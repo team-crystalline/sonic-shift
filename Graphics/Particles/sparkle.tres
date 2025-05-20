@@ -1,0 +1,16 @@
+[gd_resource type="QuadMesh" load_steps=3 format=3 uid="uid://chmadijk1uo8h"]
+
+[ext_resource type="Texture2D" uid="uid://8drlc21aksnl" path="res://Graphics/Particles/particle.png" id="1_c15ej"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0l53i"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_c15ej")
+billboard_mode = 1
+billboard_keep_scale = true
+proximity_fade_enabled = true
+
+[resource]
+material = SubResource("StandardMaterial3D_0l53i")
+subdivide_width = 2
+subdivide_depth = 2

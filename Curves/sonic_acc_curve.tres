@@ -1,0 +1,8 @@
+[gd_resource type="Curve" format=3 uid="uid://dypegvravki03"]
+
+[resource]
+resource_name = "sonic-acc"
+min_value = 1.0
+max_value = 50.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.504902, 11.7692), 54.9231, 54.9231, 0, 0, Vector2(1, 50), 0.0, 0.0, 0, 0]
+point_count = 3

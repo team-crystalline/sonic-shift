@@ -1,0 +1,8 @@
+[gd_resource type="Curve" format=3 uid="uid://drkf5afyu5swc"]
+
+[resource]
+resource_local_to_scene = true
+resource_name = "speedcurve"
+_limits = [0.0, 15.0, 0.0, 1.0]
+_data = [Vector2(0, 0.306782), 0.0, 0.0, 0, 0, Vector2(0.501385, 4.59326), 13.6365, 13.6365, 0, 0, Vector2(1, 15), 32.756, 32.756, 0, 0]
+point_count = 3

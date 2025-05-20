@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=0 format=3 uid="uid://c6w23mcym36bu"]
+
+[resource]
+transparency = 1
+blend_mode = 1
+vertex_color_use_as_albedo = true
+billboard_mode = 1
+billboard_keep_scale = true
+proximity_fade_enabled = true

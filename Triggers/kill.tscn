@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://t2ifc1kqrgxb"]
+
+[ext_resource type="Script" uid="uid://7exnc3353a8w" path="res://Scripts/trigger_kill.gd" id="1_7tp4s"]
+[ext_resource type="Texture2D" uid="uid://c30abn3bjle1v" path="res://Graphics/Textures/Placeholders/Red/texture_03.png" id="2_6bn40"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6bn40"]
+size = Vector3(1000, 1, 1000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pfstm"]
+albedo_texture = ExtResource("2_6bn40")
+uv1_scale = Vector3(1000, 1000, 1000)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yb3p6"]
+material = SubResource("StandardMaterial3D_pfstm")
+size = Vector3(1000, 1, 1000)
+
+[node name="Kill" type="Area3D"]
+script = ExtResource("1_7tp4s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_6bn40")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_yb3p6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

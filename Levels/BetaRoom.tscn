@@ -1,0 +1,108 @@
+[gd_scene load_steps=13 format=3 uid="uid://bp27esbw6s3b3"]
+
+[ext_resource type="Texture2D" uid="uid://bsnthxf3v31y5" path="res://Graphics/Textures/sky.png" id="1_gabao"]
+[ext_resource type="Texture2D" uid="uid://baccneuiftbk5" path="res://Graphics/Textures/Placeholders/Green/texture_08.png" id="1_olaht"]
+[ext_resource type="PackedScene" uid="uid://pgx7n8fyonap" path="res://Actors/player.tscn" id="2_olaht"]
+[ext_resource type="PackedScene" uid="uid://t2ifc1kqrgxb" path="res://Triggers/kill.tscn" id="3_6v0uy"]
+[ext_resource type="PackedScene" uid="uid://dfmsbbxxx5ipp" path="res://HUD/HUD.tscn" id="4_gb6cv"]
+[ext_resource type="PackedScene" uid="uid://dx2w3t4amh84c" path="res://Actors/ring.tscn" id="5_87n1l"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_52khx"]
+panorama = ExtResource("1_gabao")
+
+[sub_resource type="Sky" id="Sky_6v0uy"]
+sky_material = SubResource("PanoramaSkyMaterial_52khx")
+
+[sub_resource type="Environment" id="Environment_gb6cv"]
+background_mode = 2
+sky = SubResource("Sky_6v0uy")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_87n1l"]
+size = Vector3(15, 0.5, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gabao"]
+albedo_color = Color(0.370364, 0.370364, 0.370364, 1)
+albedo_texture = ExtResource("1_olaht")
+uv1_scale = Vector3(25, 17.5, 25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_52khx"]
+material = SubResource("StandardMaterial3D_gabao")
+size = Vector3(15, 0.5, 50)
+
+[node name="BetaRoom" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_gb6cv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, -0.356738, 0.934204, 0, -0.934204, -0.356738, 0, 35.9542, 0)
+sky_mode = 1
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(0.968713, -0.248183, 0, 0.248183, 0.968713, 0, 0, 0, 1, 0, -0.5, 16.2289)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_87n1l")
+debug_color = Color(0, 0.5185, 0.61, 0.576471)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_52khx")
+
+[node name="Player" parent="." instance=ExtResource("2_olaht")]
+
+[node name="Floor2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.38118, -32.9149)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2"]
+shape = SubResource("BoxShape3D_87n1l")
+debug_color = Color(0, 0.5185, 0.61, 0.576471)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor2"]
+mesh = SubResource("BoxMesh_52khx")
+
+[node name="Kill" parent="." instance=ExtResource("3_6v0uy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -37.1614, 0)
+
+[node name="SpawnPoint" type="Node3D" parent="." groups=["SpawnPoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94465, 36.3128)
+
+[node name="Hud" parent="." instance=ExtResource("4_gb6cv")]
+
+[node name="Rings" type="Node" parent="."]
+
+[node name="Ring" parent="Rings" instance=ExtResource("5_87n1l")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0104489, 0.25, -1.81921)
+
+[node name="Ring2" parent="Rings" instance=ExtResource("5_87n1l")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0104489, 0.25, -3.00309)
+
+[node name="Ring3" parent="Rings" instance=ExtResource("5_87n1l")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0104489, 0.25, -4.23594)
+
+[node name="Ring4" parent="Rings" instance=ExtResource("5_87n1l")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0104489, -0.760692, -30.139)
+
+[node name="Ring5" parent="Rings" instance=ExtResource("5_87n1l")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0104489, -0.760692, -31.3229)
+
+[node name="Ring6" parent="Rings" instance=ExtResource("5_87n1l")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0104489, -0.760692, -32.5557)
+
+[node name="Ring7" parent="Rings" instance=ExtResource("5_87n1l")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0104489, -0.760692, -29.516)
+
+[node name="Ring8" parent="Rings" instance=ExtResource("5_87n1l")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0104489, -0.760692, -30.6999)
+
+[node name="Ring9" parent="Rings" instance=ExtResource("5_87n1l")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0104489, -0.760692, -31.9327)
+
+[node name="Floor3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99377, -0.111452, 0, 0.111452, 0.99377, 0, 0.429681, -84.4891)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor3"]
+shape = SubResource("BoxShape3D_87n1l")
+debug_color = Color(0, 0.5185, 0.61, 0.576471)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor3"]
+mesh = SubResource("BoxMesh_52khx")

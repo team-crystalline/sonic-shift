@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfmsbbxxx5ipp"]
+
+[ext_resource type="Script" uid="uid://c7p7s17kgxj7i" path="res://HUD/hud.gd" id="1_f31rt"]
+
+[node name="Hud" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_f31rt")
+
+[node name="LivesLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Lives: 0"
+
+[node name="RingsLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 1.0
+offset_right = 152.0
+offset_bottom = 24.0
+text = "Rings: 0"
+
+[node name="BoostLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 229.0
+offset_top = 1.0
+offset_right = 291.0
+offset_bottom = 24.0
+text = "Boost: 0"
