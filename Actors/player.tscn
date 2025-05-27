@@ -1388,4 +1388,3 @@ skin = SubResource("Skin_c5kq5")
 
 [node name="ThirdPerson" type="Camera3D" parent="ThirdPersonPivot"]
 transform = Transform3D(1, 0, 0, 0, 0.940383, 0.340117, 0, -0.340117, 0.940383, 0.00438827, 0.621845, 1.37095)
-current = true

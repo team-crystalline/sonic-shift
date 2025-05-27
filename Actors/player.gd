@@ -66,7 +66,6 @@ func _unhandled_input(event: InputEvent) -> void:
 				-camera.rotation.x,
 				camera.rotation.z
 			)
-			print(new_head_rotation)
 			set_bone_rot("Reference", Vector3(0, new_head_rotation.x, 0))
 			set_bone_rot("Head", Vector3(0, new_head_rotation.y, 0))
 			#if new_head_rotation.x < -1.5 or new_head_rotation.x > 1.5:
@@ -109,8 +108,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = 0
 		velocity.z = 0
 	if is_moving():
-		var look_direction = Vector2(velocity.z, velocity.x)
-		$Sonic.rotation.y = lerp_angle($Sonic.rotation.y, look_direction.angle(), delta * 8)
+		var look_direction = Vector2(velocity.z, velocity.y)
+		$Sonic.rotation.y = lerp_angle($Sonic.rotation.y, 3, delta * 8)
 
 	move_and_slide()
 	

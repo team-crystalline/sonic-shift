@@ -1,17 +1,15 @@
 [gd_scene load_steps=13 format=3 uid="uid://bp27esbw6s3b3"]
 
-[ext_resource type="Texture2D" uid="uid://bsnthxf3v31y5" path="res://Graphics/Textures/sky.png" id="1_gabao"]
+[ext_resource type="Material" uid="uid://dm3lbpt4q3jnv" path="res://Graphics/Resources/Sky.tres" id="1_gabao"]
 [ext_resource type="Texture2D" uid="uid://baccneuiftbk5" path="res://Graphics/Textures/Placeholders/Green/texture_08.png" id="1_olaht"]
 [ext_resource type="PackedScene" uid="uid://pgx7n8fyonap" path="res://Actors/player.tscn" id="2_olaht"]
 [ext_resource type="PackedScene" uid="uid://t2ifc1kqrgxb" path="res://Triggers/kill.tscn" id="3_6v0uy"]
 [ext_resource type="PackedScene" uid="uid://dfmsbbxxx5ipp" path="res://HUD/HUD.tscn" id="4_gb6cv"]
 [ext_resource type="PackedScene" uid="uid://dx2w3t4amh84c" path="res://Actors/ring.tscn" id="5_87n1l"]
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_52khx"]
-panorama = ExtResource("1_gabao")
+[ext_resource type="PackedScene" uid="uid://34pcfwymlki4" path="res://Models/Levels/Test/TestRoom.glb" id="7_52khx"]
 
 [sub_resource type="Sky" id="Sky_6v0uy"]
-sky_material = SubResource("PanoramaSkyMaterial_52khx")
+sky_material = ExtResource("1_gabao")
 
 [sub_resource type="Environment" id="Environment_gb6cv"]
 background_mode = 2
@@ -64,7 +62,7 @@ mesh = SubResource("BoxMesh_52khx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -37.1614, 0)
 
 [node name="SpawnPoint" type="Node3D" parent="." groups=["SpawnPoint"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94465, 36.3128)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -127.611, 5.43347, 21.4692)
 
 [node name="Hud" parent="." instance=ExtResource("4_gb6cv")]
 
@@ -106,3 +104,6 @@ debug_color = Color(0, 0.5185, 0.61, 0.576471)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor3"]
 mesh = SubResource("BoxMesh_52khx")
+
+[node name="TestRoom" parent="." instance=ExtResource("7_52khx")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -90.0936, 3.14451, -0.489731)
