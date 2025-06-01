@@ -67,13 +67,23 @@ func _unhandled_input(event: InputEvent) -> void:
 			#region Pivot Camera
 			neck.rotate_y(-event.relative.x * 0.01)
 			camera.rotate_x(-event.relative.y * 0.01)
-			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
+			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(80))
 			third_person.rotate_y(-event.relative.x * 0.01)
 			#endregion
 			# Set the head's rotation to match the camera's rotation
+			var min_head_down : float = 0
+			var max_head_down : float = 0
+			if is_moving() and is_running:
+				# He's running, don't make his head go down any more.
+				min_head_down = -10
+				max_head_down = 60
+			else:
+				min_head_down = -60
+				max_head_down = 80
 			var new_head_rotation = Vector3(
 				neck.rotation.y,
-				-camera.rotation.x,
+				#-camera.rotation.x,
+				-(clamp(camera.rotation.x, deg_to_rad(min_head_down), deg_to_rad(max_head_down))),
 				camera.rotation.z
 			)
 			set_bone_rot("Reference", Vector3(0, new_head_rotation.x, 0))
