@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8jvgud5um08p"
-path.s3tc="res://.godot/imported/Sonic_chr_sonic_cloth_dif_HD.png-4b487092b8309d67b8a39fd981afeb40.s3tc.ctex"
+uid="uid://bbiu21l8rov7e"
+path.s3tc="res://.godot/imported/Sonic-animations_chr_sonic_cloth_dif_HD.png-8660e73a566b98ffac33763d2a31cc0f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Models/Sonic/Sonic_chr_sonic_cloth_dif_HD.png"
-dest_files=["res://.godot/imported/Sonic_chr_sonic_cloth_dif_HD.png-4b487092b8309d67b8a39fd981afeb40.s3tc.ctex"]
+source_file="res://Models/Sonic/Sonic-animations_chr_sonic_cloth_dif_HD.png"
+dest_files=["res://.godot/imported/Sonic-animations_chr_sonic_cloth_dif_HD.png-8660e73a566b98ffac33763d2a31cc0f.s3tc.ctex"]
 
 [params]
 

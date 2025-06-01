@@ -1,12 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://bp27esbw6s3b3"]
+[gd_scene load_steps=11 format=3 uid="uid://bp27esbw6s3b3"]
 
 [ext_resource type="Material" uid="uid://dm3lbpt4q3jnv" path="res://Graphics/Resources/Sky.tres" id="1_gabao"]
-[ext_resource type="Texture2D" uid="uid://baccneuiftbk5" path="res://Graphics/Textures/Placeholders/Green/texture_08.png" id="1_olaht"]
 [ext_resource type="PackedScene" uid="uid://pgx7n8fyonap" path="res://Actors/player.tscn" id="2_olaht"]
 [ext_resource type="PackedScene" uid="uid://t2ifc1kqrgxb" path="res://Triggers/kill.tscn" id="3_6v0uy"]
 [ext_resource type="PackedScene" uid="uid://dfmsbbxxx5ipp" path="res://HUD/HUD.tscn" id="4_gb6cv"]
-[ext_resource type="PackedScene" uid="uid://dx2w3t4amh84c" path="res://Actors/ring.tscn" id="5_87n1l"]
+[ext_resource type="Script" uid="uid://bngtdv3ukch6g" path="res://Scripts/ring_path.gd" id="6_gabao"]
 [ext_resource type="PackedScene" uid="uid://34pcfwymlki4" path="res://Models/Levels/Test/TestRoom.glb" id="7_52khx"]
+[ext_resource type="PackedScene" uid="uid://delu2qjrw6teu" path="res://Actors/Objects/Mirror3D/Mirror3D.tscn" id="7_b6u7x"]
 
 [sub_resource type="Sky" id="Sky_6v0uy"]
 sky_material = ExtResource("1_gabao")
@@ -15,95 +15,44 @@ sky_material = ExtResource("1_gabao")
 background_mode = 2
 sky = SubResource("Sky_6v0uy")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_87n1l"]
-size = Vector3(15, 0.5, 50)
+[sub_resource type="Curve3D" id="Curve3D_gabao"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gabao"]
-albedo_color = Color(0.370364, 0.370364, 0.370364, 1)
-albedo_texture = ExtResource("1_olaht")
-uv1_scale = Vector3(25, 17.5, 25)
+[node name="BetaRoom" type="Node3D" groups=["level"]]
 
-[sub_resource type="BoxMesh" id="BoxMesh_52khx"]
-material = SubResource("StandardMaterial3D_gabao")
-size = Vector3(15, 0.5, 50)
+[node name="Lights" type="Node3D" parent="."]
 
-[node name="BetaRoom" type="Node3D"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.2674, 2.95904, -1.10245)
+shadow_enabled = true
+omni_range = 16.3178
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_gb6cv")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, -0.356738, 0.934204, 0, -0.934204, -0.356738, 0, 35.9542, 0)
-sky_mode = 1
-
-[node name="Floor" type="StaticBody3D" parent="."]
-transform = Transform3D(0.968713, -0.248183, 0, 0.248183, 0.968713, 0, 0, 0, 1, 0, -0.5, 16.2289)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-shape = SubResource("BoxShape3D_87n1l")
-debug_color = Color(0, 0.5185, 0.61, 0.576471)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
-mesh = SubResource("BoxMesh_52khx")
-
-[node name="Player" parent="." instance=ExtResource("2_olaht")]
-
-[node name="Floor2" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.38118, -32.9149)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2"]
-shape = SubResource("BoxShape3D_87n1l")
-debug_color = Color(0, 0.5185, 0.61, 0.576471)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor2"]
-mesh = SubResource("BoxMesh_52khx")
 
 [node name="Kill" parent="." instance=ExtResource("3_6v0uy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -37.1614, 0)
 
 [node name="SpawnPoint" type="Node3D" parent="." groups=["SpawnPoint"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -127.611, 5.43347, 21.4692)
+transform = Transform3D(-0.583258, 0, 0.812287, 0, 1, 0, -0.812287, 0, -0.583258, -33.2463, 4.66513, -3.74162)
 
 [node name="Hud" parent="." instance=ExtResource("4_gb6cv")]
 
-[node name="Rings" type="Node" parent="."]
-
-[node name="Ring" parent="Rings" instance=ExtResource("5_87n1l")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0104489, 0.25, -1.81921)
-
-[node name="Ring2" parent="Rings" instance=ExtResource("5_87n1l")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0104489, 0.25, -3.00309)
-
-[node name="Ring3" parent="Rings" instance=ExtResource("5_87n1l")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0104489, 0.25, -4.23594)
-
-[node name="Ring4" parent="Rings" instance=ExtResource("5_87n1l")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0104489, -0.760692, -30.139)
-
-[node name="Ring5" parent="Rings" instance=ExtResource("5_87n1l")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0104489, -0.760692, -31.3229)
-
-[node name="Ring6" parent="Rings" instance=ExtResource("5_87n1l")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0104489, -0.760692, -32.5557)
-
-[node name="Ring7" parent="Rings" instance=ExtResource("5_87n1l")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0104489, -0.760692, -29.516)
-
-[node name="Ring8" parent="Rings" instance=ExtResource("5_87n1l")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0104489, -0.760692, -30.6999)
-
-[node name="Ring9" parent="Rings" instance=ExtResource("5_87n1l")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0104489, -0.760692, -31.9327)
-
-[node name="Floor3" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.99377, -0.111452, 0, 0.111452, 0.99377, 0, 0.429681, -84.4891)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor3"]
-shape = SubResource("BoxShape3D_87n1l")
-debug_color = Color(0, 0.5185, 0.61, 0.576471)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor3"]
-mesh = SubResource("BoxMesh_52khx")
-
 [node name="TestRoom" parent="." instance=ExtResource("7_52khx")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -90.0936, 3.14451, -0.489731)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -86.8499, 4.64988, -0.489731)
+
+[node name="Player" parent="." instance=ExtResource("2_olaht")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.6036, 2.75925, -15.0874)
+
+[node name="RingPath" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -113.043, 2.96534, 22.4297)
+curve = SubResource("Curve3D_gabao")
+script = ExtResource("6_gabao")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="RingPath"]
+
+[node name="Mirror3D" parent="." instance=ExtResource("7_b6u7x")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -32.5599, 3.02863, -5.53198)
+size = Vector2(5, 1)
+pixels_per_unit = 800
+color = Color(0.99377, 0.990451, 0.989026, 1)
+distortion = 1.05

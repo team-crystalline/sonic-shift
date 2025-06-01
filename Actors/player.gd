@@ -1,15 +1,16 @@
 extends CharacterBody3D
 
-
-@export var JUMP_VELOCITY : float = 7
-@export var DEFAULT_SPEED : float = 7
-@export var SPEED : float = 7
+@export_group("Movement Physics")
+@export var JUMP_VELOCITY : float = 5  # The height in which the player jumps.
+@export var SPEED : float = 15
+@export var boost_gauge : float = 30
+@export_group("Collectibles")
 @export var rings : int = 0
 @export var lives : int = 3
-@export var boost_gauge : float = 3
-@export var max_boost_gauge : float = 3 # Rings cannot make the boost go past this number.
+@export_group("Animation")
 @export var head_movement_sensitivity = 0.1
 @export var head_rotation_lerp_speed = 5.0
+@export var patience_level : float = 3 # How patient is Sonic? (He's not)
 
 # Get the gravity from the project settings to be synced with RigidDynamicBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -18,9 +19,13 @@ var target_head_rotation: Vector3 = Vector3.ZERO
 
 @onready var neck := $Neck
 @onready var camera := $Neck/Camera
-@onready var skeleton = $Sonic/GeneralSkeleton
+@onready var skeleton = $Sonic/Armature/Skeleton3D
 @onready var third_person := $ThirdPersonPivot
 @onready var spawn := get_tree().get_first_node_in_group("SpawnPoint")
+
+var DEFAULT_SPEED : float
+var max_boost_gauge : float # Rings cannot make the boost go past this number.
+var is_running : bool = true
 
 func set_bone_rot(bone, ang):
 	var b = skeleton.find_bone(bone)
@@ -31,7 +36,11 @@ func set_bone_rot(bone, ang):
 
 func is_moving():
 	return abs(velocity.z) > 0 || abs(velocity.x) > 0
+
 func _ready() -> void:
+	# Set these to be the same.
+	DEFAULT_SPEED= SPEED
+	max_boost_gauge = boost_gauge
 	#Input.set_mouse_mode(2)
 	if spawn:
 		global_position = spawn.global_position
@@ -40,7 +49,7 @@ func _ready() -> void:
 		print("Can't find a spawn point. Was it added?")
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("boost") and not is_boosting and boost_gauge > 0.5:
+	if event.is_action_pressed("boost") and not is_boosting and boost_gauge > 0.5 and is_running:
 		is_boosting = true
 	
 	if event.is_action_released("boost"):
@@ -51,6 +60,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	elif event.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	elif event.is_action_pressed("walk_toggle"):
+		is_running = !is_running
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
 			#region Pivot Camera
@@ -60,7 +71,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			third_person.rotate_y(-event.relative.x * 0.01)
 			#endregion
 			# Set the head's rotation to match the camera's rotation
-			var current_head_transform = skeleton.get_bone_pose(skeleton.find_bone("Head"))
 			var new_head_rotation = Vector3(
 				neck.rotation.y,
 				-camera.rotation.x,
@@ -68,13 +78,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			)
 			set_bone_rot("Reference", Vector3(0, new_head_rotation.x, 0))
 			set_bone_rot("Head", Vector3(0, new_head_rotation.y, 0))
-			#if new_head_rotation.x < -1.5 or new_head_rotation.x > 1.5:
-				##print("Too far.")
-				#set_bone_rot("Reference", Vector3(0, new_head_rotation.x, 0))
-			#else:
-				#set_bone_rot("Head", new_head_rotation)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Non-physics processing
 	if rings % 100 == 0 and rings > 0:
 		lives += 1
@@ -102,15 +107,25 @@ func _physics_process(delta: float) -> void:
 	# This moves the player based on camera rotation.
 	var direction = (camera_basis.x * input_dir.x + camera_basis.z * input_dir.y).normalized()
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		if is_running == true:
+			velocity.x = direction.x * SPEED
+			velocity.z = direction.z * SPEED
+		else:
+			velocity.x = (direction.x * SPEED)/5
+			velocity.z = (direction.z * SPEED)/5
 	else:
 		velocity.x = 0
 		velocity.z = 0
-	if is_moving():
-		var look_direction = Vector2(velocity.z, velocity.y)
-		$Sonic.rotation.y = lerp_angle($Sonic.rotation.y, 3, delta * 8)
+		$Sonic/AnimationPlayer.play("Standing")
+			
 
+	if is_moving():
+		#var look_direction = Vector2(velocity.z, velocity.y)
+		$Sonic.rotation.y = lerp_angle($Sonic.rotation.y, 3, delta * 8)
+		if is_running == true:
+			$Sonic/AnimationPlayer.play("Run")
+		else:
+			$Sonic/AnimationPlayer.play("walk")
 	move_and_slide()
 	
 	# Boost logic. Deplete Boost by delta

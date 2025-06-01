@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cu4x4lbo5jwbi"]
 
-[ext_resource type="PackedScene" uid="uid://dpva6fdlkjcyn" path="res://Models/Sonic/Sonic.glb" id="1_t63fq"]
+[ext_resource type="PackedScene" path="res://Bin/Sonic.glb" id="1_t63fq"]
 
 [sub_resource type="Animation" id="Animation_t63fq"]
 resource_name = "idle"

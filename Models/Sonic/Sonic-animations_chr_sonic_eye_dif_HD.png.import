@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wnatkkre3lya"
-path.s3tc="res://.godot/imported/Sonic_chr_sonic_eye_dif_HD.png-1b37c3d38231ef45a8fcd91de31a18f4.s3tc.ctex"
+uid="uid://ckon7lf05hcuc"
+path.s3tc="res://.godot/imported/Sonic-animations_chr_sonic_eye_dif_HD.png-f5f5a3dc113e204aba918355d09988a4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Models/Sonic/Sonic_chr_sonic_eye_dif_HD.png"
-dest_files=["res://.godot/imported/Sonic_chr_sonic_eye_dif_HD.png-1b37c3d38231ef45a8fcd91de31a18f4.s3tc.ctex"]
+source_file="res://Models/Sonic/Sonic-animations_chr_sonic_eye_dif_HD.png"
+dest_files=["res://.godot/imported/Sonic-animations_chr_sonic_eye_dif_HD.png-f5f5a3dc113e204aba918355d09988a4.s3tc.ctex"]
 
 [params]
 

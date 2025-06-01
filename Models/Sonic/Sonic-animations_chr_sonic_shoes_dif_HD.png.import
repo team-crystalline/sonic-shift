@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpxi2kopuh3mg"
-path.s3tc="res://.godot/imported/Sonic_chr_sonic_body01_dif_HD.png-7ba1fb9f0f83086b5b24ec2fe29b0149.s3tc.ctex"
+uid="uid://bq14kqw3nkgwh"
+path.s3tc="res://.godot/imported/Sonic-animations_chr_sonic_shoes_dif_HD.png-6656aee23140c46c204fc8ca35e6fdc7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "8ca3c9d0d4f7a19b009e23defadbc431"
+"md5": "f3d40f55ed85aaa339ae20342daa1995"
 }
 
 [deps]
 
-source_file="res://Models/Sonic/Sonic_chr_sonic_body01_dif_HD.png"
-dest_files=["res://.godot/imported/Sonic_chr_sonic_body01_dif_HD.png-7ba1fb9f0f83086b5b24ec2fe29b0149.s3tc.ctex"]
+source_file="res://Models/Sonic/Sonic-animations_chr_sonic_shoes_dif_HD.png"
+dest_files=["res://.godot/imported/Sonic-animations_chr_sonic_shoes_dif_HD.png-6656aee23140c46c204fc8ca35e6fdc7.s3tc.ctex"]
 
 [params]
 
