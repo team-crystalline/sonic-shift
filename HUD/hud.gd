@@ -2,17 +2,58 @@ extends Control
 @onready var ring_label = $RingsLabel
 @onready var lives_label = $LivesLabel
 @onready var boost_label = $BoostLabel
-@onready var coords_label = $CoordsLabel
+@onready var speed_label = $SpeedLabel
+@onready var loc_label = $LocationLabel
 @onready var player := get_tree().get_first_node_in_group("Player")
+@onready var level := get_tree().get_first_node_in_group("level")
+@onready var pause_screen = %PauseScreen
+
+func _ready() -> void:
+	loc_label.text = level.get_meta("level_name")
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		toggle_pause()
+
+func toggle_pause() -> void:
+	if pause_screen.visible:
+		pause_screen.visible = false
+		set_pause_state(false)
+	else:
+		$"../PauseSound".play()
+		pause_screen.visible = true
+		set_pause_state(true)
+
+func set_pause_state(paused: bool) -> void:
+	# Looking for any nodes we've labelled as "can_pause", and pausing all of them.
+	for node in get_tree().get_nodes_in_group("can_pause"):
+		node.set_process(!paused)
+		node.set_physics_process(!paused)
+		var animation_player = node.get_node("AnimationPlayer")
+		if animation_player:
+			# Pause any animationd
+			if paused:
+				animation_player.stop()
+			else:
+				animation_player.play()
 
 func _process(_delta: float) -> void:
 	ring_label.text= "Rings: %d" % player.rings
 	lives_label.text= "Lives: %d" % player.lives
 	boost_label.text= "Boost: %s" % player.boost_gauge
-	coords_label.text = "x: %.2f\ny: %.2f\nz: %.2f" % [player.position.x, player.position.y, player.position.z]
+	#speed_label.text = "%d" % (player.current_speed * 4)
+
+	
 	if player.is_running == true:
 		$Run.visible= true
 		$Walk.visible= false
 	else:
 		$Run.visible= false
 		$Walk.visible=true
+
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()
+
+func _on_resume_button_pressed() -> void:
+	toggle_pause()

@@ -1,0 +1,86 @@
+[gd_scene load_steps=17 format=3 uid="uid://dwsu77xhc2k5b"]
+
+[ext_resource type="Shader" uid="uid://c3swg6c7equkk" path="res://Graphics/Shaders/emerald.gdshader" id="1_tn2so"]
+[ext_resource type="QuadMesh" uid="uid://chmadijk1uo8h" path="res://Graphics/Particles/sparkle.tres" id="2_u0j5q"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tn2so"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u0j5q"]
+noise = SubResource("FastNoiseLite_tn2so")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_datio"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_oklh5"]
+as_normal_map = true
+noise = SubResource("FastNoiseLite_datio")
+
+[sub_resource type="Gradient" id="Gradient_7ear3"]
+offsets = PackedFloat32Array(0, 0.321739, 0.66087, 1)
+colors = PackedColorArray(0.85098, 0.00110085, 0.926201, 1, 0.932617, 0.000497774, 0.418804, 1, 0.446355, 0.484156, 0.831674, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_n82yd"]
+gradient = SubResource("Gradient_7ear3")
+repeat = 2
+
+[sub_resource type="Gradient" id="Gradient_yk8br"]
+offsets = PackedFloat32Array(0, 0.321739, 0.66087, 1)
+colors = PackedColorArray(0.85098, 0.00110085, 0.926201, 1, 0.932617, 0.000497774, 0.418804, 1, 0.446355, 0.484156, 0.831674, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gdrax"]
+gradient = SubResource("Gradient_yk8br")
+repeat = 2
+
+[sub_resource type="Gradient" id="Gradient_26lyh"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1kiwe"]
+gradient = SubResource("Gradient_26lyh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tn2so"]
+render_priority = 0
+shader = ExtResource("1_tn2so")
+shader_parameter/colorGradient1 = SubResource("GradientTexture2D_n82yd")
+shader_parameter/colorGradient2 = SubResource("GradientTexture2D_gdrax")
+shader_parameter/NoiseTexture_Alpha = SubResource("NoiseTexture2D_u0j5q")
+shader_parameter/NoiseTexture_Specular = SubResource("NoiseTexture2D_oklh5")
+shader_parameter/gradientSpecular = SubResource("GradientTexture2D_1kiwe")
+
+[sub_resource type="PrismMesh" id="PrismMesh_u0j5q"]
+material = SubResource("ShaderMaterial_tn2so")
+
+[sub_resource type="Curve" id="Curve_datio"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 0.813187), 0.0, 0.0, 0, 0, Vector2(0.966292, 0.0659341), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_oklh5"]
+colors = PackedColorArray(0.783812, 0.860137, 0.397052, 1, 1, 1, 1, 1)
+
+[node name="Crystal" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PrismMesh_u0j5q")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.682134, 0.151857, -0.30671)
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+amount = 4
+lifetime = 2.0
+randomness = 1.0
+lifetime_randomness = 0.4
+local_coords = true
+mesh = ExtResource("2_u0j5q")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.1
+emission_ring_radius = 0.15
+emission_ring_inner_radius = 0.12
+emission_ring_cone_angle = 90.0
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 0.05
+scale_amount_min = 0.02
+scale_amount_max = 0.07
+scale_amount_curve = SubResource("Curve_datio")
+color_ramp = SubResource("Gradient_oklh5")
+hue_variation_min = 0.03
+hue_variation_max = 0.03

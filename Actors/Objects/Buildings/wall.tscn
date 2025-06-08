@@ -1,0 +1,44 @@
+[gd_scene load_steps=10 format=3 uid="uid://xe3a3emdj7ak"]
+
+[ext_resource type="Script" uid="uid://o20p2svuchkt" path="res://Actors/Objects/Buildings/wall.gd" id="1_6cexe"]
+[ext_resource type="Texture2D" uid="uid://cwcc7himq338o" path="res://Graphics/Textures/Placeholders/brick.jpg" id="1_25hpv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6cexe"]
+size = Vector3(1, 0.316406, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3vkj7"]
+albedo_texture = ExtResource("1_25hpv")
+uv1_scale = Vector3(2, 0.35, 0.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ie3g1"]
+material = SubResource("StandardMaterial3D_3vkj7")
+size = Vector3(1, 0.25, 0.25)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ltsrj"]
+frequency = 0.9027
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jr8c2"]
+noise = SubResource("FastNoiseLite_ltsrj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w54dw"]
+albedo_color = Color(0.9, 0.9, 0.9, 1)
+albedo_texture = SubResource("NoiseTexture2D_jr8c2")
+uv1_scale = Vector3(4, 1, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8pp8n"]
+material = SubResource("StandardMaterial3D_w54dw")
+size = Vector3(1, 0.063, 0.254)
+
+[node name="Wall" type="StaticBody3D"]
+script = ExtResource("1_6cexe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0332031, 0)
+shape = SubResource("BoxShape3D_6cexe")
+
+[node name="bricks" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ie3g1")
+
+[node name="capping" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.05844, 0, 0.155968, 0)
+mesh = SubResource("BoxMesh_8pp8n")

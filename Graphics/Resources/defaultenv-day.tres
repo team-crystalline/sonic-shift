@@ -1,0 +1,13 @@
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://b4wd7qdth75lo"]
+
+[ext_resource type="Material" uid="uid://dm3lbpt4q3jnv" path="res://Graphics/Resources/Sky.tres" id="1_iyrsw"]
+
+[sub_resource type="Sky" id="Sky_52khx"]
+sky_material = ExtResource("1_iyrsw")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_52khx")
+ambient_light_source = 2
+ambient_light_color = Color(0.54, 0.5022, 0.432, 1)
+reflected_light_source = 1

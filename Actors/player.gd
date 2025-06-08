@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
 @export_group("Movement Physics")
-@export var JUMP_VELOCITY : float = 5  # The height in which the player jumps.
-@export var SPEED : float = 15
+@export var JUMP_VELOCITY : float = 7  # The height in which the player jumps.
+@export var SPEED : float = 25
 @export var boost_gauge : float = 30
 @export_group("Collectibles")
 @export var rings : int = 0
@@ -11,6 +11,9 @@ extends CharacterBody3D
 @export var head_movement_sensitivity = 0.1
 @export var head_rotation_lerp_speed = 5.0
 @export var patience_level : float = 3 # How patient is Sonic? (He's not)
+
+@export var current_speed = 0
+var effect_amount = 1
 
 # Get the gravity from the project settings to be synced with RigidDynamicBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -25,7 +28,7 @@ var target_head_rotation: Vector3 = Vector3.ZERO
 
 var DEFAULT_SPEED : float
 var max_boost_gauge : float # Rings cannot make the boost go past this number.
-var is_running : bool = true
+@export var is_running : bool = true
 
 func set_bone_rot(bone, ang):
 	var b = skeleton.find_bone(bone)
@@ -86,7 +89,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				-(clamp(camera.rotation.x, deg_to_rad(min_head_down), deg_to_rad(max_head_down))),
 				camera.rotation.z
 			)
-			set_bone_rot("Reference", Vector3(0, new_head_rotation.x, 0))
+			$Sonic.rotation = Vector3(neck.rotation.x, neck.rotation.y + deg_to_rad(180), neck.rotation.z)
 			set_bone_rot("Head", Vector3(0, new_head_rotation.y, 0))
 
 func _process(_delta: float) -> void:
@@ -95,6 +98,7 @@ func _process(_delta: float) -> void:
 		lives += 1
 
 func _physics_process(delta: float) -> void:
+
 #region Gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -103,8 +107,8 @@ func _physics_process(delta: float) -> void:
 #region Floor Normal Rotation
 	if is_on_floor():
 		var floor_norm = get_floor_normal()
-		rotation.z = lerp(global_rotation.z, -floor_norm.x, delta * 2)
-		rotation.x = lerp(global_rotation.x, floor_norm.z, delta * 2)
+		rotation.z = lerp(global_rotation.z, (-floor_norm.x * 0.5), delta * 2)
+		rotation.x = lerp(global_rotation.x, (floor_norm.z * 0.5), delta * 2)
 #endregion
 		
 	# Handle Jump.
@@ -120,18 +124,21 @@ func _physics_process(delta: float) -> void:
 		if is_running == true:
 			velocity.x = direction.x * SPEED
 			velocity.z = direction.z * SPEED
+			current_speed = SPEED
 		else:
 			velocity.x = (direction.x * SPEED)/5
 			velocity.z = (direction.z * SPEED)/5
+			current_speed = SPEED/5
 	else:
 		velocity.x = 0
 		velocity.z = 0
+		current_speed = 0
 		$Sonic/AnimationPlayer.play("Standing")
 			
 
 	if is_moving():
 		#var look_direction = Vector2(velocity.z, velocity.y)
-		$Sonic.rotation.y = lerp_angle($Sonic.rotation.y, 3, delta * 8)
+		#$Sonic.rotation.y = lerp_angle($Sonic.rotation.y, 3, delta * 8)
 		if is_running == true:
 			$Sonic/AnimationPlayer.play("Run")
 		else:
@@ -139,12 +146,24 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	# Boost logic. Deplete Boost by delta
+	
 	if is_boosting:
+		if not is_moving():
+			return
 		if boost_gauge < delta: 
 			# Not enough boost
 			is_boosting = false 
 		boost_gauge -= delta
-		SPEED = DEFAULT_SPEED * 3
+		SPEED = DEFAULT_SPEED * 2
+		$Sonic/AnimationPlayer.speed_scale = 2
+		$SpeedLines.visible = true
+		effect_amount = move_toward(effect_amount, -0.3, 8 * delta)
+		$SpeedParticles.emitting = true
 	else:
+		$Sonic/AnimationPlayer.speed_scale = 1
+		$SpeedLines.visible= false
+		effect_amount = move_toward(effect_amount, 1.0, 8 * delta)
 		is_boosting = false
 		SPEED = DEFAULT_SPEED
+		$SpeedParticles.emitting = false
+	$Control/Fisheye.material.set_shader_parameter("effect_amount", effect_amount)

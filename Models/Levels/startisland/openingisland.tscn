@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c62llqumgb4f7"]
+
+[ext_resource type="PackedScene" uid="uid://ckl5knryxtsp5" path="res://Models/Levels/startisland/openingisland.glb" id="1_7trsl"]
+
+[node name="openingisland" instance=ExtResource("1_7trsl")]
+
+[node name="Landscape" parent="." index="0"]
+gi_lightmap_texel_scale = 0.01

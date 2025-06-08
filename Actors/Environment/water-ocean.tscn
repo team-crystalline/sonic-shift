@@ -1,0 +1,80 @@
+[gd_scene load_steps=10 format=3 uid="uid://dfs47e8xm6wsq"]
+
+[ext_resource type="Script" uid="uid://cea8tbdct331d" path="res://Actors/Environment/water.gd" id="1_gy1nt"]
+[ext_resource type="Script" uid="uid://lko4be7t0pdp" path="res://Actors/Environment/water_reflection.gd" id="2_m7d7b"]
+[ext_resource type="Shader" uid="uid://diypaxa00gqwx" path="res://Graphics/Shaders/ocean-large.gdshader" id="3_gy1nt"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bdca5"]
+frequency = 0.0015
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ohm6i"]
+seamless = true
+noise = SubResource("FastNoiseLite_bdca5")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ohm6i"]
+frequency = 0.0258
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pkqtc"]
+seamless = true
+noise = SubResource("FastNoiseLite_ohm6i")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bdca5"]
+render_priority = 0
+shader = ExtResource("3_gy1nt")
+shader_parameter/absorption_color = Color(1, 0.935, 0.9, 1)
+shader_parameter/fresnel_radius = 3.17
+shader_parameter/fresnel_color = Color(4.09111e-07, 0.297056, 0.381549, 1)
+shader_parameter/roughness = 0.0
+shader_parameter/specular = 0.87
+shader_parameter/depth_distance = 25.0
+shader_parameter/beers_law = 12.9
+shader_parameter/displacement_strength = 0.1
+shader_parameter/displacement_scroll_speed = 0.058
+shader_parameter/displacement_scroll_offset = Vector2(-0.2, 0.3)
+shader_parameter/displacement_scale_offset = 1.665
+shader_parameter/displacement_scale = Vector2(0.755, 0.58)
+shader_parameter/displacement_texture = SubResource("NoiseTexture2D_ohm6i")
+shader_parameter/edge_thickness = 0.062
+shader_parameter/edge_speed = 0.35
+shader_parameter/edge_noise_scale = Vector2(1.355, 1.135)
+shader_parameter/edge_noise = SubResource("NoiseTexture2D_pkqtc")
+shader_parameter/influence_size = 1.0
+shader_parameter/player_wave_frequenzy = 10.0
+shader_parameter/player_wave_speed = 5.0
+shader_parameter/caustic_size = 2.85
+shader_parameter/caustic_range = 220.8
+shader_parameter/caustic_strength = 0.28
+shader_parameter/ssr_mix_strength = 1.0
+shader_parameter/ssr_travel = 253.0
+shader_parameter/ssr_resolution_near = 0.2
+shader_parameter/ssr_resolution_far = 13.4
+shader_parameter/ssr_tolerance = 2.0
+shader_parameter/refraction_strength = 1.25
+shader_parameter/normal_map_strength = 1.0
+shader_parameter/scroll_speed = 0.3
+shader_parameter/scroll_offset = Vector2(0.1, -0.3)
+shader_parameter/scale_offset = 0.5
+shader_parameter/normal_map_scale = Vector2(0.1, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ohm6i"]
+material = SubResource("ShaderMaterial_bdca5")
+subdivide_width = 16
+subdivide_height = 16
+
+[node name="Water" type="Node3D"]
+script = ExtResource("1_gy1nt")
+
+[node name="Viewport" type="SubViewport" parent="."]
+size = Vector2i(200, 200)
+
+[node name="Camera" type="Camera3D" parent="Viewport"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0.54955, -0.078438, -1.02715)
+keep_aspect = 0
+projection = 2
+frustum_offset = Vector2(0.54955, 0.078438)
+near = 1.07715
+far = 51.1676
+script = ExtResource("2_m7d7b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ohm6i")

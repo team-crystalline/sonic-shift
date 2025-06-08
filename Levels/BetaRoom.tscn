@@ -1,58 +1,128 @@
-[gd_scene load_steps=11 format=3 uid="uid://bp27esbw6s3b3"]
+[gd_scene load_steps=15 format=3 uid="uid://bp27esbw6s3b3"]
 
-[ext_resource type="Material" uid="uid://dm3lbpt4q3jnv" path="res://Graphics/Resources/Sky.tres" id="1_gabao"]
+[ext_resource type="Environment" uid="uid://b4wd7qdth75lo" path="res://Graphics/Resources/defaultenv-day.tres" id="1_y41jg"]
 [ext_resource type="PackedScene" uid="uid://pgx7n8fyonap" path="res://Actors/player.tscn" id="2_olaht"]
 [ext_resource type="PackedScene" uid="uid://t2ifc1kqrgxb" path="res://Triggers/kill.tscn" id="3_6v0uy"]
 [ext_resource type="PackedScene" uid="uid://dfmsbbxxx5ipp" path="res://HUD/HUD.tscn" id="4_gb6cv"]
-[ext_resource type="Script" uid="uid://bngtdv3ukch6g" path="res://Scripts/ring_path.gd" id="6_gabao"]
-[ext_resource type="PackedScene" uid="uid://34pcfwymlki4" path="res://Models/Levels/Test/TestRoom.glb" id="7_52khx"]
-[ext_resource type="PackedScene" uid="uid://delu2qjrw6teu" path="res://Actors/Objects/Mirror3D/Mirror3D.tscn" id="7_b6u7x"]
+[ext_resource type="Texture2D" uid="uid://baccneuiftbk5" path="res://Graphics/Textures/Placeholders/Green/texture_08.png" id="5_y41jg"]
+[ext_resource type="PackedScene" uid="uid://bx8c24mnmlqib" path="res://Actors/Objects/Buildings/Building1.tscn" id="7_52khx"]
+[ext_resource type="PackedScene" uid="uid://div614tanecr4" path="res://Actors/Environment/water.tscn" id="8_b6u7x"]
+[ext_resource type="PackedScene" uid="uid://xe3a3emdj7ak" path="res://Actors/Objects/Buildings/wall.tscn" id="8_y41jg"]
+[ext_resource type="PackedScene" uid="uid://3h2eievlgcdi" path="res://Actors/Objects/Collectibles/RingTrail.tscn" id="9_y41jg"]
+[ext_resource type="PackedScene" uid="uid://c3qhhst175gi0" path="res://Actors/DEBUG/teleporter.tscn" id="10_0sp38"]
+[ext_resource type="PackedScene" uid="uid://c3brwspruin4g" path="res://Levels/starting_island.tscn" id="11_5ey0c"]
 
-[sub_resource type="Sky" id="Sky_6v0uy"]
-sky_material = ExtResource("1_gabao")
+[sub_resource type="BoxShape3D" id="BoxShape3D_0sp38"]
+size = Vector3(500, 1, 500)
 
-[sub_resource type="Environment" id="Environment_gb6cv"]
-background_mode = 2
-sky = SubResource("Sky_6v0uy")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5ey0c"]
+albedo_texture = ExtResource("5_y41jg")
+uv1_scale = Vector3(500, 500, 500)
 
-[sub_resource type="Curve3D" id="Curve3D_gabao"]
+[sub_resource type="BoxMesh" id="BoxMesh_wfrlm"]
+material = SubResource("StandardMaterial3D_5ey0c")
+size = Vector3(500, 1, 500)
 
 [node name="BetaRoom" type="Node3D" groups=["level"]]
+metadata/level_name = "Beta Room"
+metadata/mission = "Try to break the game."
 
 [node name="Lights" type="Node3D" parent="."]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.2674, 2.95904, -1.10245)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
+transform = Transform3D(-0.557699, 0.709555, -0.430702, -0.821687, -0.398501, 0.407464, 0.117482, 0.581145, 0.805276, -68.357, 200, -52.385)
+light_angular_distance = 0.5
 shadow_enabled = true
-omni_range = 16.3178
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(0.145613, -0.892192, -0.42754, -0.287641, -0.451656, 0.844553, -0.946604, -7.00692e-08, -0.322398, 5.51943, 3.5578, 4.29005)
+light_energy = 2.272
+spot_range = 6.40395
+spot_angle = 39.1363
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_gb6cv")
+environment = ExtResource("1_y41jg")
 
 [node name="Kill" parent="." instance=ExtResource("3_6v0uy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -37.1614, 0)
 
 [node name="SpawnPoint" type="Node3D" parent="." groups=["SpawnPoint"]]
-transform = Transform3D(-0.583258, 0, 0.812287, 0, 1, 0, -0.812287, 0, -0.583258, -33.2463, 4.66513, -3.74162)
+transform = Transform3D(-0.583258, 0, 0.812287, 0, 1, 0, -0.812287, 0, -0.583258, 2.9571, 1, 4.84767)
+rotation_edit_mode = 1
 
 [node name="Hud" parent="." instance=ExtResource("4_gb6cv")]
 
-[node name="TestRoom" parent="." instance=ExtResource("7_52khx")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -86.8499, 4.64988, -0.489731)
-
 [node name="Player" parent="." instance=ExtResource("2_olaht")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.6036, 2.75925, -15.0874)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.98144, 1.01932, 5.22155)
 
-[node name="RingPath" type="Path3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -113.043, 2.96534, 22.4297)
-curve = SubResource("Curve3D_gabao")
-script = ExtResource("6_gabao")
+[node name="Platforms" type="Node3D" parent="."]
 
-[node name="PathFollow3D" type="PathFollow3D" parent="RingPath"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms"]
 
-[node name="Mirror3D" parent="." instance=ExtResource("7_b6u7x")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -32.5599, 3.02863, -5.53198)
-size = Vector2(5, 1)
-pixels_per_unit = 800
-color = Color(0.99377, 0.990451, 0.989026, 1)
-distortion = 1.05
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/StaticBody3D"]
+shape = SubResource("BoxShape3D_0sp38")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/StaticBody3D"]
+mesh = SubResource("BoxMesh_wfrlm")
+
+[node name="Buildings" type="Node3D" parent="."]
+
+[node name="Building1" parent="Buildings" instance=ExtResource("7_52khx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 10)
+
+[node name="Building2" parent="Buildings" instance=ExtResource("7_52khx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 0)
+
+[node name="Building3" parent="Buildings" instance=ExtResource("7_52khx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -10)
+
+[node name="Building4" parent="Buildings" instance=ExtResource("7_52khx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 10)
+
+[node name="Building5" parent="Buildings" instance=ExtResource("7_52khx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+
+[node name="Building6" parent="Buildings" instance=ExtResource("7_52khx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -10)
+
+[node name="Wall" parent="Buildings" instance=ExtResource("8_y41jg")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12.8836, 0.625, 5.00682)
+size = Vector2(2, 1)
+
+[node name="Wall2" parent="Buildings" instance=ExtResource("8_y41jg")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.19808, 0.625, 5.00682)
+size = Vector2(2, 1)
+
+[node name="Rings" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="RingTrail" parent="Rings" instance=ExtResource("9_y41jg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0.352325, 5)
+path_points = Array[Vector3]([Vector3(0, 0, 0), Vector3(8.5, 0, 0)])
+num_rings_per_segment = 5
+
+[node name="RingTrail3" parent="Rings" instance=ExtResource("9_y41jg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -5)
+path_points = Array[Vector3]([Vector3(0, 0, 0), Vector3(8.5, 0, 0)])
+num_rings_per_segment = 5
+
+[node name="RingTrail2" parent="Rings" instance=ExtResource("9_y41jg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, 5)
+path_points = Array[Vector3]([Vector3(0, 0, 0), Vector3(-8.5, 0, 0)])
+num_rings_per_segment = 5
+
+[node name="RingTrail4" parent="Rings" instance=ExtResource("9_y41jg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, -5)
+path_points = Array[Vector3]([Vector3(0, 0, 0), Vector3(-8.5, 0, 0)])
+num_rings_per_segment = 5
+
+[node name="Water" parent="." instance=ExtResource("8_b6u7x")]
+transform = Transform3D(7.63702, 0, 0, 0, 0.506513, 0, 0, 0, 2.38382, 9.00526, 0.518113, 4.94104)
+
+[node name="Wall" parent="." instance=ExtResource("8_y41jg")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.00794, 0.625, 5.05352)
+size = Vector2(3, 1)
+
+[node name="Teleporter" parent="." instance=ExtResource("10_0sp38")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.10164, 1.5, 22.0301)
+teleport_to = ExtResource("11_5ey0c")

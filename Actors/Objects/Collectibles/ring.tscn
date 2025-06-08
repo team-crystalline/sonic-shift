@@ -1,0 +1,138 @@
+[gd_scene load_steps=14 format=3 uid="uid://dx2w3t4amh84c"]
+
+[ext_resource type="Script" uid="uid://djggltacp6fyf" path="res://Actors/Objects/Collectibles/ring.gd" id="1_pn6dt"]
+[ext_resource type="ArrayMesh" uid="uid://vknxsy1o6x6k" path="res://Models/Objects/Ring/Ring.obj" id="2_frec7"]
+[ext_resource type="QuadMesh" uid="uid://chmadijk1uo8h" path="res://Graphics/Particles/sparkle.tres" id="2_il5f8"]
+[ext_resource type="Shader" uid="uid://tdunmmpyclvq" path="res://Graphics/Shaders/ringShine.gdshader" id="3_vk4ki"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_t8ehs"]
+radius = 0.25
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vk4ki"]
+render_priority = 0
+shader = ExtResource("3_vk4ki")
+shader_parameter/shine_color = Color(0.84235, 0.85, 0.391, 0.431373)
+shader_parameter/cycle_interval = 1.0
+shader_parameter/shine_speed = 3.0
+shader_parameter/shine_width = 5.0
+shader_parameter/shine_angle_x = 60.0
+shader_parameter/shine_angle_y = 0.0
+shader_parameter/shine_angle_z = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pn6dt"]
+next_pass = SubResource("ShaderMaterial_vk4ki")
+disable_fog = true
+albedo_color = Color(1, 0.766667, 0, 1)
+metallic = 0.79
+metallic_specular = 0.13
+roughness = 0.25
+roughness_texture_channel = 3
+emission = Color(0.23, 0.161, 0, 1)
+emission_energy_multiplier = 1.82
+rim_tint = 1.0
+subsurf_scatter_strength = 0.95
+backlight = Color(1, 0.9, 0.25, 1)
+proximity_fade_distance = 3254.55
+
+[sub_resource type="Curve" id="Curve_jnm54"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 0.813187), 0.0, 0.0, 0, 0, Vector2(0.966292, 0.0659341), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_u3d5s"]
+colors = PackedColorArray(0.783812, 0.860137, 0.397052, 1, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_8ixcs"]
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RingModel")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xxmf8"]
+_data = {
+&"RESET": SubResource("Animation_8ixcs")
+}
+
+[sub_resource type="Animation" id="Animation_illcr"]
+length = 0.5
+loop_mode = 1
+step = 0.25
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RingModel")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.25, 1, 0, -0.707107, 0, 0.707107, 0.5, 1, 0, 1, 0, 4.37114e-08)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w20yi"]
+_data = {
+&"spin": SubResource("Animation_illcr")
+}
+
+[node name="Ring" type="Area3D" groups=["can_pause"]]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+script = ExtResource("1_pn6dt")
+
+[node name="RingBox" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_t8ehs")
+
+[node name="RingModel" type="MeshInstance3D" parent="." groups=["can_pause"]]
+transform = Transform3D(0.227807, 0, 0, 0, 0.227807, 0, 0, 0, 0.227807, 0, 0, 0)
+mesh = ExtResource("2_frec7")
+surface_material_override/0 = SubResource("StandardMaterial3D_pn6dt")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+amount = 4
+lifetime = 2.0
+randomness = 1.0
+lifetime_randomness = 0.4
+local_coords = true
+mesh = ExtResource("2_il5f8")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.1
+emission_ring_radius = 0.15
+emission_ring_inner_radius = 0.12
+emission_ring_cone_angle = 90.0
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 0.05
+scale_amount_min = 0.02
+scale_amount_max = 0.07
+scale_amount_curve = SubResource("Curve_jnm54")
+color_ramp = SubResource("Gradient_u3d5s")
+hue_variation_min = 0.03
+hue_variation_max = 0.03
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." groups=["can_pause"]]
+libraries = {
+&"": SubResource("AnimationLibrary_xxmf8"),
+&"Ring": SubResource("AnimationLibrary_w20yi")
+}
+autoplay = "Ring/spin"
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="CollectBling" type="CPUParticles3D" parent="."]
+visible = false
+amount = 36
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+local_coords = true
+mesh = ExtResource("2_il5f8")
+spread = 180.0
+gravity = Vector3(0, -0.2, 0)
+initial_velocity_max = 0.5
+scale_amount_min = 0.07
+scale_amount_max = 0.15
+scale_amount_curve = SubResource("Curve_jnm54")
+color_ramp = SubResource("Gradient_u3d5s")
+hue_variation_min = 0.03
+hue_variation_max = 0.03
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

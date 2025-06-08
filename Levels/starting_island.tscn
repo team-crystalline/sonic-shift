@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://c3brwspruin4g"]
+
+[ext_resource type="Environment" uid="uid://bswj8iaxnt3ht" path="res://Graphics/Resources/night_sky.tres" id="1_neifk"]
+[ext_resource type="PackedScene" uid="uid://pgx7n8fyonap" path="res://Actors/player.tscn" id="2_iiinm"]
+[ext_resource type="PackedScene" uid="uid://dfmsbbxxx5ipp" path="res://HUD/HUD.tscn" id="3_u40wd"]
+[ext_resource type="PackedScene" uid="uid://dfs47e8xm6wsq" path="res://Actors/Environment/water-ocean.tscn" id="5_xcmgf"]
+[ext_resource type="PackedScene" uid="uid://d240lmnwlett3" path="res://Actors/Environment/palm_1.tscn" id="6_neifk"]
+[ext_resource type="PackedScene" uid="uid://c62llqumgb4f7" path="res://Models/Levels/startisland/openingisland.tscn" id="6_yt5h3"]
+[ext_resource type="PackedScene" uid="uid://dx2w3t4amh84c" path="res://Actors/Objects/Collectibles/ring.tscn" id="7_yt5h3"]
+[ext_resource type="AudioStream" uid="uid://bhjovwjeunxnr" path="res://Audio/FX/ocean-waves-112906.mp3" id="8_opklx"]
+
+[node name="StartingIsland" type="Node3D" groups=["level"]]
+metadata/level_name = "???"
+metadata/mission = "Figure out where you are!"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0201572, 0.999797, 0, -0.999797, 0.0201572, 388.853, 276.512, 0)
+light_color = Color(0.714747, 0.6958, 0.98, 1)
+light_energy = 0.2
+shadow_enabled = true
+shadow_blur = 6.367
+sky_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_neifk")
+
+[node name="SpawnPoint" type="Node3D" parent="." groups=["SpawnPoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440.337, 16.0827, -129.084)
+
+[node name="Hud" parent="." instance=ExtResource("3_u40wd")]
+
+[node name="Water" parent="." instance=ExtResource("5_xcmgf")]
+transform = Transform3D(17930.8, 0, 0, 0, 27.216, 0, 0, 0, 17930.8, 0, 0, 0)
+
+[node name="Trees" type="Node3D" parent="."]
+
+[node name="palm1" parent="Trees" instance=ExtResource("6_neifk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 457.58, 15.6494, -115.485)
+
+[node name="palm2" parent="Trees" instance=ExtResource("6_neifk")]
+transform = Transform3D(-0.402545, 0.00042171, -0.9154, -5.78267e-05, 1, 0.000486119, 0.9154, 0.00024863, -0.402545, 443.11, 17.7034, -88.2351)
+
+[node name="openingisland" parent="." instance=ExtResource("6_yt5h3")]
+transform = Transform3D(700, 0, 0, 0, 700, 0, 0, 0, 700, 0, 0, 0)
+
+[node name="Ring" parent="." instance=ExtResource("7_yt5h3")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 454.671, 16.4315, -116.529)
+
+[node name="AudioCues" type="Node3D" parent="."]
+
+[node name="Ocean1" type="AudioStreamPlayer3D" parent="AudioCues"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 501, 12, -99)
+stream = ExtResource("8_opklx")
+autoplay = true
+max_distance = 500.0
+
+[node name="Ocean2" type="AudioStreamPlayer3D" parent="AudioCues"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 377, 12, -243)
+stream = ExtResource("8_opklx")
+autoplay = true
+max_distance = 500.0
+
+[node name="Player" parent="." instance=ExtResource("2_iiinm")]

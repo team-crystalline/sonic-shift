@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3qhhst175gi0"]
+
+[ext_resource type="Script" uid="uid://ojiet5a3qgir" path="res://Actors/DEBUG/teleporter.gd" id="1_exu1p"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5s4ws"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_exu1p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqx63"]
+albedo_color = Color(1, 0, 1, 1)
+albedo_texture = SubResource("PlaceholderTexture2D_exu1p")
+billboard_mode = 1
+
+[sub_resource type="SphereMesh" id="SphereMesh_k3h2f"]
+material = SubResource("StandardMaterial3D_aqx63")
+
+[node name="Teleporter" type="Area3D"]
+script = ExtResource("1_exu1p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_5s4ws")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_k3h2f")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

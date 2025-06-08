@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://3h2eievlgcdi"]
+
+[ext_resource type="Script" uid="uid://d2hqrytjra4f6" path="res://Actors/Objects/Collectibles/ring_trail.gd" id="1_wvh5c"]
+
+[sub_resource type="Curve3D" id="Curve3D_wvh5c"]
+
+[node name="RingTrail" type="Node3D"]
+script = ExtResource("1_wvh5c")
+
+[node name="RingPath" type="Path3D" parent="."]
+curve = SubResource("Curve3D_wvh5c")

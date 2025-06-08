@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bh820g1g3rqgr"]
+
+[ext_resource type="FontFile" uid="uid://b6a6qryn3cooq" path="res://HUD/Blank River.ttf" id="1_fu5xi"]
+
+[resource]
+default_font = ExtResource("1_fu5xi")
+default_font_size = 32
+Label/font_sizes/font_size = 24

@@ -1,0 +1,82 @@
+[gd_resource type="Environment" load_steps=15 format=3 uid="uid://bswj8iaxnt3ht"]
+
+[ext_resource type="Shader" uid="uid://daq2ngct1hfij" path="res://Graphics/Shaders/sky.gdshader" id="1_bwbha"]
+[ext_resource type="Texture2D" uid="uid://f025tbfs8m7j" path="res://Graphics/Textures/Placeholders/star.png" id="2_qkmxg"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bwbha"]
+frequency = 0.0156
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qkmxg"]
+noise = SubResource("FastNoiseLite_bwbha")
+
+[sub_resource type="Curve" id="Curve_qkmxg"]
+_data = [Vector2(0, 0.0224719), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_d3p82"]
+curve = SubResource("Curve_qkmxg")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d3p82"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i6vp5"]
+noise = SubResource("FastNoiseLite_d3p82")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_neifk"]
+noise_type = 3
+frequency = 0.0034
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yt5h3"]
+in_3d_space = true
+seamless = true
+noise = SubResource("FastNoiseLite_neifk")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qkmxg"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_d3p82"]
+seamless = true
+noise = SubResource("FastNoiseLite_qkmxg")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yt5h3"]
+shader = ExtResource("1_bwbha")
+shader_parameter/cloud_shape_sampler = SubResource("NoiseTexture2D_yt5h3")
+shader_parameter/cloud_noise_sampler = SubResource("NoiseTexture2D_i6vp5")
+shader_parameter/cloud_curves = SubResource("CurveTexture_d3p82")
+shader_parameter/clouds_samples = 32
+shader_parameter/shadow_sample = 4
+shader_parameter/clouds_density = 0.1
+shader_parameter/clouds_scale = 1.0
+shader_parameter/clouds_smoothness = 0.1
+shader_parameter/clouds_light_color = Color(0.14, 0.14, 0.14, 1)
+shader_parameter/clouds_shadow_intensity = 6.4
+shader_parameter/high_clouds_sampler = SubResource("NoiseTexture2D_d3p82")
+shader_parameter/high_clouds_density = 0.4
+shader_parameter/top_color = Color(0, 0, 0, 1)
+shader_parameter/bottom_color = Color(0.0296333, 0.0265, 0.05, 1)
+shader_parameter/sun_scatter = Color(0.08, 0.0232, 0.05728, 1)
+shader_parameter/astro_tint = Color(0.159408, 0.0302486, 0.232442, 1)
+shader_parameter/astro_sampler = SubResource("NoiseTexture2D_qkmxg")
+shader_parameter/astro_scale = 1.0
+shader_parameter/astro_intensity = 1.0
+shader_parameter/stars_intensity = 1.0
+shader_parameter/shooting_stars_intensity = 0.9
+shader_parameter/shooting_star_sampler = ExtResource("2_qkmxg")
+shader_parameter/shooting_star_tint = Color(0.84, 0.84, 0.84, 1)
+
+[sub_resource type="Sky" id="Sky_u40wd"]
+sky_material = SubResource("ShaderMaterial_yt5h3")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_u40wd")
+ambient_light_source = 2
+ambient_light_color = Color(0.1338, 0.126, 0.36, 1)
+ambient_light_energy = 0.7
+ssao_intensity = 15.61
+glow_intensity = 2.6
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.02098, 0.0177, 0.03, 1)
+fog_density = 1.0
+fog_sky_affect = 0.0
+volumetric_fog_density = 0.1
+volumetric_fog_emission = Color(0.75, 0.75, 0.75, 1)

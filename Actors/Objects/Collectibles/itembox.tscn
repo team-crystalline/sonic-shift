@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://cfpjdvsafcmmy"]
+
+[ext_resource type="Shader" uid="uid://k8j4fgoka1ac" path="res://Graphics/Shaders/glass.gdshader" id="1_6xj78"]
+[ext_resource type="Script" uid="uid://cnu8qlffxauch" path="res://Actors/Objects/Collectibles/itembox.gd" id="1_8iea4"]
+[ext_resource type="Texture2D" uid="uid://bidnre3cc2uvq" path="res://Graphics/Textures/Placeholders/Purple/texture_08.png" id="2_ho7i7"]
+[ext_resource type="Texture2D" uid="uid://bvum851bjh2q0" path="res://Graphics/Textures/sparkly.png" id="4_45mbq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xl2ck"]
+size = Vector3(0.7, 0.7, 0.7)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ho7i7"]
+render_priority = 0
+shader = ExtResource("1_6xj78")
+shader_parameter/albedo = Color(0.8, 0.926667, 1, 0.380392)
+shader_parameter/roughness = 0.15
+shader_parameter/normal_strength = 1.0
+shader_parameter/edge_color = Color(0.5194, 0.780407, 0.98, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6xj78"]
+material = SubResource("ShaderMaterial_ho7i7")
+radius = 0.4
+height = 1.0
+rings = 4
+
+[node name="Itembox" type="StaticBody3D"]
+script = ExtResource("1_8iea4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_xl2ck")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_6xj78")
+
+[node name="itemscreen" type="Sprite3D" parent="."]
+transform = Transform3D(0.188, 0, 0, 0, 0.188, 0, 0, 0, 0.188, 0, 0, 0)
+billboard = 2
+texture = ExtResource("2_ho7i7")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.733985, 0)
+light_projector = ExtResource("4_45mbq")
+light_specular = 5.586
+shadow_enabled = true
+shadow_blur = 0.868
+omni_range = 0.852141
