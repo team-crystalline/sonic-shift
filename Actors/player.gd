@@ -1,18 +1,23 @@
 extends CharacterBody3D
 
 @export_group("Movement Physics")
-@export var JUMP_VELOCITY : float = 7  # The height in which the player jumps.
-@export var SPEED : float = 25
-@export var boost_gauge : float = 30
+@export var JUMP_VELOCITY := 7.0  # The height in which the player jumps.
+@export var SPEED := 25.0
+@export var boost_gauge := 3.0
 @export_group("Collectibles")
 @export var rings : int = 0
 @export var lives : int = 3
 @export_group("Animation")
-@export var head_movement_sensitivity = 0.1
-@export var head_rotation_lerp_speed = 5.0
-@export var patience_level : float = 3 # How patient is Sonic? (He's not)
+@export var is_running := true
+@export var head_movement_sensitivity := 0.1
+@export var head_rotation_lerp_speed := 5.0
+@export var patience_level := 3.0 # How patient is Sonic? (He's not)
+@export_group("Unlocks")
+@export var can_boost := false
+@export var can_light_dash := false
+@export var can_shift := false
 
-@export var current_speed = 0
+var current_speed = 0
 var effect_amount = 1
 
 # Get the gravity from the project settings to be synced with RigidDynamicBody nodes.
@@ -28,7 +33,6 @@ var target_head_rotation: Vector3 = Vector3.ZERO
 
 var DEFAULT_SPEED : float
 var max_boost_gauge : float # Rings cannot make the boost go past this number.
-@export var is_running : bool = true
 
 func set_bone_rot(bone, ang):
 	var b = skeleton.find_bone(bone)
@@ -52,7 +56,7 @@ func _ready() -> void:
 		print("Can't find a spawn point. Was it added?")
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("boost") and not is_boosting and boost_gauge > 0.5 and is_running:
+	if event.is_action_pressed("boost") and not is_boosting and boost_gauge > 0.5 and is_running and can_boost:
 		is_boosting = true
 	
 	if event.is_action_released("boost"):

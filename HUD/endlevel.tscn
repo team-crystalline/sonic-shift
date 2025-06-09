@@ -1,0 +1,149 @@
+[gd_scene load_steps=4 format=3 uid="uid://8x3al2o7o4tl"]
+
+[ext_resource type="Shader" uid="uid://gk4kvrunjmjl" path="res://Graphics/Shaders/2dDropShadow.gdshader" id="1_ycen0"]
+[ext_resource type="Theme" uid="uid://bh820g1g3rqgr" path="res://HUD/HUD-Scribble.tres" id="2_unngo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycen0"]
+shader = ExtResource("1_ycen0")
+shader_parameter/drop_shadow_color = Color(0, 0, 0, 0.5)
+shader_parameter/shadow_offset_x = 0.05
+shader_parameter/shadow_offset_y = 2.32907e-09
+shader_parameter/shadow_rotation = 0.0
+shader_parameter/rotation_pivot = Vector2(0.5, 0.5)
+shader_parameter/shadow_blur_strength = 16.043
+shader_parameter/shadow_blur_samples = 4
+shader_parameter/_blur_scale_factor = 1.0
+
+[node name="Endlevel" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RedBanner" type="ColorRect" parent="."]
+z_index = -2
+layout_mode = 0
+offset_top = 533.0
+offset_right = 1154.0
+offset_bottom = 701.0
+color = Color(0.8, 0.104, 0.104, 1)
+
+[node name="StageClear" type="RichTextLabel" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = 274.0
+offset_right = 1159.0
+offset_bottom = 157.0
+theme = ExtResource("2_unngo")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 6
+theme_override_font_sizes/normal_font_size = 106
+text = "Stage Clear"
+horizontal_alignment = 1
+
+[node name="Score" type="RichTextLabel" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = -1.0
+offset_top = 3.0
+offset_right = 278.0
+offset_bottom = 115.0
+theme = ExtResource("2_unngo")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 6
+theme_override_constants/line_separation = -24
+theme_override_font_sizes/normal_font_size = 56
+bbcode_enabled = true
+text = "[color=red]score[/color]
+0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Rings" type="RichTextLabel" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = 1.0
+offset_top = 184.0
+offset_right = 280.0
+offset_bottom = 294.0
+theme = ExtResource("2_unngo")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 6
+theme_override_constants/line_separation = -24
+theme_override_font_sizes/normal_font_size = 56
+bbcode_enabled = true
+text = "[color=red]rings[/color]
+0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Time" type="RichTextLabel" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = -1.0
+offset_top = 365.0
+offset_right = 278.0
+offset_bottom = 475.0
+theme = ExtResource("2_unngo")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 6
+theme_override_constants/line_separation = -24
+theme_override_font_sizes/normal_font_size = 56
+bbcode_enabled = true
+text = "[color=red]time[/color]
+00:00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bonus" type="RichTextLabel" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = -1.0
+offset_top = 520.0
+offset_right = 278.0
+offset_bottom = 634.0
+theme = ExtResource("2_unngo")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 6
+theme_override_constants/line_separation = -24
+theme_override_font_sizes/normal_font_size = 56
+bbcode_enabled = true
+text = "[color=red]bonus[/color]
+0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RankText" type="RichTextLabel" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = 623.0
+offset_top = 533.0
+offset_right = 1155.0
+offset_bottom = 690.0
+theme = ExtResource("2_unngo")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 6
+theme_override_font_sizes/normal_font_size = 106
+text = "Rank: %S"
+horizontal_alignment = 1
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_ycen0")
+
+[node name="BlackBar" type="ColorRect" parent="CanvasGroup"]
+offset_left = -132.0
+offset_top = -69.0
+offset_right = 275.0
+offset_bottom = 577.0
+scale = Vector2(1, 1.4)
+color = Color(0, 0, 0, 1)

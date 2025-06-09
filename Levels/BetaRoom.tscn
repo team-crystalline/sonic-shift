@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://xe3a3emdj7ak" path="res://Actors/Objects/Buildings/wall.tscn" id="8_y41jg"]
 [ext_resource type="PackedScene" uid="uid://3h2eievlgcdi" path="res://Actors/Objects/Collectibles/RingTrail.tscn" id="9_y41jg"]
 [ext_resource type="PackedScene" uid="uid://c3qhhst175gi0" path="res://Actors/DEBUG/teleporter.tscn" id="10_0sp38"]
-[ext_resource type="PackedScene" uid="uid://c3brwspruin4g" path="res://Levels/starting_island.tscn" id="11_5ey0c"]
+[ext_resource type="PackedScene" uid="uid://52e308j80ryx" path="res://Actors/Objects/goalRing.tscn" id="12_wfrlm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0sp38"]
 size = Vector3(500, 1, 500)
@@ -47,7 +47,7 @@ environment = ExtResource("1_y41jg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -37.1614, 0)
 
 [node name="SpawnPoint" type="Node3D" parent="." groups=["SpawnPoint"]]
-transform = Transform3D(-0.583258, 0, 0.812287, 0, 1, 0, -0.812287, 0, -0.583258, 2.9571, 1, 4.84767)
+transform = Transform3D(-0.583258, 0, 0.812287, 0, 1, 0, -0.812287, 0, -0.583258, 2.9571, 1, 20.9136)
 rotation_edit_mode = 1
 
 [node name="Hud" parent="." instance=ExtResource("4_gb6cv")]
@@ -125,4 +125,7 @@ size = Vector2(3, 1)
 
 [node name="Teleporter" parent="." instance=ExtResource("10_0sp38")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.10164, 1.5, 22.0301)
-teleport_to = ExtResource("11_5ey0c")
+teleport_to_path = "res://Levels/starting_island-daytime.tscn"
+
+[node name="GoalRing" parent="." instance=ExtResource("12_wfrlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.16335, 1.81492, 75.6284)

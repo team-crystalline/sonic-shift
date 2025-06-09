@@ -69,6 +69,7 @@ theme_override_constants/shadow_outline_size = 8
 text = "Rings: 0"
 
 [node name="BoostLabel" type="Label" parent="Control"]
+visible = false
 layout_mode = 0
 offset_left = 229.0
 offset_top = 1.0
@@ -201,6 +202,7 @@ texture = ExtResource("8_t1yhm")
 
 [node name="PauseSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_6i5cd")
+volume_db = -7.656
 
 [connection signal="pressed" from="Control/PauseScreen/QuitButton" to="Control" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="Control/PauseScreen/ResumeButton" to="Control" method="_on_resume_button_pressed"]

@@ -10,6 +10,8 @@ extends Control
 
 func _ready() -> void:
 	loc_label.text = level.get_meta("level_name")
+	if player.can_boost:
+		boost_label.visible=true
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):

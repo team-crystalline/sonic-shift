@@ -66,7 +66,7 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("RingModel")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.25, 1, 0, -0.707107, 0, 0.707107, 0.5, 1, 0, 1, 0, 4.37114e-08)
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.5, 1, 0, 1, 0, 4.37114e-08)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w20yi"]
 _data = {

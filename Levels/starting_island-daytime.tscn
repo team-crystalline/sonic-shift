@@ -1,0 +1,298 @@
+[gd_scene load_steps=17 format=3 uid="uid://bdk3pougbup37"]
+
+[ext_resource type="Sky" uid="uid://kwu65b08kd0c" path="res://Graphics/Resources/afternoon_sky.tres" id="1_iedvb"]
+[ext_resource type="Script" uid="uid://csjf3vvgpolev" path="res://Scripts/Cutscenes/Sonic_01_Intro.gd" id="1_uochh"]
+[ext_resource type="PackedScene" uid="uid://dfmsbbxxx5ipp" path="res://HUD/HUD.tscn" id="2_2uwuy"]
+[ext_resource type="Shader" uid="uid://dou63tfv5i38h" path="res://Graphics/Shaders/blur.gdshader" id="2_ceogw"]
+[ext_resource type="PackedScene" uid="uid://dfs47e8xm6wsq" path="res://Actors/Environment/water-ocean.tscn" id="3_uochh"]
+[ext_resource type="PackedScene" uid="uid://d240lmnwlett3" path="res://Actors/Environment/palm_1.tscn" id="4_ceogw"]
+[ext_resource type="PackedScene" uid="uid://c62llqumgb4f7" path="res://Models/Levels/startisland/openingisland.tscn" id="5_uk8oh"]
+[ext_resource type="PackedScene" uid="uid://dx2w3t4amh84c" path="res://Actors/Objects/Collectibles/ring.tscn" id="6_u0riy"]
+[ext_resource type="AudioStream" uid="uid://bhjovwjeunxnr" path="res://Audio/FX/ocean-waves-112906.mp3" id="7_34kdn"]
+[ext_resource type="PackedScene" uid="uid://pgx7n8fyonap" path="res://Actors/player.tscn" id="8_db1ul"]
+[ext_resource type="PackedScene" uid="uid://c3qhhst175gi0" path="res://Actors/DEBUG/teleporter.tscn" id="9_2uwuy"]
+
+[sub_resource type="Animation" id="Animation_uochh"]
+resource_name = "fade_in"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeIn:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.233258, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FadeIn:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5.73333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Hud:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 5.73333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Player:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.13333, 2.33333, 3.46667, 4.56667, 5.76667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(440.729, 15.9448, -128.981), Vector3(440.729, 15.9448, -128.981), Vector3(440.729, 16.0098, -128.981), Vector3(440.729, 16.0098, -128.981), Vector3(440.729, 16.1376, -128.981), Vector3(440.729, 16.2357, -128.981)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Player:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.33333, 2.33333, 3.63333, 4.56667, 5.76667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.0836857, -1.56352, -1.18686), Vector3(-0.0836857, -1.56352, -1.18686), Vector3(-0.0709433, -1.61581, -0.533897), Vector3(-0.0709433, -1.61581, -0.533897), Vector3(-0.416599, -1.7854, -0.0162251), Vector3(0, -1.76627, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ColorRect:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ColorRect:material:shader_parameter/blur_amount")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.76667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [4.142, 9.5e-08]
+}
+
+[sub_resource type="Animation" id="Animation_ceogw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeIn:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FadeIn:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Hud:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Player:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(440.729, 15.9448, -128.981)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Player:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.19502, -0.42638, -1.11654)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ColorRect:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ColorRect:material:shader_parameter/blur_amount")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [4.142]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uk8oh"]
+_data = {
+&"RESET": SubResource("Animation_ceogw"),
+&"fade_in": SubResource("Animation_uochh")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uk8oh"]
+shader = ExtResource("2_ceogw")
+shader_parameter/blur_amount = 4.142
+shader_parameter/mix_amount = 0.0
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="Environment" id="Environment_2uwuy"]
+background_mode = 2
+background_color = Color(0.55, 0.895, 1, 1)
+sky = ExtResource("1_iedvb")
+ambient_light_source = 2
+ambient_light_color = Color(1, 0.9545, 0.61, 1)
+ambient_light_energy = 0.7
+ssao_intensity = 15.61
+glow_intensity = 2.6
+fog_enabled = true
+fog_light_color = Color(0.72, 0.7152, 0.576, 1)
+fog_light_energy = 0.56
+fog_density = 0.005
+fog_sky_affect = 0.0
+volumetric_fog_density = 0.1
+volumetric_fog_emission = Color(0.75, 0.75, 0.75, 1)
+
+[node name="StartingIsland" type="Node3D" groups=["level"]]
+script = ExtResource("1_uochh")
+metadata/level_name = "???"
+metadata/mission = "Figure out where you are!"
+
+[node name="OpeningCutscene" type="Node3D" parent="."]
+
+[node name="FadeIn" type="ColorRect" parent="OpeningCutscene"]
+z_index = 14
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 1194.0
+offset_bottom = 666.0
+color = Color(0, 0, 0, 1)
+
+[node name="CutscenePlayer" type="AnimationPlayer" parent="OpeningCutscene"]
+libraries = {
+&"": SubResource("AnimationLibrary_uk8oh")
+}
+
+[node name="ColorRect" type="ColorRect" parent="OpeningCutscene"]
+material = SubResource("ShaderMaterial_uk8oh")
+offset_left = -29.0
+offset_top = -25.0
+offset_right = 1211.0
+offset_bottom = 675.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0201572, 0.999797, 0, -0.999797, 0.0201572, 388.853, 276.512, 0)
+light_color = Color(0.95, 0.79705, 0.551, 1)
+shadow_enabled = true
+shadow_blur = 6.367
+sky_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2uwuy")
+
+[node name="SpawnPoint" type="Node3D" parent="." groups=["SpawnPoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440.337, 16.0827, -129.084)
+
+[node name="Hud" parent="." instance=ExtResource("2_2uwuy")]
+visible = false
+
+[node name="Water" parent="." instance=ExtResource("3_uochh")]
+transform = Transform3D(17930.8, 0, 0, 0, 27.216, 0, 0, 0, 17930.8, 0, 0, 0)
+
+[node name="Trees" type="Node3D" parent="."]
+
+[node name="palm1" parent="Trees" instance=ExtResource("4_ceogw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 457.58, 15.6494, -115.485)
+
+[node name="palm2" parent="Trees" instance=ExtResource("4_ceogw")]
+transform = Transform3D(-0.402545, 0.00042171, -0.9154, -5.78267e-05, 1, 0.000486119, 0.9154, 0.00024863, -0.402545, 443.11, 17.7034, -88.2351)
+
+[node name="openingisland" parent="." instance=ExtResource("5_uk8oh")]
+transform = Transform3D(700, 0, 0, 0, 700, 0, 0, 0, 700, 0, 0, 0)
+
+[node name="Ring" parent="." instance=ExtResource("6_u0riy")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 454.671, 16.4315, -116.529)
+
+[node name="AudioCues" type="Node3D" parent="."]
+
+[node name="Ocean1" type="AudioStreamPlayer3D" parent="AudioCues"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 501, 12, -99)
+stream = ExtResource("7_34kdn")
+autoplay = true
+max_distance = 500.0
+
+[node name="Ocean2" type="AudioStreamPlayer3D" parent="AudioCues"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 377, 12, -243)
+stream = ExtResource("7_34kdn")
+autoplay = true
+max_distance = 500.0
+
+[node name="Player" parent="." instance=ExtResource("8_db1ul")]
+transform = Transform3D(0.053808, 0.986949, -0.15178, -0.329775, 0.161036, 0.930224, 0.942525, -2.08616e-07, 0.334136, 440.729, 15.9448, -128.981)
+
+[node name="Teleporter" parent="." instance=ExtResource("9_2uwuy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 446.098, 14.4667, -118.456)
+teleport_to_path = "res://Levels/BetaRoom.tscn"
