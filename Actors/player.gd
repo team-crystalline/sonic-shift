@@ -16,6 +16,8 @@ extends CharacterBody3D
 @export var can_boost := false
 @export var can_light_dash := false
 @export var can_shift := false
+@export_category("Other Booleans")
+@export var is_in_a_cutscene := false
 
 var current_speed = 0
 var effect_amount = 1

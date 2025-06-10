@@ -125,7 +125,7 @@ size = Vector2(3, 1)
 
 [node name="Teleporter" parent="." instance=ExtResource("10_0sp38")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.10164, 1.5, 22.0301)
-teleport_to_path = "res://Levels/starting_island-daytime.tscn"
+teleport_to_path = "res://Levels/starting_island.tscn"
 
 [node name="GoalRing" parent="." instance=ExtResource("12_wfrlm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.16335, 1.81492, 75.6284)

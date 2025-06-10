@@ -64,7 +64,7 @@ void fragment() {
     vec2 uv = SCREEN_UV;
     float rotation = radians(shadow_rotation);
     vec2 offset = vec2(shadow_offset_x, shadow_offset_y);
-    
+
     // Calculate aspect ratio correction (width/height, height/width)
     vec2 aspect = vec2(1.0, SCREEN_PIXEL_SIZE.x/SCREEN_PIXEL_SIZE.y);
 

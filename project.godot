@@ -24,13 +24,17 @@ config/icon="res://icon.svg"
 
 window/stretch/mode="canvas_items"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+
 [global_group]
 
 Player=""
 SpawnPoint=""
 level="Scenes with this group are considered a level for play."
 shootbox="This is a hitbox for targeting with mouse"
-can_pause="These nodes should stop when everything is paused."
+can_pause="!! DO NOT APPLY TO ROOT NODES OF LEVELS !! These nodes should stop when everything is paused."
 
 [input]
 

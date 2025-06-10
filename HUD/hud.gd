@@ -33,11 +33,24 @@ func set_pause_state(paused: bool) -> void:
 		node.set_physics_process(!paused)
 		var animation_player = node.get_node("AnimationPlayer")
 		if animation_player:
-			# Pause any animationd
+			# Pause any animations
 			if paused:
 				animation_player.stop()
 			else:
 				animation_player.play()
+
+	# Find all sounds playing in Master and BGM buses, lower volume when paused.
+	var master_bus_index = AudioServer.get_bus_index("Master")
+	var bgm_bus_index = AudioServer.get_bus_index("BGM")
+	
+	# Adjust volume for Master bus
+	if paused:
+		AudioServer.set_bus_volume_db(master_bus_index, -10)  # Mute or lower volume significantly
+		AudioServer.set_bus_volume_db(bgm_bus_index, -10)     # Mute or lower volume significantly
+	else:
+		AudioServer.set_bus_volume_db(master_bus_index, 0)    # Reset to original volume
+		AudioServer.set_bus_volume_db(bgm_bus_index, 0)       # Reset to original volume
+
 
 func _process(_delta: float) -> void:
 	ring_label.text= "Rings: %d" % player.rings
