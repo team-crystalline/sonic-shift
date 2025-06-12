@@ -67,6 +67,8 @@ func _input(event: InputEvent) -> void:
 		is_boosting = false
 
 func _unhandled_input(event: InputEvent) -> void:
+	if is_in_a_cutscene:
+		return
 	if event is InputEventMouseButton:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	elif event.is_action_pressed("ui_cancel"):
@@ -106,7 +108,8 @@ func _process(_delta: float) -> void:
 		lives += 1
 
 func _physics_process(delta: float) -> void:
-
+	if is_in_a_cutscene:
+		return
 #region Gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
