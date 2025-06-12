@@ -18,6 +18,8 @@ extends CharacterBody3D
 @export var can_boost := false
 @export var can_light_dash := false
 @export var can_shift := false
+@export var can_double_jump := false
+@export var can_quint_jump := false
 @export_category("Other Booleans")
 @export var is_in_a_cutscene := false
 
