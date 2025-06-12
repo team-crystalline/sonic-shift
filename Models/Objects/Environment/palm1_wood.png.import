@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dl165b4q8208p"
 path.s3tc="res://.godot/imported/palm1_wood.png-f69e565a254a24c2e61aa4aaaa2bb3ed.s3tc.ctex"
+path.etc2="res://.godot/imported/palm1_wood.png-f69e565a254a24c2e61aa4aaaa2bb3ed.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Models/Objects/Environment/palm1_wood.png"
-dest_files=["res://.godot/imported/palm1_wood.png-f69e565a254a24c2e61aa4aaaa2bb3ed.s3tc.ctex"]
+dest_files=["res://.godot/imported/palm1_wood.png-f69e565a254a24c2e61aa4aaaa2bb3ed.s3tc.ctex", "res://.godot/imported/palm1_wood.png-f69e565a254a24c2e61aa4aaaa2bb3ed.etc2.ctex"]
 
 [params]
 

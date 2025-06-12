@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dx7n8jq5jfy43"
 path.s3tc="res://.godot/imported/Knuckles_chr_knuckles_shoes_abd.png-31c6b26dba088481898af308fa1287ec.s3tc.ctex"
+path.etc2="res://.godot/imported/Knuckles_chr_knuckles_shoes_abd.png-31c6b26dba088481898af308fa1287ec.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Models/Knuckles/Knuckles_chr_knuckles_shoes_abd.png"
-dest_files=["res://.godot/imported/Knuckles_chr_knuckles_shoes_abd.png-31c6b26dba088481898af308fa1287ec.s3tc.ctex"]
+dest_files=["res://.godot/imported/Knuckles_chr_knuckles_shoes_abd.png-31c6b26dba088481898af308fa1287ec.s3tc.ctex", "res://.godot/imported/Knuckles_chr_knuckles_shoes_abd.png-31c6b26dba088481898af308fa1287ec.etc2.ctex"]
 
 [params]
 

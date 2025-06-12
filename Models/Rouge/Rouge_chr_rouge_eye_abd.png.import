@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://5kdm2qsbaq5w"
 path.s3tc="res://.godot/imported/Rouge_chr_rouge_eye_abd.png-92382ae93aed1256994f48555057508a.s3tc.ctex"
+path.etc2="res://.godot/imported/Rouge_chr_rouge_eye_abd.png-92382ae93aed1256994f48555057508a.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Models/Rouge/Rouge_chr_rouge_eye_abd.png"
-dest_files=["res://.godot/imported/Rouge_chr_rouge_eye_abd.png-92382ae93aed1256994f48555057508a.s3tc.ctex"]
+dest_files=["res://.godot/imported/Rouge_chr_rouge_eye_abd.png-92382ae93aed1256994f48555057508a.s3tc.ctex", "res://.godot/imported/Rouge_chr_rouge_eye_abd.png-92382ae93aed1256994f48555057508a.etc2.ctex"]
 
 [params]
 

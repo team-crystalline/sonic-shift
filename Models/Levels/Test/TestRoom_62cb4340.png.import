@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cqfie4homs68k"
 path.s3tc="res://.godot/imported/TestRoom_62cb4340.png-490f0089f49cf555b9e9642f4578af40.s3tc.ctex"
+path.etc2="res://.godot/imported/TestRoom_62cb4340.png-490f0089f49cf555b9e9642f4578af40.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Models/Levels/Test/TestRoom_62cb4340.png"
-dest_files=["res://.godot/imported/TestRoom_62cb4340.png-490f0089f49cf555b9e9642f4578af40.s3tc.ctex"]
+dest_files=["res://.godot/imported/TestRoom_62cb4340.png-490f0089f49cf555b9e9642f4578af40.s3tc.ctex", "res://.godot/imported/TestRoom_62cb4340.png-490f0089f49cf555b9e9642f4578af40.etc2.ctex"]
 
 [params]
 
