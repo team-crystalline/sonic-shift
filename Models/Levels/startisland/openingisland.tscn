@@ -1,8 +1,58 @@
-[gd_scene load_steps=2 format=3 uid="uid://c62llqumgb4f7"]
+[gd_scene load_steps=6 format=3 uid="uid://c62llqumgb4f7"]
 
 [ext_resource type="PackedScene" uid="uid://ckl5knryxtsp5" path="res://Models/Levels/startisland/openingisland.glb" id="1_7trsl"]
+[ext_resource type="Shader" uid="uid://diypaxa00gqwx" path="res://Graphics/Shaders/ocean-large.gdshader" id="2_0ibcf"]
+
+[sub_resource type="Gradient" id="Gradient_0ibcf"]
+offsets = PackedFloat32Array(0, 0.446903, 0.619469, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5etvh"]
+gradient = SubResource("Gradient_0ibcf")
+fill_from = Vector2(0, 0.0128205)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5etvh"]
+render_priority = 0
+shader = ExtResource("2_0ibcf")
+shader_parameter/absorption_color = Color(1, 0.35, 0, 1)
+shader_parameter/fresnel_radius = 2.0
+shader_parameter/fresnel_color = Color(0, 0.57, 0.72, 1)
+shader_parameter/roughness = 0.0
+shader_parameter/specular = 0.0
+shader_parameter/depth_distance = 25.0
+shader_parameter/beers_law = 4.5
+shader_parameter/displacement_strength = 0.1
+shader_parameter/displacement_scroll_speed = 0.438
+shader_parameter/displacement_scroll_offset = Vector2(-0.2, 0.3)
+shader_parameter/displacement_scale_offset = 0.645
+shader_parameter/displacement_scale = Vector2(0.195, 0.22)
+shader_parameter/displacement_texture = SubResource("GradientTexture2D_5etvh")
+shader_parameter/edge_thickness = 0.3
+shader_parameter/edge_speed = 0.35
+shader_parameter/edge_noise_scale = Vector2(0.4, 0.4)
+shader_parameter/influence_size = 1.0
+shader_parameter/player_wave_frequenzy = 10.0
+shader_parameter/player_wave_speed = 5.0
+shader_parameter/caustic_size = 2.0
+shader_parameter/caustic_range = 40.0
+shader_parameter/caustic_strength = 0.08
+shader_parameter/ssr_mix_strength = 0.65
+shader_parameter/ssr_travel = 100.0
+shader_parameter/ssr_resolution_near = 1.0
+shader_parameter/ssr_resolution_far = 5.0
+shader_parameter/ssr_tolerance = 1.0
+shader_parameter/refraction_strength = 1.25
+shader_parameter/normal_map_strength = 1.0
+shader_parameter/scroll_speed = 0.3
+shader_parameter/scroll_offset = Vector2(0.1, -0.3)
+shader_parameter/scale_offset = 0.5
+shader_parameter/normal_map_scale = Vector2(0.1, 0.1)
 
 [node name="openingisland" instance=ExtResource("1_7trsl")]
 
 [node name="Landscape" parent="." index="0"]
 gi_lightmap_texel_scale = 0.01
+
+[node name="Water" parent="." index="2"]
+transform = Transform3D(8.58547, 0, 0, 0, -0.0195353, 0, 0, 0, 8.67416, 0, -0.00658675, 0)
+surface_material_override/0 = SubResource("ShaderMaterial_5etvh")

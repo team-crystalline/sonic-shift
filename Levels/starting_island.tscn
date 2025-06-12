@@ -1,11 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://b37c4e87pan8q"]
+[gd_scene load_steps=17 format=3 uid="uid://b37c4e87pan8q"]
 
 [ext_resource type="Script" uid="uid://csjf3vvgpolev" path="res://Scripts/Cutscenes/Sonic_01_Intro.gd" id="1_46lvm"]
 [ext_resource type="Shader" uid="uid://dou63tfv5i38h" path="res://Graphics/Shaders/blur.gdshader" id="2_da1dx"]
 [ext_resource type="PackedScene" uid="uid://pgx7n8fyonap" path="res://Actors/player.tscn" id="2_iiinm"]
 [ext_resource type="Sky" uid="uid://bq6tvg02xsvcp" path="res://Graphics/Resources/strange_sky.tres" id="3_74m5d"]
 [ext_resource type="PackedScene" uid="uid://dfmsbbxxx5ipp" path="res://HUD/HUD.tscn" id="3_u40wd"]
-[ext_resource type="PackedScene" uid="uid://dfs47e8xm6wsq" path="res://Actors/Environment/water-ocean.tscn" id="5_xcmgf"]
 [ext_resource type="PackedScene" uid="uid://d240lmnwlett3" path="res://Actors/Environment/palm_1.tscn" id="6_neifk"]
 [ext_resource type="PackedScene" uid="uid://c62llqumgb4f7" path="res://Models/Levels/startisland/openingisland.tscn" id="6_yt5h3"]
 [ext_resource type="PackedScene" uid="uid://dx2w3t4amh84c" path="res://Actors/Objects/Collectibles/ring.tscn" id="7_yt5h3"]
@@ -99,6 +98,18 @@ tracks/6/keys = {
 "update": 0,
 "values": [4.142]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../Player:is_in_a_cutscene")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_uochh"]
 resource_name = "fade_in"
@@ -187,6 +198,18 @@ tracks/6/keys = {
 "update": 0,
 "values": [4.142, 9.5e-08]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../Player:is_in_a_cutscene")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uk8oh"]
 _data = {
@@ -260,9 +283,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 451.08, 16.0827, -129.143)
 [node name="Hud" parent="." instance=ExtResource("3_u40wd")]
 visible = false
 
-[node name="Water" parent="." instance=ExtResource("5_xcmgf")]
-transform = Transform3D(17930.8, 0, 0, 0, 27.216, 0, 0, 0, 17930.8, 0, 0, 0)
-
 [node name="Trees" type="Node3D" parent="."]
 
 [node name="palm1" parent="Trees" instance=ExtResource("6_neifk")]
@@ -270,9 +290,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 457.58, 15.6494, -115.485)
 
 [node name="palm2" parent="Trees" instance=ExtResource("6_neifk")]
 transform = Transform3D(-0.402545, 0.00042171, -0.9154, -5.78267e-05, 1, 0.000486119, 0.9154, 0.00024863, -0.402545, 443.11, 17.7034, -88.2351)
-
-[node name="openingisland" parent="." instance=ExtResource("6_yt5h3")]
-transform = Transform3D(700, 0, 0, 0, 700, 0, 0, 0, 700, 0, 0, 0)
 
 [node name="AudioCues" type="Node3D" parent="."]
 
@@ -315,3 +332,6 @@ stream = ExtResource("12_6m1y0")
 volume_db = -9.571
 autoplay = true
 bus = &"BGM"
+
+[node name="openingisland" parent="." instance=ExtResource("6_yt5h3")]
+transform = Transform3D(700, 0, 0, 0, 700, 0, 0, 0, 700, 0, 0, 0)
