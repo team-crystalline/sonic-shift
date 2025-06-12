@@ -18,7 +18,10 @@ warnings/check_angle_interpolation_type_conflicting=false
 config/name="First Person Runner"
 run/main_scene="uid://bp27esbw6s3b3"
 config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/bg_color=Color(0.0562916, 0.0562916, 0.0562916, 1)
+boot_splash/image="uid://dlbbgafydgq6s"
 config/icon="res://icon.svg"
+boot_splash/minimum_display_time=500
 
 [display]
 

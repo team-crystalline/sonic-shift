@@ -1,9 +1,11 @@
 extends CharacterBody3D
 
 @export_group("Movement Physics")
-@export var JUMP_VELOCITY := 7.0  # The height in which the player jumps.
-@export var SPEED := 25.0
+@export var JUMP_VELOCITY := 5.0  # The height in which the player jumps.
+@export var SPEED := 20.0
 @export var boost_gauge := 3.0
+@onready var air_speed = SPEED * 0.5
+@onready var air_direction_change_speed:= SPEED/20
 @export_group("Collectibles")
 @export var rings : int = 0
 @export var lives : int = 3
@@ -110,31 +112,45 @@ func _physics_process(delta: float) -> void:
 		velocity.y -= gravity * delta
 #endregion
 	
-#region Floor Normal Rotation
+	#region Floor Normal Rotation
 	if is_on_floor():
 		var floor_norm = get_floor_normal()
 		rotation.z = lerp(global_rotation.z, (-floor_norm.x * 0.5), delta * 2)
 		rotation.x = lerp(global_rotation.x, (floor_norm.z * 0.5), delta * 2)
-#endregion
-		
+	#endregion
+
 	# Handle Jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		var floor_norm = get_floor_normal()
+		# Calculate the jump direction based on the floor normal
+		var jump_direction = Vector3(0, 1, 0)  # Default upward direction
+		jump_direction = jump_direction.rotated(Vector3(1, 0, 0), floor_norm.x * PI / 2)  # Rotate based on floor normal
+		jump_direction = jump_direction.rotated(Vector3(0, 0, 1), floor_norm.z * PI / 2)  # Rotate based on floor normal
+
+		# Set the jump velocity
+		velocity.y = JUMP_VELOCITY * jump_direction.y  # Apply the vertical component of the jump
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var camera_basis = camera.global_transform.basis
 	# This moves the player based on camera rotation.
 	var direction = (camera_basis.x * input_dir.x + camera_basis.z * input_dir.y).normalized()
+
 	if direction:
-		if is_running == true:
+		if not is_on_floor():
+			# In the air. Reduced speed
+			var target_velocity = Vector3(direction.x * air_speed, velocity.y, direction.z * air_speed)
+			velocity.x = lerp(velocity.x, target_velocity.x, air_direction_change_speed * delta)
+			velocity.z = lerp(velocity.z, target_velocity.z, air_direction_change_speed * delta)
+			current_speed = air_speed
+		elif is_running == true:
 			velocity.x = direction.x * SPEED
 			velocity.z = direction.z * SPEED
 			current_speed = SPEED
 		else:
-			velocity.x = (direction.x * SPEED)/5
-			velocity.z = (direction.z * SPEED)/5
-			current_speed = SPEED/5
+			velocity.x = (direction.x * SPEED) / 5
+			velocity.z = (direction.z * SPEED) / 5
+			current_speed = SPEED / 5
 	else:
 		velocity.x = 0
 		velocity.z = 0
