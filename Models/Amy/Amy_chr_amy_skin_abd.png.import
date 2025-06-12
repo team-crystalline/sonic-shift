@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://gcgmtp08plw"
 path.s3tc="res://.godot/imported/Amy_chr_amy_skin_abd.png-f836c3872aef3f8491b2e7618c7d6d90.s3tc.ctex"
+path.etc2="res://.godot/imported/Amy_chr_amy_skin_abd.png-f836c3872aef3f8491b2e7618c7d6d90.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Models/Amy/Amy_chr_amy_skin_abd.png"
-dest_files=["res://.godot/imported/Amy_chr_amy_skin_abd.png-f836c3872aef3f8491b2e7618c7d6d90.s3tc.ctex"]
+dest_files=["res://.godot/imported/Amy_chr_amy_skin_abd.png-f836c3872aef3f8491b2e7618c7d6d90.s3tc.ctex", "res://.godot/imported/Amy_chr_amy_skin_abd.png-f836c3872aef3f8491b2e7618c7d6d90.etc2.ctex"]
 
 [params]
 

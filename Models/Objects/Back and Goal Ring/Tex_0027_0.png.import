@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dqfboaa5w6a0i"
 path.s3tc="res://.godot/imported/Tex_0027_0.png-42b7399d069838d2ff303cf788fed563.s3tc.ctex"
+path.etc2="res://.godot/imported/Tex_0027_0.png-42b7399d069838d2ff303cf788fed563.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Models/Objects/Back and Goal Ring/Tex_0027_0.png"
-dest_files=["res://.godot/imported/Tex_0027_0.png-42b7399d069838d2ff303cf788fed563.s3tc.ctex"]
+dest_files=["res://.godot/imported/Tex_0027_0.png-42b7399d069838d2ff303cf788fed563.s3tc.ctex", "res://.godot/imported/Tex_0027_0.png-42b7399d069838d2ff303cf788fed563.etc2.ctex"]
 
 [params]
 

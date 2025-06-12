@@ -33,8 +33,8 @@ enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [global_group]
 
-Player=""
-SpawnPoint=""
+Player="A player scene."
+SpawnPoint="A Node3D point that establishes where a player will initially spawn."
 level="Scenes with this group are considered a level for play."
 shootbox="This is a hitbox for targeting with mouse"
 can_pause="!! DO NOT APPLY TO ROOT NODES OF LEVELS !! These nodes should stop when everything is paused."
@@ -133,6 +133,7 @@ jump={
 
 [rendering]
 
+textures/vram_compression/import_etc2_astc=true
 anti_aliasing/quality/msaa_2d=1
 anti_aliasing/quality/msaa_3d=1
 anti_aliasing/quality/screen_space_aa=1

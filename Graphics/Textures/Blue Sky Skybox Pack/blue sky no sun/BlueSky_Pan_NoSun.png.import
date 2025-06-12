@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dkgo58n082w24"
 path.s3tc="res://.godot/imported/BlueSky_Pan_NoSun.png-46cb837134328b8450163792cbeb2f3b.s3tc.ctex"
+path.etc2="res://.godot/imported/BlueSky_Pan_NoSun.png-46cb837134328b8450163792cbeb2f3b.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Graphics/Textures/Blue Sky Skybox Pack/blue sky no sun/BlueSky_Pan_NoSun.png"
-dest_files=["res://.godot/imported/BlueSky_Pan_NoSun.png-46cb837134328b8450163792cbeb2f3b.s3tc.ctex"]
+dest_files=["res://.godot/imported/BlueSky_Pan_NoSun.png-46cb837134328b8450163792cbeb2f3b.s3tc.ctex", "res://.godot/imported/BlueSky_Pan_NoSun.png-46cb837134328b8450163792cbeb2f3b.etc2.ctex"]
 
 [params]
 

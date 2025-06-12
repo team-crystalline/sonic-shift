@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cmdd7n1mwvest"
 path.s3tc="res://.godot/imported/night_panorama.png-95f43c08f5047b35162459ff4621cc61.s3tc.ctex"
+path.etc2="res://.godot/imported/night_panorama.png-95f43c08f5047b35162459ff4621cc61.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Graphics/Textures/Blue Sky Skybox Pack/night no moon/night_panorama.png"
-dest_files=["res://.godot/imported/night_panorama.png-95f43c08f5047b35162459ff4621cc61.s3tc.ctex"]
+dest_files=["res://.godot/imported/night_panorama.png-95f43c08f5047b35162459ff4621cc61.s3tc.ctex", "res://.godot/imported/night_panorama.png-95f43c08f5047b35162459ff4621cc61.etc2.ctex"]
 
 [params]
 
