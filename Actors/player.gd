@@ -120,18 +120,17 @@ func _physics_process(delta: float) -> void:
 	#endregion
 
 	# Handle Jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		var floor_norm = get_floor_normal()
-		# Calculate the jump direction based on the floor normal
-		var jump_direction = Vector3(0, 1, 0)  # Default upward direction
-		jump_direction = jump_direction.rotated(Vector3(1, 0, 0), floor_norm.x * PI / 2)  # Rotate based on floor normal
-		jump_direction = jump_direction.rotated(Vector3(0, 0, 1), floor_norm.z * PI / 2)  # Rotate based on floor normal
+		var jump_direction = Vector3(0, 1, 0)
+		jump_direction = jump_direction.rotated(Vector3(1, 0, 0), floor_norm.x * PI / 2)
+		jump_direction = jump_direction.rotated(Vector3(0, 0, 1), floor_norm.z * PI / 2)
 
 		# Set the jump velocity
-		velocity.y = JUMP_VELOCITY * jump_direction.y  # Apply the vertical component of the jump
+		velocity.y = JUMP_VELOCITY * jump_direction.y
 
 	# Get the input direction and handle the movement/deceleration.
-	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var input_dir := Input.get_vector("left", "right", "up", "down")
 	var camera_basis = camera.global_transform.basis
 	# This moves the player based on camera rotation.
 	var direction = (camera_basis.x * input_dir.x + camera_basis.z * input_dir.y).normalized()
@@ -159,8 +158,6 @@ func _physics_process(delta: float) -> void:
 			
 
 	if is_moving():
-		#var look_direction = Vector2(velocity.z, velocity.y)
-		#$Sonic.rotation.y = lerp_angle($Sonic.rotation.y, 3, delta * 8)
 		if is_running == true:
 			$Sonic/AnimationPlayer.play("Run")
 		else:
