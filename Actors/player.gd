@@ -151,8 +151,6 @@ func _process(_delta: float) -> void:
 		lives += 1
 
 func _physics_process(delta: float) -> void:
-	is_attacking = !is_attacking
-	#print(is_attacking)
 	if is_in_a_cutscene:
 		return
 #region Gravity

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dfmsbbxxx5ipp"]
+[gd_scene load_steps=18 format=3 uid="uid://dfmsbbxxx5ipp"]
 
 [ext_resource type="Script" uid="uid://c7p7s17kgxj7i" path="res://HUD/hud.gd" id="1_f31rt"]
 [ext_resource type="Texture2D" uid="uid://cpurtqhp7dqo1" path="res://HUD/crosshair.png" id="2_b7ubu"]
@@ -66,12 +66,11 @@ Label/fonts/font = ExtResource("5_aa5tu")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pd2p5"]
 shader = ExtResource("8_pd2p5")
-shader_parameter/aberration_intensity = 4.0
-shader_parameter/r_displacement = Vector2(1, 0)
-shader_parameter/g_displacement = Vector2(0, 0)
-shader_parameter/b_displacement = Vector2(-1, 0)
-
-[sub_resource type="Theme" id="Theme_aa5tu"]
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
 
 [sub_resource type="Theme" id="Theme_lkt0t"]
 default_font = ExtResource("5_aa5tu")
@@ -153,41 +152,6 @@ position = Vector2(1104, 592)
 scale = Vector2(0.125, 0.125)
 texture = ExtResource("4_aa5tu")
 
-[node name="SpeedLabel" type="Label" parent="Control"]
-visible = false
-z_index = 1
-layout_mode = 0
-offset_left = 992.0
-offset_top = 580.0
-offset_right = 1053.0
-offset_bottom = 622.0
-theme = SubResource("Theme_aa5tu")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/outline_size = 8
-theme_override_constants/shadow_outline_size = 8
-theme_override_fonts/font = ExtResource("5_aa5tu")
-theme_override_font_sizes/font_size = 32
-text = "97879"
-horizontal_alignment = 1
-
-[node name="SpeedLabel2" type="RichTextLabel" parent="Control"]
-visible = false
-layout_mode = 0
-offset_left = 968.0
-offset_top = 554.0
-offset_right = 1048.0
-offset_bottom = 602.0
-theme = ExtResource("6_njmlf")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_y = 0
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_outline_size = 10
-text = "SPEED"
-horizontal_alignment = 1
-
 [node name="LocationLabel" type="RichTextLabel" parent="Control"]
 layout_mode = 0
 offset_left = 24.0
@@ -207,6 +171,7 @@ vertical_alignment = 1
 [node name="PauseScreen" type="Node2D" parent="Control"]
 unique_name_in_owner = true
 visible = false
+z_index = 4096
 
 [node name="ScreenBG" type="ColorRect" parent="Control/PauseScreen"]
 offset_left = -88.0
