@@ -58,7 +58,6 @@ func _process(_delta: float) -> void:
 	ring_label.text= "Rings: %d" % player.rings
 	lives_label.text= "Lives: %d" % player.lives
 	boost_label.text= "Boost: %s" % player.boost_gauge
-	#speed_label.text = "%d" % (player.current_speed * 4)
 
 	
 	if player.is_running == true:

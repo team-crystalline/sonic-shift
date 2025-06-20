@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bp27esbw6s3b3"]
+[gd_scene load_steps=19 format=3 uid="uid://bp27esbw6s3b3"]
 
 [ext_resource type="Environment" uid="uid://b4wd7qdth75lo" path="res://Graphics/Resources/defaultenv-day.tres" id="1_y41jg"]
 [ext_resource type="PackedScene" uid="uid://pgx7n8fyonap" path="res://Actors/player.tscn" id="2_olaht"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dfmsbbxxx5ipp" path="res://HUD/HUD.tscn" id="4_gb6cv"]
 [ext_resource type="Texture2D" uid="uid://baccneuiftbk5" path="res://Graphics/Textures/Placeholders/Green/texture_08.png" id="5_y41jg"]
 [ext_resource type="PackedScene" uid="uid://dv7e2w135rgoe" path="res://Actors/Badniks/motobug.tscn" id="6_48f0s"]
+[ext_resource type="PackedScene" uid="uid://delu2qjrw6teu" path="res://Actors/Objects/Mirror3D/Mirror3D.tscn" id="7_20qaj"]
 [ext_resource type="PackedScene" uid="uid://bx8c24mnmlqib" path="res://Actors/Objects/Buildings/Building1.tscn" id="7_52khx"]
 [ext_resource type="PackedScene" uid="uid://div614tanecr4" path="res://Actors/Environment/water.tscn" id="8_b6u7x"]
 [ext_resource type="PackedScene" uid="uid://xe3a3emdj7ak" path="res://Actors/Objects/Buildings/wall.tscn" id="8_y41jg"]
@@ -13,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://c3qhhst175gi0" path="res://Actors/DEBUG/teleporter.tscn" id="10_0sp38"]
 [ext_resource type="PackedScene" uid="uid://bjyvvolkoq2a6" path="res://Actors/Objects/trampoline.tscn" id="12_48f0s"]
 [ext_resource type="PackedScene" uid="uid://52e308j80ryx" path="res://Actors/Objects/goalRing.tscn" id="12_wfrlm"]
+[ext_resource type="PackedScene" uid="uid://fpa0fvh1j1yf" path="res://Actors/Environment/streetlight.tscn" id="15_fb2ui"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0sp38"]
 size = Vector3(500, 1, 500)
@@ -55,7 +57,7 @@ rotation_edit_mode = 1
 [node name="Hud" parent="." instance=ExtResource("4_gb6cv")]
 
 [node name="Player" parent="." instance=ExtResource("2_olaht")]
-transform = Transform3D(0.999996, 0, 0.00284481, 0, 1, 0, -0.00284481, 0, 0.999996, 3.98144, 1.01932, 5.22155)
+transform = Transform3D(0.999996, 0, 0.00284481, 0, 1, 0, -0.00284481, 0, 0.999996, 3.96279, 1.01932, 5.21591)
 
 [node name="Platforms" type="Node3D" parent="."]
 
@@ -84,6 +86,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 10)
 [node name="Building5" parent="Buildings" instance=ExtResource("7_52khx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
 
+[node name="Mirror3D" parent="Buildings/Building5" instance=ExtResource("7_20qaj")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.00502, 1.58096, 0.0914707)
+size = Vector2(5, 2)
+pixels_per_unit = 512
+
 [node name="Building6" parent="Buildings" instance=ExtResource("7_52khx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -10)
 
@@ -94,6 +101,15 @@ size = Vector2(2, 1)
 [node name="Wall2" parent="Buildings" instance=ExtResource("8_y41jg")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.19808, 0.625, 5.00682)
 size = Vector2(2, 1)
+
+[node name="Sketchfab_Scene" parent="Buildings" instance=ExtResource("15_fb2ui")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.31896, 0.517801, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Buildings"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 9.66499, 0)
+light_energy = 1.918
+spot_range = 30.7484
+spot_attenuation = 0.14
 
 [node name="Rings" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -126,7 +142,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.0079
 size = Vector2(3, 1)
 
 [node name="Teleporter" parent="." instance=ExtResource("10_0sp38")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.6951, 1.5, 29.175)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2461, 1.8117, 0.385701)
 teleport_to_path = "res://Levels/starting_island.tscn"
 
 [node name="GoalRing" parent="." instance=ExtResource("12_wfrlm")]

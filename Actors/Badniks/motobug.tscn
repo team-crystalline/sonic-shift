@@ -30,7 +30,7 @@ material = SubResource("StandardMaterial3D_e37k2")
 _data = [Vector2(0, 0.506897), 0.0, 0.0, 0, 0, Vector2(1, 0.977586), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Motobug" type="RigidBody3D" groups=["attackable"]]
+[node name="Motobug" type="RigidBody3D" groups=["attackable", "can_pause"]]
 physics_interpolation_mode = 1
 gravity_scale = -1.0
 angular_velocity = Vector3(0.0174533, 0.0174533, 0.0174533)

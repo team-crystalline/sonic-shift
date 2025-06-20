@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://fpa0fvh1j1yf"]
+
+[ext_resource type="PackedScene" uid="uid://334d8dy115wf" path="res://Models/Objects/Environment/road_street_light.glb" id="1_stv06"]
+
+[node name="Sketchfab_Scene" instance=ExtResource("1_stv06")]
+
+[node name="Sketchfab_model" parent="." index="0"]
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 0, 0)
+
+[node name="StreetLightBody_low_0" parent="Sketchfab_model/root/GLTF_SceneRootNode" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.23779, 0)
+
+[node name="StreetLightHead_low_1" parent="Sketchfab_model/root/GLTF_SceneRootNode" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.53145, 8.51105, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." index="1"]
+transform = Transform3D(0.987862, 6.78974e-09, -0.155331, 0.155331, -4.31808e-08, 0.987862, 0, -1, -4.37114e-08, 0.852602, 4.31062, 0)
+light_energy = 7.136
+light_indirect_energy = 5.875
+light_volumetric_fog_energy = 15.427
+spot_range = 9.24995
+spot_angle = 30.4027
