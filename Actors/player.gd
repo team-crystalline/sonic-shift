@@ -1,11 +1,18 @@
 extends CharacterBody3D
-
+@export var mouse_sensitivity := 0.004
+@export var attack_power : int = 1
 @export_group("Movement Physics")
 @export var JUMP_VELOCITY := 5.0  # The height in which the player jumps.
 @export var SPEED := 20.0
 @export var boost_gauge := 3.0
 @onready var air_speed = SPEED * 0.5
-@onready var air_direction_change_speed:= SPEED/20
+@onready var air_direction_change_speed:= SPEED/10
+@export var attack_sight := 10
+#region Trampolines
+@export var bounce_bonus_base := 2.0
+@export var bounce_max := 20.0
+@export var bounce_bonus : float
+#endregion
 @export_group("Collectibles")
 @export var rings : int = 0
 @export var lives : int = 3
@@ -21,7 +28,13 @@ extends CharacterBody3D
 @export var can_double_jump := false
 @export var can_quint_jump := false
 @export_category("Other Booleans")
+@export_group("States")
 @export var is_in_a_cutscene := false
+@export var is_paused = false
+@export var is_attacking = false
+
+@onready var collision_area = $CollisionShape3D
+@onready var attack_cooldown: Timer = $AttackCooldown
 
 var current_speed = 0
 var effect_amount = 1
@@ -39,6 +52,7 @@ var target_head_rotation: Vector3 = Vector3.ZERO
 
 var DEFAULT_SPEED : float
 var max_boost_gauge : float # Rings cannot make the boost go past this number.
+var target_position = Vector3()
 
 func set_bone_rot(bone, ang):
 	var b = skeleton.find_bone(bone)
@@ -67,6 +81,33 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_released("boost"):
 		is_boosting = false
+	
+	if event.is_action_pressed("attack_primary") and not is_in_a_cutscene and not is_paused:
+		if not attack_cooldown.is_stopped():
+			is_attacking = false
+			return
+		var space_state = get_world_3d().direct_space_state
+		var camera = $Neck/Camera  # Replace with your camera node
+		var ray_origin = camera.global_transform.origin
+		var ray_direction = -camera.global_transform.basis.z
+
+		var ray_query = PhysicsRayQueryParameters3D.new()
+		ray_query.from = ray_origin
+		ray_query.to = ray_origin + ray_direction * attack_sight
+		ray_query.collision_mask = 1  # You can adjust this to only collide with certain layers
+
+		var result = space_state.intersect_ray(ray_query)
+
+		if result:
+			if result.collider.is_in_group("attackable"):
+				var target_position = result.position
+				# TODO: Lerp them to the position instead of like. teleporting.
+				global_transform.origin = Vector3(target_position.x, target_position.y + 1.1, target_position.z)
+				# Don't let them spam! Make a cooldown.
+				is_attacking = true
+				attack_cooldown.start()
+
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_in_a_cutscene:
@@ -80,10 +121,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
 			#region Pivot Camera
-			neck.rotate_y(-event.relative.x * 0.01)
-			camera.rotate_x(-event.relative.y * 0.01)
+			neck.rotate_y(-event.relative.x * mouse_sensitivity)
+			camera.rotate_x(-event.relative.y * mouse_sensitivity)
 			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(80))
-			third_person.rotate_y(-event.relative.x * 0.01)
+			third_person.rotate_y(-event.relative.x * mouse_sensitivity)
 			#endregion
 			# Set the head's rotation to match the camera's rotation
 			var min_head_down : float = 0
@@ -110,6 +151,8 @@ func _process(_delta: float) -> void:
 		lives += 1
 
 func _physics_process(delta: float) -> void:
+	is_attacking = !is_attacking
+	#print(is_attacking)
 	if is_in_a_cutscene:
 		return
 #region Gravity
@@ -191,3 +234,20 @@ func _physics_process(delta: float) -> void:
 		SPEED = DEFAULT_SPEED
 		$SpeedParticles.emitting = false
 	$Control/Fisheye.material.set_shader_parameter("effect_amount", effect_amount)
+	
+	#region Colliding Checks
+	var colliding_bodies = []
+	for slide_count in range(get_slide_collision_count()):
+		var collision = get_slide_collision(slide_count)
+		var collider = collision.get_collider()
+		colliding_bodies.append(collider)
+	for body in colliding_bodies:
+		# and not Input.is_action_pressed("jump")
+		if (body.is_in_group("trampoline") and not Input.is_action_pressed("jump")) or not body.is_in_group("trampoline"):
+			# Bounced on a trampoline, but did not hold the jump button. Reset bounce_bonus.
+			bounce_bonus = bounce_bonus_base
+	#endregion
+
+
+func _on_attack_cooldown_timeout() -> void:
+	is_attacking = false

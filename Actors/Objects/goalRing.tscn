@@ -17,6 +17,21 @@ point_count = 3
 [sub_resource type="Gradient" id="Gradient_2bqok"]
 colors = PackedColorArray(0.783812, 0.860137, 0.397052, 1, 1, 1, 1, 1)
 
+[sub_resource type="Animation" id="Animation_1pw43"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GoalRing:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_ax0v3"]
 resource_name = "spin"
 length = 1.5
@@ -33,21 +48,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_1pw43"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GoalRing:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dxhe5"]
@@ -96,6 +96,6 @@ autoplay = "spin"
 transform = Transform3D(0.999988, -0.00488684, 0.00103363, 0.00488722, 0.999988, -0.000373344, -0.00103179, 0.000378379, 0.999999, 0, 0, 0)
 stream = ExtResource("3_ax0v3")
 volume_db = -7.134
-unit_size = 1.0
+unit_size = 0.25
 autoplay = true
 doppler_tracking = 2
