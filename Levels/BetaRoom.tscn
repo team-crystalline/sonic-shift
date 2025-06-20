@@ -1,15 +1,17 @@
-[gd_scene load_steps=15 format=3 uid="uid://bp27esbw6s3b3"]
+[gd_scene load_steps=17 format=3 uid="uid://bp27esbw6s3b3"]
 
 [ext_resource type="Environment" uid="uid://b4wd7qdth75lo" path="res://Graphics/Resources/defaultenv-day.tres" id="1_y41jg"]
 [ext_resource type="PackedScene" uid="uid://pgx7n8fyonap" path="res://Actors/player.tscn" id="2_olaht"]
 [ext_resource type="PackedScene" uid="uid://t2ifc1kqrgxb" path="res://Triggers/kill.tscn" id="3_6v0uy"]
 [ext_resource type="PackedScene" uid="uid://dfmsbbxxx5ipp" path="res://HUD/HUD.tscn" id="4_gb6cv"]
 [ext_resource type="Texture2D" uid="uid://baccneuiftbk5" path="res://Graphics/Textures/Placeholders/Green/texture_08.png" id="5_y41jg"]
+[ext_resource type="PackedScene" uid="uid://dv7e2w135rgoe" path="res://Actors/Badniks/motobug.tscn" id="6_48f0s"]
 [ext_resource type="PackedScene" uid="uid://bx8c24mnmlqib" path="res://Actors/Objects/Buildings/Building1.tscn" id="7_52khx"]
 [ext_resource type="PackedScene" uid="uid://div614tanecr4" path="res://Actors/Environment/water.tscn" id="8_b6u7x"]
 [ext_resource type="PackedScene" uid="uid://xe3a3emdj7ak" path="res://Actors/Objects/Buildings/wall.tscn" id="8_y41jg"]
 [ext_resource type="PackedScene" uid="uid://3h2eievlgcdi" path="res://Actors/Objects/Collectibles/RingTrail.tscn" id="9_y41jg"]
 [ext_resource type="PackedScene" uid="uid://c3qhhst175gi0" path="res://Actors/DEBUG/teleporter.tscn" id="10_0sp38"]
+[ext_resource type="PackedScene" uid="uid://bjyvvolkoq2a6" path="res://Actors/Objects/trampoline.tscn" id="12_48f0s"]
 [ext_resource type="PackedScene" uid="uid://52e308j80ryx" path="res://Actors/Objects/goalRing.tscn" id="12_wfrlm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0sp38"]
@@ -53,7 +55,7 @@ rotation_edit_mode = 1
 [node name="Hud" parent="." instance=ExtResource("4_gb6cv")]
 
 [node name="Player" parent="." instance=ExtResource("2_olaht")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.98144, 1.01932, 5.22155)
+transform = Transform3D(0.999996, 0, 0.00284481, 0, 1, 0, -0.00284481, 0, 0.999996, 3.98144, 1.01932, 5.22155)
 
 [node name="Platforms" type="Node3D" parent="."]
 
@@ -124,8 +126,33 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.0079
 size = Vector2(3, 1)
 
 [node name="Teleporter" parent="." instance=ExtResource("10_0sp38")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.10164, 1.5, 22.0301)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.6951, 1.5, 29.175)
 teleport_to_path = "res://Levels/starting_island.tscn"
 
 [node name="GoalRing" parent="." instance=ExtResource("12_wfrlm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.16335, 1.81492, 75.6284)
+
+[node name="Trampolines" type="Node3D" parent="."]
+
+[node name="trampoline" parent="Trampolines" groups=["can_pause"] instance=ExtResource("12_48f0s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.64409, 0.197968, 26.5024)
+
+[node name="trampoline3" parent="Trampolines" groups=["can_pause"] instance=ExtResource("12_48f0s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.64409, 0.197968, 19.6921)
+
+[node name="trampoline2" parent="Trampolines" groups=["can_pause"] instance=ExtResource("12_48f0s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.64409, 0.197968, 34.0694)
+
+[node name="Badniks" type="Node3D" parent="."]
+
+[node name="Motobug" parent="Badniks" instance=ExtResource("6_48f0s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.46912, 1, 14.5875)
+
+[node name="Motobug2" parent="Badniks" instance=ExtResource("6_48f0s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0085, 1, 16.2762)
+
+[node name="Motobug3" parent="Badniks" instance=ExtResource("6_48f0s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.323639, 1, 10.8997)
+
+[node name="Motobug4" parent="Badniks" instance=ExtResource("6_48f0s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85317, 1, 12.0324)

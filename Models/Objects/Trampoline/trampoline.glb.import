@@ -1,0 +1,60 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://cv5c2yn5248wh"
+path="res://.godot/imported/trampoline.glb-24be26e627728ec2475d5135e1c65a38.scn"
+
+[deps]
+
+source_file="res://Models/Objects/Trampoline/trampoline.glb"
+dest_files=["res://.godot/imported/trampoline.glb-24be26e627728ec2475d5135e1c65a38.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+_subresources={
+"nodes": {
+"PATH:BouncyPart": {
+"generate/physics": true,
+"physics/physics_material_override": Object(PhysicsMaterial,"resource_local_to_scene":false,"resource_name":"","friction":1.0,"rough":false,"bounce":1.0,"absorbent":true,"script":null)
+
+},
+"PATH:Leg": {
+"generate/physics": true
+},
+"PATH:Leg_001": {
+"generate/physics": true
+},
+"PATH:Leg_002": {
+"generate/physics": true
+},
+"PATH:Leg_003": {
+"generate/physics": true
+},
+"PATH:PlasticPart": {
+"generate/physics": true
+}
+}
+}
+gltf/naming_version=1
+gltf/embedded_image_handling=1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dfmsbbxxx5ipp"]
+[gd_scene load_steps=19 format=3 uid="uid://dfmsbbxxx5ipp"]
 
 [ext_resource type="Script" uid="uid://c7p7s17kgxj7i" path="res://HUD/hud.gd" id="1_f31rt"]
 [ext_resource type="Texture2D" uid="uid://cpurtqhp7dqo1" path="res://HUD/crosshair.png" id="2_b7ubu"]
@@ -10,6 +10,59 @@
 [ext_resource type="AudioStream" uid="uid://bj1fim1aogb7h" path="res://Audio/FX/Pause.wav" id="8_6i5cd"]
 [ext_resource type="Shader" uid="uid://cnwrync841tgg" path="res://Graphics/Shaders/chromaticAbb.gdshader" id="8_pd2p5"]
 [ext_resource type="Texture2D" uid="uid://bdm7wuevdarnx" path="res://Graphics/icon.png" id="8_t1yhm"]
+
+[sub_resource type="SystemFont" id="SystemFont_pd2p5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fwgky"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 0, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7odlb"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.635294, 0, 1, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_huo54"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 0, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_blend = true
+
+[sub_resource type="Theme" id="Theme_pd2p5"]
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/constants/h_separation = 8
+Button/font_sizes/font_size = 16
+Button/fonts/font = SubResource("SystemFont_pd2p5")
+Button/styles/hover = SubResource("StyleBoxFlat_fwgky")
+Button/styles/normal = SubResource("StyleBoxFlat_7odlb")
+Button/styles/pressed = SubResource("StyleBoxFlat_huo54")
+Label/colors/font_color = Color(0, 1, 1, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 8
+Label/font_sizes/font_size = 36
+Label/fonts/font = ExtResource("5_aa5tu")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pd2p5"]
 shader = ExtResource("8_pd2p5")
@@ -33,6 +86,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme = SubResource("Theme_pd2p5")
 script = ExtResource("1_f31rt")
 
 [node name="AbbOverlay" type="ColorRect" parent="Control"]
@@ -48,8 +102,10 @@ color = Color(0, 0, 0, 0.623529)
 
 [node name="LivesLabel" type="Label" parent="Control"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 19.0
+offset_top = 8.0
+offset_right = 105.0
+offset_bottom = 56.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
@@ -58,10 +114,10 @@ text = "Lives: 0"
 
 [node name="RingsLabel" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 112.0
-offset_top = 1.0
-offset_right = 152.0
-offset_bottom = 24.0
+offset_left = 131.0
+offset_top = 9.0
+offset_right = 226.0
+offset_bottom = 57.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0

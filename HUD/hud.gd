@@ -21,23 +21,25 @@ func toggle_pause() -> void:
 	if pause_screen.visible:
 		pause_screen.visible = false
 		set_pause_state(false)
+		player.is_paused = false
 	else:
 		$"../PauseSound".play()
 		pause_screen.visible = true
 		set_pause_state(true)
+		player.is_paused = true
 
 func set_pause_state(paused: bool) -> void:
 	# Looking for any nodes we've labelled as "can_pause", and pausing all of them.
 	for node in get_tree().get_nodes_in_group("can_pause"):
 		node.set_process(!paused)
 		node.set_physics_process(!paused)
-		var animation_player = node.get_node("AnimationPlayer")
-		if animation_player:
-			# Pause any animations
-			if paused:
-				animation_player.stop()
-			else:
-				animation_player.play()
+		#var animation_player = node.get_node("AnimationPlayer")
+		#if animation_player:
+			## Pause any animations
+			#if paused:
+				#animation_player.stop()
+			#else:
+				#animation_player.play()
 
 	# Find all sounds playing in Master and BGM buses, lower volume when paused.
 	var master_bus_index = AudioServer.get_bus_index("Master")

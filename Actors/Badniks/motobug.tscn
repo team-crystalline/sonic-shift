@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://dv7e2w135rgoe"]
+
+[ext_resource type="Script" uid="uid://be34j07b44lo4" path="res://Scripts/Brains/motobug.gd" id="1_cpt6f"]
+[ext_resource type="Texture2D" uid="uid://cgu4uolapjfe7" path="res://Graphics/Particles/cloud_part.png" id="2_e37k2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tekqx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cpt6f"]
+albedo_color = Color(0.784314, 0, 0, 1)
+metallic = 0.71
+metallic_specular = 0.36
+roughness = 0.4
+
+[sub_resource type="SphereMesh" id="SphereMesh_e37k2"]
+material = SubResource("StandardMaterial3D_cpt6f")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cpt6f"]
+radius = 1.26527
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e37k2"]
+transparency = 1
+albedo_texture = ExtResource("2_e37k2")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_mttih"]
+material = SubResource("StandardMaterial3D_e37k2")
+
+[sub_resource type="Curve" id="Curve_g3qyk"]
+_data = [Vector2(0, 0.506897), 0.0, 0.0, 0, 0, Vector2(1, 0.977586), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Motobug" type="RigidBody3D" groups=["attackable"]]
+physics_interpolation_mode = 1
+gravity_scale = -1.0
+angular_velocity = Vector3(0.0174533, 0.0174533, 0.0174533)
+script = ExtResource("1_cpt6f")
+
+[node name="ModelCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_tekqx")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_e37k2")
+skeleton = NodePath("")
+
+[node name="HitBox" type="Area3D" parent="."]
+
+[node name="HitCollision" type="CollisionShape3D" parent="HitBox"]
+shape = SubResource("SphereShape3D_cpt6f")
+
+[node name="Poof" type="CPUParticles3D" parent="."]
+emitting = false
+amount = 32
+one_shot = true
+speed_scale = 1.46
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.4
+mesh = SubResource("QuadMesh_mttih")
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+angular_velocity_min = 154.84
+angular_velocity_max = 720.0
+scale_amount_min = 0.5
+scale_amount_curve = SubResource("Curve_g3qyk")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
