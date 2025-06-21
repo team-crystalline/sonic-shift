@@ -339,173 +339,173 @@ brushDensity = 7
 paintableObjects = Array[PackedScene]([ExtResource("6_neifk")])
 metadata/_custom_type_script = "uid://b6rkas85iuxsv"
 
-[node name="Brush_1750450548_55341" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450548_55341" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.999288, 0.0377183, 0.000853005, -0.037728, 0.999033, 0.0225932, 2.32831e-10, -0.0226093, 0.999744, 399.465, 30.7699, 44.8006)
 
-[node name="Brush_1750450548_55354" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450548_55354" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.99899, 0.0449223, 0.000659179, -0.0449272, 0.998883, 0.0146574, 0, -0.0146722, 0.999892, 400.285, 30.8937, 52.7278)
 
-[node name="Brush_1750450548_55364" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450548_55364" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.999748, -0.0224658, -0.000135515, 0.0224662, 0.999729, 0.00603044, -1.45519e-11, -0.00603196, 0.999982, 375.923, 31.1584, 61.217)
 
-[node name="Brush_1750450548_97856" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450548_97856" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(1.86265e-09, 0.0657298, 0.997837, -0.103684, 0.992459, -0.0653755, -0.99461, -0.10346, 0.00681515, 399.069, 24.1069, -49.7561)
 
-[node name="Brush_1750450548_97868" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450548_97868" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(3.39933e-08, 0.0709098, 0.997483, -0.0884067, 0.993577, -0.0706321, -0.996084, -0.0881841, 0.00626893, 373.748, 24.6069, -61.9595)
 
-[node name="Brush_1750450549_71225" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450549_71225" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(2.8871e-08, 0.0838573, 0.996478, -0.0946263, 0.992006, -0.083481, -0.995513, -0.094293, 0.00793514, 431.078, 20.8798, -57.8355)
 
-[node name="Brush_1750450550_16224" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450550_16224" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.989179, 0.14668, 0.00317974, -0.146715, 0.988947, 0.0214385, 0, -0.021673, 0.999765, 437.248, 27.1188, 40.4312)
 
-[node name="Brush_1750450550_16237" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450550_16237" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.993323, 0.115244, 0.00527711, -0.115365, 0.992283, 0.0454374, 1.39698e-09, -0.0457428, 0.998953, 429.125, 27.3995, 17.1355)
 
-[node name="Brush_1750450550_83736" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450550_83736" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.994399, 0.10569, -0.000779805, -0.105693, 0.994372, -0.00733669, 0, 0.00737802, 0.999973, 420.41, 29.5372, 80.7127)
 
-[node name="Brush_1750450551_24546" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450551_24546" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(8.5216e-08, 0.0742874, 0.997237, 0.0771084, 0.994268, -0.0740662, -0.997023, 0.0768954, -0.0057281, 418.298, 24.691, 221.554)
 
-[node name="Brush_1750450555_83759" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450555_83759" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(2.6077e-08, 0.151582, 0.988445, -0.181696, 0.971992, -0.149059, -0.983355, -0.179596, 0.0275419, 291.427, 21.0563, -223.524)
 
-[node name="Brush_1750450555_83771" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450555_83771" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.989561, 0.143778, 0.00985964, -0.144116, 0.987242, 0.0677006, 0, -0.0684148, 0.997657, 351.306, 20.7349, -147.984)
 
-[node name="Brush_1750450556_2543" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450556_2543" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.96959, 0.243903, 0.0201474, -0.244734, 0.966299, 0.0798205, 1.86265e-09, -0.0823239, 0.996606, 326.328, 25.7854, -140.748)
 
-[node name="Brush_1750450556_25443" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450556_25443" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.984605, 0.174473, 0.0106123, -0.174795, 0.982789, 0.0597782, 0, -0.0607129, 0.998155, 338.085, 25.3783, -109.392)
 
-[node name="Brush_1750450556_47111" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450556_47111" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(-5.58794e-08, 0.219727, 0.975561, -0.248031, 0.945077, -0.212861, -0.968752, -0.24197, 0.0544992, 234.02, 28.365, -240.493)
 
-[node name="Brush_1750450556_47124" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450556_47124" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(7.45058e-09, 0.203741, 0.979025, -0.226469, 0.953588, -0.198447, -0.974018, -0.221718, 0.0461408, 284.778, 25.8685, -205.718)
 
-[node name="Brush_1750450557_89652" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450557_89652" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.998406, 0.0563682, 0.00270491, -0.0564331, 0.997259, 0.0478549, 0, -0.0479313, 0.998851, 471.106, 13.6081, -156.294)
 
-[node name="Brush_1750450563_27245" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450563_27245" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(4.09782e-08, -0.010512, 0.999945, -0.199088, 0.979928, 0.0103016, -0.979982, -0.199077, -0.00209277, 77.3661, 21.5368, -316.194)
 
-[node name="Brush_1750450563_27256" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450563_27256" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(-1.49012e-08, 0.134828, 0.990869, -0.159782, 0.978139, -0.133096, -0.987152, -0.158323, 0.0215431, 150.952, 19.6382, -319.221)
 
-[node name="Brush_1750450563_97259" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450563_97259" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(6.98492e-09, -0.020814, 0.999783, -0.20595, 0.978351, 0.0203678, -0.978563, -0.205905, -0.00428662, 90.0962, 20.2103, -323.408)
 
-[node name="Brush_1750450569_23984" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450569_23984" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(8.23638e-08, -0.00691784, 0.999976, -0.0625005, 0.998021, 0.00690432, -0.998045, -0.062499, -0.000432286, -25.5314, 22.2803, -342.539)
 
-[node name="Brush_1750450569_23994" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450569_23994" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(4.85088e-08, 0.0012114, 0.999999, -0.0685128, 0.997649, -0.00120855, -0.99765, -0.0685127, 8.30451e-05, -17.662, 22.1891, -344.205)
 
-[node name="Brush_1750450569_95679" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450569_95679" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(3.74857e-08, -0.0117038, 0.999932, -0.118284, 0.992912, 0.0116216, -0.99298, -0.118275, -0.00138433, -101.661, 18.9044, -375.637)
 
-[node name="Brush_1750450570_11475" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450570_11475" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(6.1933e-08, -0.0257474, 0.999668, -0.102343, 0.994419, 0.0256123, -0.994749, -0.102309, -0.00263501, -246.527, 18.2815, -345.301)
 
-[node name="Brush_1750450573_14037" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450573_14037" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.997535, -0.0700151, -0.00456815, 0.070164, 0.995419, 0.0649464, -9.31323e-10, -0.0651069, 0.997878, -295.969, 19.5336, -306.149)
 
-[node name="Brush_1750450577_0" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450577_0" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.989083, -0.147295, -0.00443586, 0.147362, 0.988634, 0.0297732, -4.65661e-10, -0.0301018, 0.999547, -353.605, 13.2401, -293.015)
 
-[node name="Brush_1750450577_0001" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450577_0001" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.998847, -0.0480006, 0.000985721, 0.0480107, 0.998636, -0.0205076, 0, 0.0205313, 0.999789, -405.099, 13.2766, -229.456)
 
-[node name="Brush_1750450577_00019" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450577_00019" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.996371, -0.0849114, -0.0059581, 0.0851201, 0.993927, 0.0697423, -9.31323e-10, -0.0699963, 0.997547, -340.375, 13.589, -337.138)
 
-[node name="Brush_1750450577_00026" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450577_00026" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(4.18513e-08, 0.0171491, 0.999853, -0.0454502, 0.99882, -0.0171313, -0.998967, -0.0454435, 0.000779471, -404.922, 12.2893, -275.663)
 
-[node name="Brush_1750450577_74149" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450577_74149" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.995406, -0.0956976, -0.00286798, 0.0957406, 0.99496, 0.0298181, -2.32831e-10, -0.0299557, 0.999551, -377.958, 15.4699, -223.885)
 
-[node name="Brush_1750450578_04148" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450578_04148" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.997154, -0.0753501, -0.00253342, 0.0753927, 0.996591, 0.0335073, 4.65661e-10, -0.0336029, 0.999435, -345.259, 13.5519, -330.063)
 
-[node name="Brush_1750450578_04157" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450578_04157" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(4.37722e-08, -0.0849675, 0.996384, -0.121988, 0.988942, 0.0843329, -0.992532, -0.121547, -0.010365, -322.029, 14.1001, -348.755)
 
-[node name="Brush_1750450578_3833" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450578_3833" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(3.58559e-08, -0.0411554, 0.999153, -0.0998986, 0.994155, 0.0409495, -0.994998, -0.099814, -0.00411133, -280.789, 17.5372, -341.533)
 
-[node name="Brush_1750450578_64193" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450578_64193" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(8.3819e-08, -0.0534277, 0.998572, -0.175956, 0.982992, 0.0525942, -0.984398, -0.175704, -0.00940083, -208.401, 15.4679, -377.284)
 
-[node name="Brush_1750450578_95026" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450578_95026" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.999634, -0.0270554, 0.000318601, 0.0270573, 0.999565, -0.0117707, 0, 0.011775, 0.999931, -94.489, 20.8115, -337.26)
 
-[node name="Brush_1750450578_95047" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450578_95047" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(6.15837e-08, -0.0119373, 0.999929, -0.0644857, 0.997847, 0.0119125, -0.997919, -0.0644811, -0.000769723, -126.196, 19.7613, -362.568)
 
-[node name="Brush_1750450578_95056" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450578_95056" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(5.94882e-08, -0.0184487, 0.99983, -0.0875592, 0.99599, 0.0183779, -0.996159, -0.0875443, -0.00161529, -162.331, 19.1981, -363.465)
 
-[node name="Brush_1750450579_85867" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450579_85867" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.976065, -0.217473, 0.0018116, 0.21748, 0.976031, -0.00813056, 1.16415e-10, 0.00832993, 0.999965, -352.994, 18.4941, -126.092)
 
-[node name="Brush_1750450580_1584" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450580_1584" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.984418, -0.175842, 0.000685349, 0.175843, 0.984411, -0.00383676, 0, 0.00389749, 0.999992, -367.621, 15.5339, -129.101)
 
-[node name="Brush_1750450580_46723" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450580_46723" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.975799, -0.21806, 0.0163009, 0.218668, 0.973084, -0.0727423, 0, 0.0745464, 0.997218, -343.623, 14.929, -51.6191)
 
-[node name="Brush_1750450581_10871" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450581_10871" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.921027, -0.381536, 0.0783543, 0.389499, 0.902198, -0.18528, -7.45058e-09, 0.201167, 0.979557, -344.122, 30.885, 163.358)
 
-[node name="Brush_1750450581_10881" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450581_10881" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.915114, -0.402417, 0.0250494, 0.403196, 0.913346, -0.0568533, -1.86265e-09, 0.0621271, 0.998068, -364.943, 32.1217, 107.412)
 
-[node name="Brush_1750450582_63402" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450582_63402" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.991001, -0.13339, 0.011119, 0.133853, 0.987576, -0.0823216, 1.86265e-09, 0.0830692, 0.996544, -406.718, 13.4133, 155.206)
 
-[node name="Brush_1750450582_84218" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450582_84218" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.973329, -0.228253, 0.0230576, 0.229415, 0.9684, -0.0978253, 0, 0.100506, 0.994936, -399.692, 16.0101, 139.023)
 
-[node name="Brush_1750450586_64297" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450586_64297" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(3.58559e-08, 0.0603988, 0.998174, 0.0941199, 0.993743, -0.0601307, -0.995561, 0.0939481, -0.00568469, 411.992, 23.2107, 243.789)
 
-[node name="Brush_1750450586_64315" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450586_64315" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.995856, 0.090613, -0.00781605, -0.0909495, 0.992171, -0.0855822, -4.65661e-10, 0.0859384, 0.9963, 423.213, 23.3992, 232.48)
 
-[node name="Brush_1750450586_6433" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450586_6433" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.995303, -0.0966724, 0.00518123, 0.0968112, 0.993876, -0.0532676, 0, 0.053519, 0.998567, 335.726, 23.021, 215.016)
 
-[node name="Brush_1750450587_37607" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450587_37607" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.994505, 0.104656, -0.0028142, -0.104693, 0.994145, -0.0267327, -2.32831e-10, 0.0268804, 0.999639, 371.633, 20.7043, 310.509)
 
-[node name="Brush_1750450587_58447" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450587_58447" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.994174, 0.10774, -0.0032239, -0.107788, 0.993729, -0.0297353, 2.32831e-10, 0.0299095, 0.999553, 373.377, 20.5138, 310.708)
 
-[node name="Brush_1750450587_9262" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450587_9262" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.996448, 0.0839821, -0.00627722, -0.0842164, 0.993676, -0.074272, -4.65661e-10, 0.0745368, 0.997218, 432.886, 16.1924, 297.072)
 
-[node name="Brush_1750450588_18455" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450588_18455" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0, 0.0956921, 0.995411, 0.101149, 0.990306, -0.0952013, -0.994871, 0.100685, -0.00967915, 389.922, 17.0859, 338.691)
 
-[node name="Brush_1750450589_32657" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450589_32657" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(6.65459e-08, 0.0112219, 0.999937, 0.0138719, 0.999841, -0.0112208, -0.999904, 0.013871, -0.000155602, 294.33, 25.1016, 305.06)
 
-[node name="Brush_1750450589_3267" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450589_3267" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(-5.4948e-08, -0.00950386, 0.999955, 0.0876494, 0.996106, 0.00946729, -0.996151, 0.0876455, 0.000832953, 298.549, 24.3656, 319.836)
 
-[node name="Brush_1750450589_3268" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450589_3268" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(1.53668e-08, 0.0488131, 0.998808, -0.0737253, 0.99609, -0.0486803, -0.997279, -0.0736374, 0.00359878, 283.349, 24.6742, 284.934)
 
-[node name="Brush_1750450589_50165" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450589_50165" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(9.54606e-09, 0.0305053, 0.999535, -0.0728805, 0.996877, -0.0304242, -0.997341, -0.0728466, 0.00222325, 315.284, 23.9551, 289.549)
 
-[node name="Brush_1750450589_50183" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450589_50183" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(0.999585, 0.0288113, 0.000383009, -0.0288138, 0.999497, 0.013287, -2.91038e-11, -0.0132925, 0.999912, 313.716, 24.7738, 304.778)
 
-[node name="Brush_1750450590_02673" type="Node3D" parent="Brush" instance=ExtResource("6_neifk")]
+[node name="Brush_1750450590_02673" parent="Brush" instance=ExtResource("6_neifk")]
 transform = Transform3D(1.02445e-08, 0.0538323, 0.99855, 0.151576, 0.987012, -0.0532103, -0.988446, 0.151357, -0.0081597, 231.168, 14.3856, 367.189)

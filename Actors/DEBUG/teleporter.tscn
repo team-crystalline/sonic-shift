@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://c3qhhst175gi0"]
+[gd_scene load_steps=35 format=3 uid="uid://c3qhhst175gi0"]
 
 [ext_resource type="Script" uid="uid://ojiet5a3qgir" path="res://Actors/DEBUG/teleporter.gd" id="1_exu1p"]
 [ext_resource type="Shader" uid="uid://do1ngs2rvih2m" path="res://Graphics/Shaders/chowder.gdshader" id="2_aqx63"]
+[ext_resource type="Shader" uid="uid://cv5xtnxgghpis" path="res://Graphics/Shaders/fresnel.gdshader" id="2_wv2xi"]
 [ext_resource type="Shader" uid="uid://cnwrync841tgg" path="res://Graphics/Shaders/chromaticAbb.gdshader" id="4_15et6"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5s4ws"]
@@ -17,6 +18,20 @@ billboard_mode = 1
 [sub_resource type="SphereMesh" id="SphereMesh_k3h2f"]
 material = SubResource("StandardMaterial3D_aqx63")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_15et6"]
+render_priority = 0
+shader = ExtResource("2_wv2xi")
+shader_parameter/level = 1.0
+shader_parameter/emission_intensity = 0.0
+shader_parameter/fresnel_color = Color(0, 0, 0, 1)
+shader_parameter/fresnel_intensity = 0.0
+shader_parameter/fresnel_power = 0.0
+shader_parameter/rim_color = Color(0.417706, 3.2753e-05, 0.352036, 1)
+shader_parameter/rim_size = 0.8
+shader_parameter/rim_intensity = 0.377
+shader_parameter/rim_start = -0.107
+shader_parameter/rim_end = -0.229
+
 [sub_resource type="Gradient" id="Gradient_aqx63"]
 offsets = PackedFloat32Array(0.720879, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0, 0.0233333, 0.35, 1)
@@ -25,24 +40,24 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0.0233333, 0.35, 1)
 frequency = 0.0838
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wv2xi"]
+generate_mipmaps = false
 color_ramp = SubResource("Gradient_aqx63")
 noise = SubResource("FastNoiseLite_k3h2f")
 
-[sub_resource type="Gradient" id="Gradient_15et6"]
-offsets = PackedFloat32Array(0.731868, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0, 0.0366666, 0.55, 1)
+[sub_resource type="Gradient" id="Gradient_k3h2f"]
+offsets = PackedFloat32Array(0.797802, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0.014, 0.21, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_v5nyg"]
-seed = 1
-frequency = 0.205
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wv2xi"]
+frequency = 0.0497
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ndqrt"]
-color_ramp = SubResource("Gradient_15et6")
-noise = SubResource("FastNoiseLite_v5nyg")
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_15et6"]
+color_ramp = SubResource("Gradient_k3h2f")
+noise = SubResource("FastNoiseLite_wv2xi")
 
 [sub_resource type="Gradient" id="Gradient_oxfja"]
 offsets = PackedFloat32Array(0.78022, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0, 0.0366666, 0.55, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0.014, 0.21, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_18cin"]
 frequency = 0.2293
@@ -62,19 +77,48 @@ frequency = 0.1466
 color_ramp = SubResource("Gradient_p48rb")
 noise = SubResource("FastNoiseLite_qpl6v")
 
+[sub_resource type="Gradient" id="Gradient_wv2xi"]
+offsets = PackedFloat32Array(0.830769, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0.0233333, 0.35, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_15et6"]
+noise_type = 4
+frequency = 0.2975
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_v5nyg"]
+color_ramp = SubResource("Gradient_wv2xi")
+noise = SubResource("FastNoiseLite_15et6")
+
+[sub_resource type="Gradient" id="Gradient_ndqrt"]
+offsets = PackedFloat32Array(0.775824, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0.014, 0.21, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_oxfja"]
+noise_type = 2
+frequency = 0.1009
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_18cin"]
+color_ramp = SubResource("Gradient_ndqrt")
+noise = SubResource("FastNoiseLite_oxfja")
+
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_lvxhl"]
-frames = 4
-speed_scale = 5.6
+frames = 6
+speed_scale = 6.0
 frame_0/texture = SubResource("NoiseTexture2D_wv2xi")
-frame_1/texture = SubResource("NoiseTexture2D_ndqrt")
+frame_1/texture = SubResource("NoiseTexture2D_15et6")
 frame_1/duration = 1.0
 frame_2/texture = SubResource("NoiseTexture2D_a3mx7")
 frame_2/duration = 1.0
 frame_3/texture = SubResource("NoiseTexture2D_y8bnb")
 frame_3/duration = 1.0
+frame_4/texture = SubResource("NoiseTexture2D_v5nyg")
+frame_4/duration = 1.0
+frame_5/texture = SubResource("NoiseTexture2D_18cin")
+frame_5/duration = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tx113"]
 render_priority = 0
+next_pass = SubResource("ShaderMaterial_15et6")
 shader = ExtResource("2_aqx63")
 shader_parameter/texture_albedo = SubResource("AnimatedTexture_lvxhl")
 shader_parameter/scale = 1.0
@@ -102,6 +146,13 @@ shader_parameter/shake_speed = 5.675
 shader_parameter/shake_block_size = 10.0
 shader_parameter/shake_color_rate = 0.043
 
+[sub_resource type="BoxMesh" id="BoxMesh_k3h2f"]
+material = SubResource("ShaderMaterial_tx113")
+size = Vector3(0.1, 0.1, 0.25)
+subdivide_width = 2
+subdivide_height = 2
+subdivide_depth = 2
+
 [node name="Teleporter" type="Area3D"]
 script = ExtResource("1_exu1p")
 
@@ -115,13 +166,13 @@ mesh = SubResource("SphereMesh_k3h2f")
 
 [node name="GPUParticles3D" type="CPUParticles3D" parent="."]
 cast_shadow = 0
-amount = 128
+amount = 512
 lifetime = 1.61
 randomness = 0.76
 lifetime_randomness = 1.0
 mesh = SubResource("BoxMesh_nk43e")
 emission_shape = 1
-emission_sphere_radius = 1.0
+emission_sphere_radius = 2.0
 particle_flag_align_y = true
 direction = Vector3(1, 0, 1)
 spread = 180.0
@@ -136,6 +187,7 @@ angle_min = -103.2
 angle_max = 149.7
 
 [node name="DangerZone" type="Area3D" parent="."]
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DangerZone"]
 shape = SubResource("SphereShape3D_aqx63")
@@ -155,10 +207,35 @@ offset_bottom = 672.0
 mouse_filter = 2
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-light_color = Color(0.310804, 4.08149e-05, 0.290851, 1)
-light_energy = 0.197
-light_volumetric_fog_energy = 5.53
+light_color = Color(1, 0.68, 0.36, 1)
+light_energy = 4.269
+light_indirect_energy = 8.57
+light_volumetric_fog_energy = 14.132
 light_negative = true
+distance_fade_enabled = true
+omni_range = 12.5033
+
+[node name="SmallerParticles" type="CPUParticles3D" parent="."]
+cast_shadow = 0
+amount = 64
+lifetime = 1.61
+randomness = 0.76
+lifetime_randomness = 1.0
+mesh = SubResource("BoxMesh_k3h2f")
+emission_shape = 1
+emission_sphere_radius = 3.0
+particle_flag_align_y = true
+direction = Vector3(1, 0, 1)
+spread = 180.0
+flatness = 1.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 0.1
+angular_velocity_min = 1.0
+angular_velocity_max = 2.0
+angular_velocity_curve = SubResource("Curve_wv2xi")
+angle_min = -103.2
+angle_max = 149.7
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="DangerZone" to="." method="_on_danger_zone_body_entered"]

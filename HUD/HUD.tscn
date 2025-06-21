@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bdm7wuevdarnx" path="res://Graphics/icon.png" id="8_t1yhm"]
 
 [sub_resource type="SystemFont" id="SystemFont_pd2p5"]
+subpixel_positioning = 0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fwgky"]
 content_margin_left = 0.0
@@ -138,7 +139,7 @@ text = "Boost: 0"
 
 [node name="Crosshair" type="Sprite2D" parent="Control"]
 position = Vector2(576, 320)
-scale = Vector2(0.075, 0.075)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_b7ubu")
 
 [node name="Run" type="Sprite2D" parent="Control"]

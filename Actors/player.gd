@@ -35,6 +35,7 @@ extends CharacterBody3D
 
 @onready var collision_area = $CollisionShape3D
 @onready var attack_cooldown: Timer = $AttackCooldown
+var physics_delta: float = 0.0
 
 var current_speed = 0
 var effect_amount = 1
@@ -75,82 +76,11 @@ func _ready() -> void:
 	else:
 		print("Can't find a spawn point. Was it added?")
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("boost") and not is_boosting and boost_gauge > 0.5 and is_running and can_boost:
-		is_boosting = true
-	
-	if event.is_action_released("boost"):
-		is_boosting = false
-	
-	if event.is_action_pressed("attack_primary") and not is_in_a_cutscene and not is_paused:
-		if not attack_cooldown.is_stopped():
-			is_attacking = false
-			return
-		var space_state = get_world_3d().direct_space_state
-		var camera = $Neck/Camera  # Replace with your camera node
-		var ray_origin = camera.global_transform.origin
-		var ray_direction = -camera.global_transform.basis.z
-
-		var ray_query = PhysicsRayQueryParameters3D.new()
-		ray_query.from = ray_origin
-		ray_query.to = ray_origin + ray_direction * attack_sight
-		ray_query.collision_mask = 1  # You can adjust this to only collide with certain layers
-
-		var result = space_state.intersect_ray(ray_query)
-
-		if result:
-			if result.collider.is_in_group("attackable"):
-				var target_position = result.position
-				# TODO: Lerp them to the position instead of like. teleporting.
-				global_transform.origin = Vector3(target_position.x, target_position.y + 1.1, target_position.z)
-				# Don't let them spam! Make a cooldown.
-				is_attacking = true
-				attack_cooldown.start()
-
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if is_in_a_cutscene:
-		return
-	if event is InputEventMouseButton:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	elif event.is_action_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	elif event.is_action_pressed("walk_toggle"):
-		is_running = !is_running
-	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		if event is InputEventMouseMotion:
-			#region Pivot Camera
-			neck.rotate_y(-event.relative.x * mouse_sensitivity)
-			camera.rotate_x(-event.relative.y * mouse_sensitivity)
-			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(80))
-			third_person.rotate_y(-event.relative.x * mouse_sensitivity)
-			#endregion
-			# Set the head's rotation to match the camera's rotation
-			var min_head_down : float = 0
-			var max_head_down : float = 0
-			if is_moving() and is_running:
-				# He's running, don't make his head go down any more.
-				min_head_down = -10
-				max_head_down = 60
-			else:
-				min_head_down = -60
-				max_head_down = 80
-			var new_head_rotation = Vector3(
-				neck.rotation.y,
-				#-camera.rotation.x,
-				-(clamp(camera.rotation.x, deg_to_rad(min_head_down), deg_to_rad(max_head_down))),
-				camera.rotation.z
-			)
-			$Sonic.rotation = Vector3(neck.rotation.x, neck.rotation.y + deg_to_rad(180), neck.rotation.z)
-			set_bone_rot("Head", Vector3(0, new_head_rotation.y, 0))
-
-func _process(_delta: float) -> void:
-	# Non-physics processing
-	if rings % 100 == 0 and rings > 0:
-		lives += 1
-
 func _physics_process(delta: float) -> void:
+	if is_attacking:
+		global_position = lerp(global_position, target_position, (SPEED * 3) * delta)
+		if global_position.distance_to(target_position) < 0.1:
+			is_attacking = false
 	if is_in_a_cutscene:
 		return
 #region Gravity
@@ -182,6 +112,8 @@ func _physics_process(delta: float) -> void:
 	var direction = (camera_basis.x * input_dir.x + camera_basis.z * input_dir.y).normalized()
 
 	if direction:
+		if is_attacking:
+			return
 		if not is_on_floor():
 			# In the air. Reduced speed
 			var target_velocity = Vector3(direction.x * air_speed, velocity.y, direction.z * air_speed)
@@ -246,6 +178,74 @@ func _physics_process(delta: float) -> void:
 			bounce_bonus = bounce_bonus_base
 	#endregion
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("boost") and not is_boosting and boost_gauge > 0.5 and is_running and can_boost:
+		is_boosting = true
+	
+	if event.is_action_released("boost"):
+		is_boosting = false
+	
+	if event.is_action_pressed("attack_primary") and not is_in_a_cutscene and not is_paused:
+		if not attack_cooldown.is_stopped():
+			is_attacking = false
+			return
+		var space_state = get_world_3d().direct_space_state
+		var camera = $Neck/Camera  # Replace with your camera node
+		var ray_origin = camera.global_transform.origin
+		var ray_direction = -camera.global_transform.basis.z
+
+		var ray_query = PhysicsRayQueryParameters3D.new()
+		ray_query.from = ray_origin
+		ray_query.to = ray_origin + ray_direction * attack_sight
+		ray_query.collision_mask = 1  # You can adjust this to only collide with certain layers
+
+		var result = space_state.intersect_ray(ray_query)
+
+		if result:
+			if result.collider.is_in_group("attackable"):
+				$SpeedLines.visible = true
+				var col = result.collider.global_transform.origin
+				target_position = Vector3(col.x, col.y + 1, col.z)
+				# Don't let them spam! Make a cooldown.
+				is_attacking = true
+				attack_cooldown.start()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if is_in_a_cutscene:
+		return
+	if event is InputEventMouseButton:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	elif event.is_action_pressed("ui_cancel"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	elif event.is_action_pressed("walk_toggle"):
+		is_running = !is_running
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+		if event is InputEventMouseMotion:
+			#region Pivot Camera
+			neck.rotate_y(-event.relative.x * mouse_sensitivity)
+			camera.rotate_x(-event.relative.y * mouse_sensitivity)
+			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(80))
+			third_person.rotate_y(-event.relative.x * mouse_sensitivity)
+			#endregion
+			# Set the head's rotation to match the camera's rotation
+			var min_head_down : float = 0
+			var max_head_down : float = 0
+			if is_moving() and is_running:
+				# He's running, don't make his head go down any more.
+				min_head_down = -10
+				max_head_down = 60
+			else:
+				min_head_down = -60
+				max_head_down = 80
+			var new_head_rotation = Vector3(
+				neck.rotation.y,
+				#-camera.rotation.x,
+				-(clamp(camera.rotation.x, deg_to_rad(min_head_down), deg_to_rad(max_head_down))),
+				camera.rotation.z
+			)
+			$Sonic.rotation = Vector3(neck.rotation.x, neck.rotation.y + deg_to_rad(180), neck.rotation.z)
+			set_bone_rot("Head", Vector3(0, new_head_rotation.y, 0))
 
 func _on_attack_cooldown_timeout() -> void:
 	is_attacking = false
+	$SpeedLines.visible = false
