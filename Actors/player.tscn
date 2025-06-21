@@ -3304,10 +3304,10 @@ shader = ExtResource("7_1c8hm")
 shader_parameter/noise = SubResource("NoiseTexture2D_lkt0t")
 shader_parameter/line_color = Color(0.47, 0.991167, 1, 1)
 shader_parameter/line_count = 2.0
-shader_parameter/line_density = 0.939
+shader_parameter/line_density = 1.0
 shader_parameter/line_faloff = 1.0
-shader_parameter/mask_size = 0.071
-shader_parameter/mask_edge = 0.727
+shader_parameter/mask_size = 0.0
+shader_parameter/mask_edge = 0.649
 shader_parameter/animation_speed = 20.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tvot5"]

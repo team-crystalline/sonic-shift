@@ -142,7 +142,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.0079
 size = Vector2(3, 1)
 
 [node name="Teleporter" parent="." instance=ExtResource("10_0sp38")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2461, 1.8117, 0.385701)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.585, 2.89315, 8.58795)
 teleport_to_path = "res://Levels/starting_island.tscn"
 
 [node name="GoalRing" parent="." instance=ExtResource("12_wfrlm")]
@@ -172,3 +172,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.323639, 1, 10.8997)
 
 [node name="Motobug4" parent="Badniks" instance=ExtResource("6_48f0s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85317, 1, 12.0324)
+
+[node name="Motobug5" parent="Badniks" instance=ExtResource("6_48f0s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.31085, 1, 20.9591)
+
+[node name="Motobug6" parent="Badniks" instance=ExtResource("6_48f0s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.78847, 1, 22.6478)
+
+[node name="Motobug7" parent="Badniks" instance=ExtResource("6_48f0s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.45633, 1, 17.2713)
+
+[node name="Motobug8" parent="Badniks" instance=ExtResource("6_48f0s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.63313, 1, 18.404)
+
+[node name="Motobug9" parent="Badniks" instance=ExtResource("6_48f0s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.1352, 1, 20.1869)
+
+[node name="Motobug10" parent="Badniks" instance=ExtResource("6_48f0s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6128, 1, 21.8756)
+
+[node name="Motobug11" parent="Badniks" instance=ExtResource("6_48f0s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2807, 1, 16.4991)
+
+[node name="Motobug12" parent="Badniks" instance=ExtResource("6_48f0s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.4575, 1, 17.6318)
