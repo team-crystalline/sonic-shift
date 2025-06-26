@@ -113,7 +113,7 @@ tracks/7/keys = {
 
 [sub_resource type="Animation" id="Animation_uochh"]
 resource_name = "fade_in"
-length = 6.0
+length = 10.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -145,7 +145,7 @@ tracks/2/path = NodePath("../Hud:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 5.73333),
+"times": PackedFloat32Array(0, 10),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -169,10 +169,10 @@ tracks/4/path = NodePath("../Player:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 1.33333, 2.33333, 3.63333, 4.56667, 5.76667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1.33333, 2.33333, 3.63333, 4.56667, 5.76667, 6.06667, 6.66667, 7.66667, 8.56667, 9.06667, 9.4, 9.73333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(-0.0836857, -1.56352, -1.18686), Vector3(-0.0836857, -1.56352, -1.18686), Vector3(-0.0709433, -1.61581, -0.533897), Vector3(-0.0709433, -1.61581, -0.533897), Vector3(-0.416599, -1.7854, -0.0162251), Vector3(0, -1.76627, 0)]
+"values": [Vector3(-0.0836857, -1.56352, -1.18686), Vector3(-0.0836857, -1.56352, -1.18686), Vector3(-0.0709433, -1.61581, -0.533897), Vector3(-0.0709433, -1.61581, -0.533897), Vector3(-0.416599, -1.7854, -0.0162251), Vector3(0, -1.76627, 0), Vector3(0, -1.76627, 0), Vector3(0.356624, -2.36924, -0.0738333), Vector3(0.356624, -2.49203, -0.0738334), Vector3(0.214197, -1.44353, -0.0552038), Vector3(0.203048, -1.35272, -0.0521256), Vector3(-0.049364, -2.07142, 0.0175706), Vector3(-0.0839343, -2.53494, -0.0162079)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -205,7 +205,7 @@ tracks/7/path = NodePath("../Player:is_in_a_cutscene")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 6),
+"times": PackedFloat32Array(0, 10),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
