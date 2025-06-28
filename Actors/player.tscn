@@ -3328,6 +3328,7 @@ floor_snap_length = 1.0
 platform_on_leave = 1
 script = ExtResource("1_sor1j")
 SPEED = 10.0
+can_boost = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 editor_description = "The capsule collision box of the player. Keep this as a capsule."

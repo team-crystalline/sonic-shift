@@ -69,7 +69,7 @@ func _ready() -> void:
 	# Set these to be the same.
 	DEFAULT_SPEED= SPEED
 	max_boost_gauge = boost_gauge
-	#Input.set_mouse_mode(2)
+	Input.set_mouse_mode(2)
 	if spawn:
 		global_position = spawn.global_position
 		print("Spawned player at %s" % spawn.global_position)

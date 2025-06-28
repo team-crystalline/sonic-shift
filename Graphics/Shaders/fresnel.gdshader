@@ -18,7 +18,7 @@ void fragment()
 	float dir = 1.0 - clamp(dot(normalize(NORMAL), normalize(VIEW)), 0.0, 1.0);
 	float fresnel_amount = pow(dir, fresnel_power) * fresnel_intensity;
 	vec3 fresnel = fresnel_color * fresnel_amount;
-	
+
 	float top_align = dot(normalize(NORMAL), vec3(0.0, 1.0, 0.0));
 	float top_limit = smoothstep(rim_start, rim_end, top_align);
 	float rim_amount = step(1.0 - rim_size, dir) * rim_intensity * top_limit;
