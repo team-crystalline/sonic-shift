@@ -35,6 +35,7 @@ extends CharacterBody3D
 
 @onready var collision_area = $CollisionShape3D
 @onready var attack_cooldown: Timer = $AttackCooldown
+@onready var save_data : Dictionary = {}
 var physics_delta: float = 0.0
 
 var current_speed = 0
@@ -69,7 +70,7 @@ func _ready() -> void:
 	# Set these to be the same.
 	DEFAULT_SPEED= SPEED
 	max_boost_gauge = boost_gauge
-	Input.set_mouse_mode(2)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if spawn:
 		global_position = spawn.global_position
 		print("Spawned player at %s" % spawn.global_position)
@@ -249,3 +250,18 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_attack_cooldown_timeout() -> void:
 	is_attacking = false
 	$SpeedLines.visible = false
+
+func save():
+	save_data = {
+		"player": {
+			"boost_gauge": boost_gauge,
+			"max_boost_gauge": max_boost_gauge,
+			"can_boost": can_boost,
+			"can_light_dash": can_light_dash,
+			"can_shift": can_shift,
+			"can_double_jump": can_double_jump,
+			"can_quint_jump": can_quint_jump,
+			"current_level": get_tree().get_first_node_in_group("level").get_meta("name_ref")
+		}
+	}
+	return save_data

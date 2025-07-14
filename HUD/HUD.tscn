@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dfmsbbxxx5ipp"]
+[gd_scene load_steps=19 format=3 uid="uid://dfmsbbxxx5ipp"]
 
 [ext_resource type="Script" uid="uid://c7p7s17kgxj7i" path="res://HUD/hud.gd" id="1_f31rt"]
 [ext_resource type="Texture2D" uid="uid://cpurtqhp7dqo1" path="res://HUD/crosshair.png" id="2_b7ubu"]
@@ -78,6 +78,9 @@ default_font = ExtResource("5_aa5tu")
 default_font_size = 92
 Button/fonts/font = ExtResource("5_aa5tu")
 Label/font_sizes/font_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pd2p5"]
+bg_color = Color(1, 1, 1, 0.4)
 
 [node name="Hud" type="CanvasLayer"]
 
@@ -201,18 +204,35 @@ text = "Paused"
 horizontal_alignment = 1
 
 [node name="QuitButton" type="Button" parent="Control/PauseScreen"]
-offset_left = 32.0
-offset_top = 312.0
-offset_right = 102.0
-offset_bottom = 343.0
+offset_left = 40.0
+offset_top = 450.0
+offset_right = 110.0
+offset_bottom = 481.0
+size_flags_horizontal = 0
 text = "Quit"
 
 [node name="ResumeButton" type="Button" parent="Control/PauseScreen"]
-offset_left = 32.0
-offset_top = 264.0
-offset_right = 102.0
-offset_bottom = 295.0
+offset_left = 40.0
+offset_top = 400.0
+offset_right = 110.0
+offset_bottom = 431.0
+size_flags_horizontal = 0
 text = "Resume"
+
+[node name="LoadButton" type="Button" parent="Control/PauseScreen"]
+offset_left = 40.0
+offset_top = 350.0
+offset_right = 112.0
+offset_bottom = 381.0
+text = "Load"
+
+[node name="SaveButton" type="Button" parent="Control/PauseScreen"]
+offset_left = 40.0
+offset_top = 300.0
+offset_right = 110.0
+offset_bottom = 331.0
+size_flags_horizontal = 0
+text = "Save"
 
 [node name="TextureRect" type="TextureRect" parent="Control/PauseScreen"]
 offset_left = 16.0
@@ -222,9 +242,50 @@ offset_bottom = 774.0
 scale = Vector2(0.293477, 0.293477)
 texture = ExtResource("8_t1yhm")
 
+[node name="SavesList" type="ItemList" parent="Control/PauseScreen" groups=["SaveList"]]
+visible = false
+offset_left = 192.0
+offset_top = 296.0
+offset_right = 544.0
+offset_bottom = 504.0
+
+[node name="SaveFilePanel" type="Panel" parent="Control/PauseScreen" groups=["SaveNameInput"]]
+visible = false
+offset_left = 168.0
+offset_top = 280.0
+offset_right = 584.0
+offset_bottom = 352.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pd2p5")
+
+[node name="NameInput" type="LineEdit" parent="Control/PauseScreen/SaveFilePanel"]
+offset_left = 8.0
+offset_top = 32.0
+offset_right = 264.0
+offset_bottom = 64.0
+placeholder_text = "Enter Your Name"
+
+[node name="Label" type="Label" parent="Control/PauseScreen/SaveFilePanel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 102.0
+offset_bottom = 31.0
+text = "Save File As:"
+
+[node name="SaveNameButton" type="Button" parent="Control/PauseScreen/SaveFilePanel"]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 32.0
+offset_right = 364.0
+offset_bottom = 63.0
+text = "Save"
+
 [node name="PauseSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_6i5cd")
 volume_db = -7.656
 
 [connection signal="pressed" from="Control/PauseScreen/QuitButton" to="Control" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="Control/PauseScreen/ResumeButton" to="Control" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Control/PauseScreen/LoadButton" to="Control" method="_on_load_button_pressed"]
+[connection signal="pressed" from="Control/PauseScreen/SaveButton" to="Control" method="_on_save_button_pressed"]
+[connection signal="pressed" from="Control/PauseScreen/SaveFilePanel/SaveNameButton" to="Control" method="_on_save_name_button_pressed"]
