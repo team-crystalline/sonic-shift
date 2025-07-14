@@ -30,6 +30,7 @@ size = Vector3(500, 1, 500)
 [node name="BetaRoom" type="Node3D" groups=["level"]]
 metadata/level_name = "Beta Room"
 metadata/mission = "Try to break the game."
+metadata/name_ref = "BetaRoom"
 
 [node name="Lights" type="Node3D" parent="."]
 

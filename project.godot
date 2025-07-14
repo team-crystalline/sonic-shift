@@ -15,7 +15,7 @@ warnings/check_angle_interpolation_type_conflicting=false
 
 [application]
 
-config/name="First Person Runner"
+config/name="Sonic Shift"
 run/main_scene="uid://dwmsunjr7k7td"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/bg_color=Color(0.0562916, 0.0562916, 0.0562916, 1)
@@ -25,6 +25,7 @@ boot_splash/minimum_display_time=500
 [autoload]
 
 GameDefaults="*res://game_defaults.gd"
+GameSaves="*res://Scripts/SaveManager.gd"
 
 [dialogue_manager]
 
@@ -49,6 +50,8 @@ bouncy_objects="This is a bouncy thing."
 trampoline="This instance is a trampoline or spring."
 attackable="Can be interacted with via attack inputs"
 Persist="These are data values that should be stored in save files."
+SaveList="This is an ItemList node to load save data on."
+SaveNameInput="This is a Panel Node with a LineInput and a Button for saving."
 
 [input]
 

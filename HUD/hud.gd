@@ -47,12 +47,13 @@ func set_pause_state(paused: bool) -> void:
 	
 	# Adjust volume for Master bus
 	if paused:
-		AudioServer.set_bus_volume_db(master_bus_index, -10)  # Mute or lower volume significantly
-		AudioServer.set_bus_volume_db(bgm_bus_index, -10)     # Mute or lower volume significantly
+		AudioServer.set_bus_volume_db(master_bus_index, -10)
+		AudioServer.set_bus_volume_db(bgm_bus_index, -10)
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
-		AudioServer.set_bus_volume_db(master_bus_index, 0)    # Reset to original volume
-		AudioServer.set_bus_volume_db(bgm_bus_index, 0)       # Reset to original volume
-
+		AudioServer.set_bus_volume_db(master_bus_index, 0)
+		AudioServer.set_bus_volume_db(bgm_bus_index, 0)
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _process(_delta: float) -> void:
 	ring_label.text= "Rings: %d" % player.rings
@@ -67,9 +68,29 @@ func _process(_delta: float) -> void:
 		$Run.visible= false
 		$Walk.visible=true
 
-
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
 
 func _on_resume_button_pressed() -> void:
 	toggle_pause()
+
+func _on_save_button_pressed() -> void:
+	$PauseScreen/SavesList.visible = false
+	var fetched_save : Array = GameSaves.fetch_save()
+	if len(fetched_save) == 0:
+		# Can we get a name?
+		var save_name_panel = get_tree().get_first_node_in_group("SaveNameInput")
+		save_name_panel.visible = true
+	else:
+		GameSaves.save_game()
+
+func _on_load_button_pressed() -> void:
+	$PauseScreen/SaveFilePanel.visible = false
+	GameSaves.load_all_saves()
+
+func _on_save_name_button_pressed() -> void:
+	if len($PauseScreen/SaveFilePanel/NameInput.text) == 0:
+		print("Hey, put a name in.")
+		return
+	else:
+		GameSaves.save_game($PauseScreen/SaveFilePanel/NameInput.text)

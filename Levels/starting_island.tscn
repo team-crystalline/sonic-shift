@@ -244,6 +244,7 @@ volumetric_fog_emission = Color(0.75, 0.75, 0.75, 1)
 script = ExtResource("1_46lvm")
 metadata/level_name = "???"
 metadata/mission = "Figure out where you are!"
+metadata/name_ref = "starting_island"
 
 [node name="OpeningCutscene" type="Node3D" parent="."]
 
