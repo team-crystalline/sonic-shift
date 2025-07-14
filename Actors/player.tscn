@@ -3321,7 +3321,7 @@ point_count = 3
 [sub_resource type="Gradient" id="Gradient_c5kq5"]
 colors = PackedColorArray(0.3956, 0.53492, 0.86, 1, 0.82, 0.994, 1, 1)
 
-[node name="Player" type="CharacterBody3D" groups=["Player", "bouncy_objects", "can_pause"]]
+[node name="Player" type="CharacterBody3D" groups=["Persist", "Player", "bouncy_objects", "can_pause"]]
 editor_description = "This is a generic player. It contains the basic movement of all characters that will be implemented."
 floor_max_angle = 0.827286
 floor_snap_length = 1.0
