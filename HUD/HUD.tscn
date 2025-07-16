@@ -82,7 +82,7 @@ Label/font_sizes/font_size = 24
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pd2p5"]
 bg_color = Color(1, 1, 1, 0.4)
 
-[node name="Hud" type="CanvasLayer"]
+[node name="Hud" type="CanvasLayer" groups=["HUD"]]
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -242,13 +242,6 @@ offset_bottom = 774.0
 scale = Vector2(0.293477, 0.293477)
 texture = ExtResource("8_t1yhm")
 
-[node name="SavesList" type="ItemList" parent="Control/PauseScreen" groups=["SaveList"]]
-visible = false
-offset_left = 192.0
-offset_top = 296.0
-offset_right = 544.0
-offset_bottom = 504.0
-
 [node name="SaveFilePanel" type="Panel" parent="Control/PauseScreen" groups=["SaveNameInput"]]
 visible = false
 offset_left = 168.0
@@ -258,6 +251,7 @@ offset_bottom = 352.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_pd2p5")
 
 [node name="NameInput" type="LineEdit" parent="Control/PauseScreen/SaveFilePanel"]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 32.0
 offset_right = 264.0
@@ -280,6 +274,46 @@ offset_right = 364.0
 offset_bottom = 63.0
 text = "Save"
 
+[node name="LoadFilePanel" type="Panel" parent="Control/PauseScreen"]
+visible = false
+offset_left = 208.0
+offset_top = 240.0
+offset_right = 576.0
+offset_bottom = 512.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pd2p5")
+
+[node name="SavesList" type="ItemList" parent="Control/PauseScreen/LoadFilePanel" groups=["SaveList"]]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 48.0
+offset_right = 328.0
+offset_bottom = 216.0
+
+[node name="SavesListLabel" type="Label" parent="Control/PauseScreen/LoadFilePanel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 85.0
+offset_bottom = 31.0
+text = "Load File"
+
+[node name="LoadFileButton" type="Button" parent="Control/PauseScreen/LoadFilePanel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 232.0
+offset_right = 109.0
+offset_bottom = 263.0
+text = "Load File"
+
+[node name="DeleteFileButton" type="Button" parent="Control/PauseScreen/LoadFilePanel"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 232.0
+offset_right = 329.0
+offset_bottom = 263.0
+disabled = true
+text = "Delete File"
+
 [node name="PauseSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_6i5cd")
 volume_db = -7.656
@@ -289,3 +323,4 @@ volume_db = -7.656
 [connection signal="pressed" from="Control/PauseScreen/LoadButton" to="Control" method="_on_load_button_pressed"]
 [connection signal="pressed" from="Control/PauseScreen/SaveButton" to="Control" method="_on_save_button_pressed"]
 [connection signal="pressed" from="Control/PauseScreen/SaveFilePanel/SaveNameButton" to="Control" method="_on_save_name_button_pressed"]
+[connection signal="pressed" from="Control/PauseScreen/LoadFilePanel/LoadFileButton" to="Control" method="_on_load_file_button_pressed"]

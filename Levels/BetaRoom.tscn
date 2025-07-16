@@ -1,9 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://bp27esbw6s3b3"]
+[gd_scene load_steps=18 format=3 uid="uid://bp27esbw6s3b3"]
 
+[ext_resource type="Script" uid="uid://bx13raqqgxgbq" path="res://Scripts/LevelManager.gd" id="1_fb2ui"]
 [ext_resource type="Environment" uid="uid://b4wd7qdth75lo" path="res://Graphics/Resources/defaultenv-day.tres" id="1_y41jg"]
-[ext_resource type="PackedScene" uid="uid://pgx7n8fyonap" path="res://Actors/player.tscn" id="2_olaht"]
 [ext_resource type="PackedScene" uid="uid://t2ifc1kqrgxb" path="res://Triggers/kill.tscn" id="3_6v0uy"]
-[ext_resource type="PackedScene" uid="uid://dfmsbbxxx5ipp" path="res://HUD/HUD.tscn" id="4_gb6cv"]
 [ext_resource type="Texture2D" uid="uid://baccneuiftbk5" path="res://Graphics/Textures/Placeholders/Green/texture_08.png" id="5_y41jg"]
 [ext_resource type="PackedScene" uid="uid://dv7e2w135rgoe" path="res://Actors/Badniks/motobug.tscn" id="6_48f0s"]
 [ext_resource type="PackedScene" uid="uid://delu2qjrw6teu" path="res://Actors/Objects/Mirror3D/Mirror3D.tscn" id="7_20qaj"]
@@ -28,9 +27,11 @@ material = SubResource("StandardMaterial3D_5ey0c")
 size = Vector3(500, 1, 500)
 
 [node name="BetaRoom" type="Node3D" groups=["level"]]
+script = ExtResource("1_fb2ui")
 metadata/level_name = "Beta Room"
 metadata/mission = "Try to break the game."
 metadata/name_ref = "BetaRoom"
+metadata/is_action = false
 
 [node name="Lights" type="Node3D" parent="."]
 
@@ -54,11 +55,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -37.1614, 0)
 [node name="SpawnPoint" type="Node3D" parent="." groups=["SpawnPoint"]]
 transform = Transform3D(-0.583258, 0, 0.812287, 0, 1, 0, -0.812287, 0, -0.583258, 2.9571, 1, 20.9136)
 rotation_edit_mode = 1
-
-[node name="Hud" parent="." instance=ExtResource("4_gb6cv")]
-
-[node name="Player" parent="." instance=ExtResource("2_olaht")]
-transform = Transform3D(0.999996, 0, 0.00284481, 0, 1, 0, -0.00284481, 0, 0.999996, 3.96279, 1.01932, 5.21591)
 
 [node name="Platforms" type="Node3D" parent="."]
 
