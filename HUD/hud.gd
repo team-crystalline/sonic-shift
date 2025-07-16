@@ -12,6 +12,9 @@ func _ready() -> void:
 	loc_label.text = level.get_meta("level_name")
 	if player.can_boost:
 		boost_label.visible=true
+	player.connect("rings_changed", Callable(self, "_on_rings_changed")) # We use Callable in Godot 4.4+
+	player.connect("lives_changed", Callable(self, "_on_lives_changed"))
+	player.connect("boost_changed", Callable(self, "_on_boost_changed"))
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
@@ -60,7 +63,6 @@ func _process(_delta: float) -> void:
 	lives_label.text= "Lives: %d" % player.lives
 	boost_label.text= "Boost: %s" % player.boost_gauge
 
-	
 	if player.is_running == true:
 		$Run.visible= true
 		$Walk.visible= false
@@ -75,7 +77,7 @@ func _on_resume_button_pressed() -> void:
 	toggle_pause()
 
 func _on_save_button_pressed() -> void:
-	$PauseScreen/SavesList.visible = false
+	$PauseScreen/LoadFilePanel.visible = false
 	var fetched_save : Array = GameSaves.fetch_save()
 	if len(fetched_save) == 0:
 		# Can we get a name?
@@ -86,6 +88,7 @@ func _on_save_button_pressed() -> void:
 
 func _on_load_button_pressed() -> void:
 	$PauseScreen/SaveFilePanel.visible = false
+	$PauseScreen/LoadFilePanel.visible=true
 	GameSaves.load_all_saves()
 
 func _on_save_name_button_pressed() -> void:
@@ -94,3 +97,24 @@ func _on_save_name_button_pressed() -> void:
 		return
 	else:
 		GameSaves.save_game($PauseScreen/SaveFilePanel/NameInput.text)
+
+func _on_load_file_button_pressed() -> void:
+	var selected_indices = $PauseScreen/LoadFilePanel/SavesList.get_selected_items()
+	if len(selected_indices) == 0:
+		print("Nothing selected.")
+		return
+	
+	var selected_ind = selected_indices[0]
+	var selected_save_name = $PauseScreen/LoadFilePanel/SavesList.get_item_text(selected_ind) 
+	var selected_save_id = $PauseScreen/LoadFilePanel/SavesList.get_item_metadata(selected_ind)
+	GameSaves.load_game(selected_save_id) 
+
+
+func _on_rings_changed(new_rings):
+	ring_label.text = "Rings: %d" % new_rings
+
+func _on_lives_changed(new_lives):
+	lives_label.text = "Lives: %d" % new_lives
+
+func _on_boost_changed(new_boost):
+	boost_label.text = "Boost: %s" % new_boost

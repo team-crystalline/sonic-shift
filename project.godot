@@ -52,6 +52,7 @@ attackable="Can be interacted with via attack inputs"
 Persist="These are data values that should be stored in save files."
 SaveList="This is an ItemList node to load save data on."
 SaveNameInput="This is a Panel Node with a LineInput and a Button for saving."
+HUD=""
 
 [input]
 
