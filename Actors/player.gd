@@ -56,6 +56,12 @@ var DEFAULT_SPEED : float
 var max_boost_gauge : float # Rings cannot make the boost go past this number.
 var target_position = Vector3()
 
+#region DEFINING SIGNALS ----
+signal rings_changed(new_rings)
+signal lives_changed(new_lives)
+signal boost_changed(new_boost)
+#endregion ------------------
+
 func set_bone_rot(bone, ang):
 	var b = skeleton.find_bone(bone)
 	var rest = skeleton.get_bone_rest(b)
@@ -262,6 +268,46 @@ func save():
 			"can_double_jump": can_double_jump,
 			"can_quint_jump": can_quint_jump,
 			"current_level": get_tree().get_first_node_in_group("level").get_meta("name_ref")
-		}
+		},
+		"rings": rings, # Remove this later.
 	}
 	return save_data
+
+func load_save(save_data: Dictionary):
+	var player_data = save_data["player"]
+	var level_path = "res://Levels/" + player_data["current_level"] + ".tscn"
+	
+	# Restore player properties first
+	lives = save_data.get("lives", lives)
+	emit_signal("lives_changed", lives)
+	rings = save_data.get("rings", rings)
+	emit_signal("rings_changed", rings)
+	
+	# Other stuff to add.
+	boost_gauge = player_data.get("boost_gauge", boost_gauge)
+	max_boost_gauge = player_data.get("max_boost_gauge", max_boost_gauge)
+	can_boost = player_data.get("can_boost", can_boost)
+	can_double_jump = player_data.get("can_double_jump", can_double_jump)
+	can_light_dash = player_data.get("can_light_dash", can_light_dash)
+	can_shift = player_data.get("can_shift", can_shift)
+	GameDefaults.game_id = save_data["game_id"]
+	
+	# this is tricky, right. Load the new level...
+	var new_level = load(level_path).instantiate()
+	# ... Then delete the current scene
+	var current_scene = get_tree().current_scene
+	current_scene.queue_free()
+	
+	# Then add the new level to the scene tree
+	get_tree().root.add_child(new_level)
+	get_tree().current_scene = new_level
+	
+	# Now remove the player and HUD from the current_scene, and move to new_level.
+	var player = get_tree().get_first_node_in_group("Player")
+	var hud = get_tree().get_first_node_in_group("HUD")
+	if player:
+		player.get_parent().remove_child(player)
+		new_level.add_child(player)
+	if hud:
+		hud.get_parent().remove_child(hud)
+		new_level.add_child(hud)
