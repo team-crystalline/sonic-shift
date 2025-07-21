@@ -6,7 +6,6 @@ extends Area3D
 func _on_body_entered(_body: Node3D) -> void:
 	if spawn:
 		player.global_position = spawn.global_position
-		player.lives -= 1
 		player.SPEED = player.DEFAULT_SPEED # <-- In case they boosted off the stage.
 		player.boost_gauge = 0 # <-- No boost = punishment
 		player.rings = 0
