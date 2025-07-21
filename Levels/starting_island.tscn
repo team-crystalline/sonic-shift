@@ -101,14 +101,14 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("../Player:is_in_a_cutscene")
+tracks/7/path = NodePath("../Player:current_state")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [9]
 }
 
 [sub_resource type="Animation" id="Animation_uochh"]
@@ -201,14 +201,14 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("../Player:is_in_a_cutscene")
+tracks/7/path = NodePath("../Player:current_state")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0, 10),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true, false]
+"values": [9, 0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uk8oh"]
@@ -308,7 +308,7 @@ max_distance = 500.0
 
 [node name="Player" parent="." instance=ExtResource("2_iiinm")]
 transform = Transform3D(0.0538044, 0.986949, -0.151781, -0.329777, 0.161035, 0.930223, 0.942525, 3.72529e-06, 0.334137, 440.729, 15.9448, -128.981)
-is_in_a_cutscene = true
+current_state = 9
 
 [node name="Rings" type="Node3D" parent="."]
 

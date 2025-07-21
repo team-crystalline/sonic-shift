@@ -1,8 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://bp27esbw6s3b3"]
+[gd_scene load_steps=17 format=3 uid="uid://bp27esbw6s3b3"]
 
 [ext_resource type="Script" uid="uid://bx13raqqgxgbq" path="res://Scripts/LevelManager.gd" id="1_fb2ui"]
 [ext_resource type="Environment" uid="uid://b4wd7qdth75lo" path="res://Graphics/Resources/defaultenv-day.tres" id="1_y41jg"]
-[ext_resource type="PackedScene" uid="uid://t2ifc1kqrgxb" path="res://Triggers/kill.tscn" id="3_6v0uy"]
 [ext_resource type="Texture2D" uid="uid://baccneuiftbk5" path="res://Graphics/Textures/Placeholders/Green/texture_08.png" id="5_y41jg"]
 [ext_resource type="PackedScene" uid="uid://dv7e2w135rgoe" path="res://Actors/Badniks/motobug.tscn" id="6_48f0s"]
 [ext_resource type="PackedScene" uid="uid://delu2qjrw6teu" path="res://Actors/Objects/Mirror3D/Mirror3D.tscn" id="7_20qaj"]
@@ -48,9 +47,6 @@ spot_angle = 39.1363
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("1_y41jg")
-
-[node name="Kill" parent="." instance=ExtResource("3_6v0uy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -37.1614, 0)
 
 [node name="SpawnPoint" type="Node3D" parent="." groups=["SpawnPoint"]]
 transform = Transform3D(-0.583258, 0, 0.812287, 0, 1, 0, -0.812287, 0, -0.583258, 2.9571, 1, 20.9136)
@@ -157,6 +153,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.64409, 0.197968, 19.6921)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.64409, 0.197968, 34.0694)
 
 [node name="Badniks" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -21.7297, 0)
 
 [node name="Motobug" parent="Badniks" instance=ExtResource("6_48f0s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.46912, 1, 14.5875)

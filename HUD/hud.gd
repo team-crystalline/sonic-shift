@@ -1,12 +1,34 @@
 extends Control
-@onready var ring_label = $RingsLabel
-@onready var lives_label = $LivesLabel
-@onready var boost_label = $BoostLabel
-@onready var speed_label = $SpeedLabel
+@onready var ring_label = $PrimaryPanel/RingsLabel
+@onready var lives_label = $PrimaryPanel/LivesLabel
+@onready var boost_label = $PrimaryPanel/BoostLabel
 @onready var loc_label = $LocationLabel
 @onready var player := get_tree().get_first_node_in_group("Player")
 @onready var level := get_tree().get_first_node_in_group("level")
 @onready var pause_screen = %PauseScreen
+
+@onready var state_label = $Panel/StateLabel
+
+var state_array = [
+		'IDLE', # <-- The default state when the player is not doing anything.
+		'IMPATIENT', # <-- To make Sonic tap his foot, because you're not moving.
+		'RUNNING', # <-- For running animations.
+		'WALKING', # <-- Players have the option to walk in the hub world to feel more immersive.
+		'JUMPING', # <-- For jumping animations.
+		'LAUNCHED',
+		'FALLING', # <-- Not sure how I will differentiate from jumping but I'll need to find out to make the animations work.
+		'ATTACKING', # <-- For detecting badniks and other enemies.
+		'TAUNTING', # <-- For air tricks, to fire an event that gives the player a score boost.
+		'CUTSCENE', # <-- Will be needed for us to disable player controls during cutscenes.
+		'TALKING', # <-- Will be needed for us to disable player controls during conversations.
+		'SWIMMING', # <-- Will need to adjust player speed and gravity when swimming.
+		'DROWNING', # <-- Will be needed for the timer to count down until the player dies.
+		'DEAD', # <-- To trigger the respawn system (or game over)
+		'HURT', # <-- To trigger the hurt animation and invincibility frames.
+		'WALL_RUN',
+		'WALL_JUMP',
+		'BOOSTING'
+]
 
 func _ready() -> void:
 	loc_label.text = level.get_meta("level_name")
@@ -61,7 +83,12 @@ func set_pause_state(paused: bool) -> void:
 func _process(_delta: float) -> void:
 	ring_label.text= "Rings: %d" % player.rings
 	lives_label.text= "Lives: %d" % player.lives
-	boost_label.text= "Boost: %s" % player.boost_gauge
+	boost_label.text= "Boost: %.2f" % player.boost_gauge
+	state_label.text = state_array[player.current_state]
+	$Panel/VelocityLabel.text="Velocity:
+X: %.2f
+Y: %.2f
+z: %.2f" % [player.velocity.x, player.velocity.y, player.velocity.z]
 
 	if player.is_running == true:
 		$Run.visible= true

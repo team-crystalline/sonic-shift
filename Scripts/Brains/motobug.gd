@@ -7,11 +7,11 @@ extends RigidBody3D
 @export var max_wander_distance : float = 2.0
 
 var direction: Vector3 = Vector3.ZERO
-var sound_played: bool = false
 var change_direction_timer: Timer
 var move_distance: float = 0.0
 var is_moving : bool = false
 var distance_moved: float = 0.0
+var sound_played = false
 
 func _ready() -> void:
 	change_direction_time *= randf_range(1, 1.5)
@@ -38,22 +38,27 @@ func _change_direction() -> void:
 
 func _on_hit_box_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Player"):
-		if body.is_attacking:
+		if body.current_state in [body.State.ATTACKING, body.State.BOOSTING] or body.current_status in [body.StatusState.SUPER, body.StatusState.INVINCIBLE]:
 			hit_points -= body.attack_power
+			if body.has_method("add_boost"):
+				body.call("add_boost", 0.5)
+		else:
+			if body.has_method("take_damage"):
+				body.call("take_damage")
 
 func _process(delta: float) -> void:
 	if hit_points <= 0 and not sound_played:
-		var player_sound = get_tree().get_first_node_in_group("Player").get_node("PoofSound")  # Adjust the path if necessary
-		if not player_sound.playing:
-			player_sound.play()
-			sound_played = true
+		$PoofSound.play()
+		sound_played = true
 		
 		set_collision_layer_value(1,false)
 		set_collision_mask_value(1, false)
 		$Model.visible=false
 		$ModelCollision.visible=false
 		$HitBox.visible=false
-		$Poof.emitting = true # Doesn't show because the object is deleted
+		$Poof.emitting = true
+		$Gear1.emitting = true
+		$Gear2.emitting = true
 		await get_tree().create_timer(1).timeout
 		queue_free()
 	if is_moving:

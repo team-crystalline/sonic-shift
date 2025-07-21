@@ -10,6 +10,9 @@ func _on_body_entered(body: Node) -> void:
 			total_bounce = body.bounce_max # Yeah dude!
 		
 		body.velocity.y += total_bounce
+		
+		if body.has_method("set_state"):
+			body.set_state(body.State.LAUNCHED)
 		# If you're pressing jump, you can bounce even higher.
 		if Input.is_action_pressed("jump"):
 			# Go higher! But not higher than the max bounce.
