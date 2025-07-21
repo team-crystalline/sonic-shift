@@ -1,7 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dv7e2w135rgoe"]
+[gd_scene load_steps=14 format=3 uid="uid://dv7e2w135rgoe"]
 
 [ext_resource type="Script" uid="uid://be34j07b44lo4" path="res://Scripts/Brains/motobug.gd" id="1_cpt6f"]
 [ext_resource type="Texture2D" uid="uid://cgu4uolapjfe7" path="res://Graphics/Particles/cloud_part.png" id="2_e37k2"]
+[ext_resource type="ArrayMesh" uid="uid://bgb88y8xwfcxa" path="res://Graphics/Particles/gear1.obj" id="3_mttih"]
+[ext_resource type="ArrayMesh" uid="uid://brkogd6ddvaan" path="res://Graphics/Particles/gear2.obj" id="4_g3qyk"]
+[ext_resource type="AudioStream" uid="uid://p5ypty5jn806" path="res://Audio/FX/badnik_death.ogg" id="5_c5aaw"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tekqx"]
 
@@ -27,8 +30,13 @@ billboard_keep_scale = true
 material = SubResource("StandardMaterial3D_e37k2")
 
 [sub_resource type="Curve" id="Curve_g3qyk"]
-_data = [Vector2(0, 0.506897), 0.0, 0.0, 0, 0, Vector2(1, 0.977586), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0.503536), 0.0, 0.0, 0, 0, Vector2(0.521905, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_c5aaw"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.304762, 360), 0.0, 0.0, 0, 0, Vector2(0.499048, -360), 0.0, 0.0, 0, 0, Vector2(0.752381, 360), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 5
 
 [node name="Motobug" type="RigidBody3D" groups=["attackable", "can_pause"]]
 physics_interpolation_mode = 1
@@ -69,5 +77,64 @@ scale_amount_min = 0.5
 scale_amount_curve = SubResource("Curve_g3qyk")
 
 [node name="Node3D" type="Node3D" parent="."]
+
+[node name="Gear1" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.795974, 0)
+cast_shadow = 0
+emitting = false
+amount = 16
+one_shot = true
+speed_scale = 1.46
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+mesh = ExtResource("3_mttih")
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_align_y = true
+direction = Vector3(1, 0.5, 1)
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+linear_accel_max = 7.33
+angle_max = 312.5
+angle_curve = SubResource("Curve_c5aaw")
+scale_amount_min = 0.1
+scale_amount_max = 0.3
+scale_amount_curve = SubResource("Curve_g3qyk")
+hue_variation_max = 0.57
+
+[node name="Gear2" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.795974, 0)
+cast_shadow = 0
+emitting = false
+amount = 16
+one_shot = true
+speed_scale = 1.46
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+mesh = ExtResource("4_g3qyk")
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_align_y = true
+direction = Vector3(1, 0.5, 1)
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+linear_accel_max = 7.33
+angle_max = 312.5
+angle_curve = SubResource("Curve_c5aaw")
+scale_amount_min = 0.1
+scale_amount_max = 0.3
+scale_amount_curve = SubResource("Curve_g3qyk")
+hue_variation_max = 0.57
+
+[node name="PoofSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_c5aaw")
+max_polyphony = 10
+bus = &"SFX"
 
 [connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]

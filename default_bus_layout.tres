@@ -1,4 +1,13 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://dgwkgc1ena1vb"]
+[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://dgwkgc1ena1vb"]
+
+[sub_resource type="AudioEffectHighPassFilter" id="AudioEffectHighPassFilter_j3pel"]
+resource_name = "HighPassFilter"
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_j3pel"]
+resource_name = "LowPassFilter"
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_j3pel"]
+resource_name = "Reverb"
 
 [resource]
 bus/1/name = &"BGM"
@@ -19,9 +28,15 @@ bus/3/mute = false
 bus/3/bypass_fx = false
 bus/3/volume_db = 0.0
 bus/3/send = &"Master"
+bus/3/effect/0/effect = SubResource("AudioEffectHighPassFilter_j3pel")
+bus/3/effect/0/enabled = false
+bus/3/effect/1/effect = SubResource("AudioEffectLowPassFilter_j3pel")
+bus/3/effect/1/enabled = false
 bus/4/name = &"SFX"
 bus/4/solo = false
 bus/4/mute = false
 bus/4/bypass_fx = false
 bus/4/volume_db = 0.0
 bus/4/send = &"Master"
+bus/4/effect/0/effect = SubResource("AudioEffectReverb_j3pel")
+bus/4/effect/0/enabled = false

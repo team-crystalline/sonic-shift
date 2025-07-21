@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://pgx7n8fyonap"]
+[gd_scene load_steps=40 format=4 uid="uid://pgx7n8fyonap"]
 
 [ext_resource type="Script" uid="uid://44ncygd5css7" path="res://Actors/player.gd" id="1_sor1j"]
 [ext_resource type="Script" uid="uid://b6youh33uuxbb" path="res://Actors/camera.gd" id="2_c5kq5"]
@@ -10,7 +10,9 @@
 [ext_resource type="Shader" uid="uid://bg2dr3jcnsm16" path="res://HUD/speedlines.gdshader" id="7_1c8hm"]
 [ext_resource type="Shader" uid="uid://bfsww0dmjbkb6" path="res://Graphics/Shaders/fisheye.gdshader" id="8_sinrj"]
 [ext_resource type="QuadMesh" uid="uid://chmadijk1uo8h" path="res://Graphics/Particles/sparkle.tres" id="9_ks2ow"]
-[ext_resource type="AudioStream" uid="uid://p5ypty5jn806" path="res://Audio/FX/badnik_death.ogg" id="11_c5kq5"]
+[ext_resource type="AudioStream" uid="uid://dlyd82si3yqyk" path="res://Audio/Voices/Sonic/Boost2.ogg" id="11_3sj5c"]
+[ext_resource type="AudioStream" uid="uid://braypwwxga67t" path="res://Audio/FX/boost-boom.ogg" id="12_3sj5c"]
+[ext_resource type="AudioStream" uid="uid://bf4npmh83ecse" path="res://Audio/FX/boost-sustain.ogg" id="13_6yncu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tl1vq"]
 
@@ -3353,6 +3355,7 @@ script = ExtResource("2_c5kq5")
 editor_description = "Ring sound for collecting rings."
 stream = ExtResource("2_y2lmi")
 max_polyphony = 20
+bus = &"SFX"
 
 [node name="ThirdPersonPivot" type="Node3D" parent="."]
 
@@ -4217,9 +4220,19 @@ hue_variation_max = 0.03
 wait_time = 0.5
 one_shot = true
 
-[node name="PoofSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_c5kq5")
-
 [node name="RayCast3D" type="RayCast3D" parent="."]
+
+[node name="Voice" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_3sj5c")
+volume_db = -1.095
+bus = &"Voice"
+
+[node name="BoostBoom" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_3sj5c")
+bus = &"SFX"
+
+[node name="BoomSustain" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_6yncu")
+bus = &"SFX"
 
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

@@ -1,11 +1,11 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://bh820g1g3rqgr"]
 
-[ext_resource type="FontFile" uid="uid://b6a6qryn3cooq" path="res://HUD/Blank River.ttf" id="1_fu5xi"]
+[ext_resource type="FontFile" uid="uid://dnsj1gj1lmp40" path="res://HUD/Fonts/LeagueofOrbitron/Orbitron Bold.ttf" id="1_fu5xi"]
 
 [resource]
 default_font = ExtResource("1_fu5xi")
-default_font_size = 32
 Label/constants/outline_size = 3
 Label/constants/shadow_offset_x = 4
 Label/constants/shadow_offset_y = 4
 Label/font_sizes/font_size = 24
+Label/fonts/font = ExtResource("1_fu5xi")

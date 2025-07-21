@@ -19,8 +19,8 @@ func _on_body_entered(body):
 		ring_box.visible = false
 		ring_model.visible=false
 		body.rings += 1
-		if body.boost_gauge + 1 <= body.max_boost_gauge:
-			body.boost_gauge += 0.5
+		if body.has_method("add_boost"):
+			body.call("add_boost", 0.125)
 		# Play the sound on the player
 		var player_sound = body.get_node("RingSound")  # Adjust the path if necessary
 		player_sound.play()
