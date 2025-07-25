@@ -84,6 +84,7 @@ Label/font_sizes/font_size = 24
 bg_color = Color(1, 1, 1, 0.4)
 
 [node name="Hud" type="CanvasLayer" groups=["HUD"]]
+process_mode = 3
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -178,6 +179,7 @@ vertical_alignment = 1
 
 [node name="PauseScreen" type="Node2D" parent="Control"]
 unique_name_in_owner = true
+process_mode = 2
 visible = false
 z_index = 4096
 
@@ -321,22 +323,10 @@ text = "Delete File"
 [node name="Panel" type="Panel" parent="Control"]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 200.0
+offset_top = 536.0
 offset_right = 248.0
 offset_bottom = 640.0
-
-[node name="VelocityLabel" type="Label" parent="Control/Panel"]
-offset_top = 128.0
-offset_right = 217.0
-offset_bottom = 172.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
-theme_override_constants/shadow_outline_size = 8
-text = "Velocity:
-X: o
-Y: o
-z: o"
+scale = Vector2(0.758525, 0.758525)
 
 [node name="Label" type="Label" parent="Control/Panel"]
 layout_mode = 0

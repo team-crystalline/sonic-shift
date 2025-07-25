@@ -40,38 +40,30 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
+		if get_tree().paused:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else: 
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		toggle_pause()
 
 func toggle_pause() -> void:
-	if pause_screen.visible:
+	if get_tree().paused:
 		pause_screen.visible = false
-		set_pause_state(false)
 		player.is_paused = false
+		get_tree().paused = false
 	else:
 		$"../PauseSound".play()
 		pause_screen.visible = true
-		set_pause_state(true)
 		player.is_paused = true
+		get_tree().paused = true
 
-func set_pause_state(paused: bool) -> void:
-	# Looking for any nodes we've labelled as "can_pause", and pausing all of them.
-	for node in get_tree().get_nodes_in_group("can_pause"):
-		node.set_process(!paused)
-		node.set_physics_process(!paused)
-		#var animation_player = node.get_node("AnimationPlayer")
-		#if animation_player:
-			## Pause any animations
-			#if paused:
-				#animation_player.stop()
-			#else:
-				#animation_player.play()
 
 	# Find all sounds playing in Master and BGM buses, lower volume when paused.
 	var master_bus_index = AudioServer.get_bus_index("Master")
 	var bgm_bus_index = AudioServer.get_bus_index("BGM")
 	
 	# Adjust volume for Master bus
-	if paused:
+	if get_tree().paused:
 		AudioServer.set_bus_volume_db(master_bus_index, -10)
 		AudioServer.set_bus_volume_db(bgm_bus_index, -10)
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -85,10 +77,6 @@ func _process(_delta: float) -> void:
 	lives_label.text= "Lives: %d" % player.lives
 	boost_label.text= "Boost: %.2f" % player.boost_gauge
 	state_label.text = state_array[player.current_state]
-	$Panel/VelocityLabel.text="Velocity:
-X: %.2f
-Y: %.2f
-z: %.2f" % [player.velocity.x, player.velocity.y, player.velocity.z]
 
 	if player.is_running == true:
 		$Run.visible= true

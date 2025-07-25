@@ -18,9 +18,10 @@ func _on_danger_zone_body_entered(body: Node3D) -> void:
 	if not body.is_in_group("Player"):
 		return
 	$CanvasLayer/Glitch.visible = true
-
+	AudioServer.set_bus_effect_enabled(1, 0, true)
 
 func _on_danger_zone_body_exited(body: Node3D) -> void:
 	if not body.is_in_group("Player"):
 		return
 	$CanvasLayer/Glitch.visible = false
+	AudioServer.set_bus_effect_enabled(1, 0, false)

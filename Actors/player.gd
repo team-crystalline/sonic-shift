@@ -5,11 +5,11 @@ extends CharacterBody3D
 @export var attack_power : int = 1
 @export_group("Movement Physics")
 @export var JUMP_VELOCITY := 5.0  # The height in which the player jumps.
-@export var SPEED := 55.0
+@export var SPEED := 20.0
 @export var boost_gauge := 16.0
-@onready var air_speed = SPEED * 0.5
-@onready var air_direction_change_speed:= SPEED/10
-@export var attack_sight := 10
+@onready var air_speed : float
+@onready var air_direction_change_speed : float
+@export var attack_sight := 15
 #region Trampolines
 @export var bounce_bonus_base := 2.0
 @export var bounce_max := 20.0
@@ -34,6 +34,7 @@ extends CharacterBody3D
 @export var is_paused = false
 #@export var is_attacking = false
 
+@onready var col : Vector3i
 @onready var collision_area = $CollisionShape3D
 @onready var attack_cooldown: Timer = $AttackCooldown
 @onready var save_data : Dictionary = {}
@@ -51,10 +52,11 @@ var target_head_rotation: Vector3 = Vector3.ZERO
 @onready var skeleton = $Sonic/Armature/Skeleton3D
 @onready var third_person := $ThirdPersonPivot
 @onready var spawn := get_tree().get_first_node_in_group("SpawnPoint")
+@onready var vocal_queue : Array = []
 
 var DEFAULT_SPEED : float
 var max_boost_gauge : float # Rings cannot make the boost go past this number.
-var target_position = Vector3()
+var target # this could be any Node in group attackable.
 
 #region Audio stuff ---------
 func fade_out(audio_node: AudioStreamPlayer, duration: float) -> void:
@@ -124,7 +126,10 @@ func _ready() -> void:
 	set_state(State.IDLE)
 	# Set these to be the same.
 	DEFAULT_SPEED= SPEED
+	print("SPEED set to %.2f" % SPEED)
 	max_boost_gauge = boost_gauge
+	air_speed = SPEED * 0.5
+	air_direction_change_speed = SPEED / 10
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if spawn:
 		global_position = spawn.global_position
@@ -133,27 +138,20 @@ func _ready() -> void:
 		print("Can't find a spawn point. Was it added?")
 
 func _physics_process(delta: float) -> void:
-	print("Current SPEED: ", SPEED)
-
-	if velocity.y < 0:
+	if velocity.y < 0 and current_state != State.ATTACKING:
 		set_state(State.FALLING)
 	
 	if current_state == State.HURT:
-		print("Velocity before push: ", velocity) 
-		var backward_direction = -transform.basis.z.normalized()
-		velocity = -velocity.normalized() * randf_range(8.0,12.0)
-		velocity.y += randf_range(2.0,5.0)
-		print("Velocity after push: ", velocity) 
+		velocity = Vector3(
+			-velocity.x * randf_range(1.0, 2.0),
+			velocity.y + randf_range(3.0, 6.0),
+			-velocity.z * randf_range(1.0, 2.0)
+		)
+				
 		set_state(State.IDLE)
 		move_and_slide()
 		return
 
-
-	if current_state == State.ATTACKING:
-		global_position = lerp(global_position, target_position, (SPEED * 2) * delta)
-		if global_position.distance_to(target_position) < 0.1:
-			#is_attacking = false
-			set_state(State.IDLE)
 	if current_state == State.CUTSCENE:
 		return
 #region Gravity
@@ -172,14 +170,7 @@ func _physics_process(delta: float) -> void:
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		var floor_norm = get_floor_normal()
-		var jump_direction = Vector3(0, 1, 0)
-		jump_direction = jump_direction.rotated(Vector3(1, 0, 0), floor_norm.x * PI / 2)
-		jump_direction = jump_direction.rotated(Vector3(0, 0, 1), floor_norm.z * PI / 2)
-		set_state(State.JUMPING)
-
-		# Set the jump velocity
-		velocity.y = JUMP_VELOCITY * jump_direction.y
+		handle_jump()
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir := Input.get_vector("left", "right", "up", "down")
@@ -193,9 +184,7 @@ func _physics_process(delta: float) -> void:
 
 	# Calculate the movement direction
 	var direction = (right_direction * input_dir.x + forward_direction * input_dir.y).normalized()
-	if direction:
-		if current_state == State.ATTACKING:
-			return
+	if direction and current_state != State.HURT:
 		if not is_on_floor():
 			# In the air. Reduced speed
 			var target_velocity = Vector3(direction.x * air_speed, velocity.y, direction.z * air_speed)
@@ -205,7 +194,6 @@ func _physics_process(delta: float) -> void:
 		elif is_running == true:
 			velocity.x = direction.x * SPEED
 			velocity.z = direction.z * SPEED
-			print(SPEED)
 			current_speed = SPEED
 			if not current_state in [State.JUMPING, State.FALLING, State.LAUNCHED, State.BOOSTING]:
 				set_state(State.RUNNING)
@@ -215,7 +203,7 @@ func _physics_process(delta: float) -> void:
 			current_speed = SPEED / 5
 			set_state(State.WALKING)
 	else:
-		if not current_state in [State.JUMPING, State.LAUNCHED, State.FALLING]:
+		if not current_state in [State.JUMPING, State.LAUNCHED, State.FALLING, State.ATTACKING]:
 				set_state(State.IDLE)
 		velocity.x = 0
 		velocity.z = 0
@@ -239,7 +227,7 @@ func _physics_process(delta: float) -> void:
 			# Not enough boost
 			set_state(State.RUNNING)
 		boost_gauge = clamp(boost_gauge-delta, 0, max_boost_gauge)
-		SPEED = DEFAULT_SPEED * 4
+		SPEED = DEFAULT_SPEED * 2
 		$Sonic/AnimationPlayer.speed_scale = 2
 		$SpeedLines.visible = true
 		effect_amount = move_toward(effect_amount, -0.3, 8 * delta)
@@ -266,7 +254,13 @@ func _physics_process(delta: float) -> void:
 	#endregion
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("boost") and not current_state == State.BOOSTING and current_state == State.RUNNING and can_boost:
+	var delta = get_process_delta_time()
+	if (event.is_action_pressed("boost")
+	and not current_state == State.BOOSTING 
+	and current_state == State.RUNNING 
+	and can_boost
+	and boost_gauge > delta
+	):
 		set_state(State.BOOSTING)
 		if has_node("Voice"):
 			var audio_files = [
@@ -282,16 +276,14 @@ func _input(event: InputEvent) -> void:
 			random_vocal(audio_files)
 			$BoostBoom.play()
 			$BoomSustain.play()
+			$WindyNoise.play()
 		
 	if event.is_action_released("boost"):
 		set_state(State.RUNNING)
-		#$BoomSustain.stop()
 		fade_out($BoomSustain, 0.2)
+		fade_out($WindyNoise, 0.2)
 	
-	if event.is_action_pressed("attack_primary") and not current_state == State.CUTSCENE and not is_paused:
-		if not attack_cooldown.is_stopped():
-			#is_attacking = false
-			return
+	if event.is_action_pressed("attack_primary"):
 		var space_state = get_world_3d().direct_space_state
 		var camera = $Neck/Camera  # Replace with your camera node
 		var ray_origin = camera.global_transform.origin
@@ -303,15 +295,38 @@ func _input(event: InputEvent) -> void:
 		ray_query.collision_mask = 1  # You can adjust this to only collide with certain layers
 
 		var result = space_state.intersect_ray(ray_query)
-
 		if result:
 			if result.collider.is_in_group("attackable"):
-				$SpeedLines.visible = true
-				var col = result.collider.global_transform.origin
-				target_position = Vector3(col.x, col.y + 1, col.z)
+				var voice_lines = [
+					"res://Audio/Voices/" + GameDefaults.character +"/jump-att1.ogg",
+					"res://Audio/Voices/" + GameDefaults.character +"/jump-att2.ogg",
+					"res://Audio/Voices/" + GameDefaults.character +"/jump-att3.ogg",
+					"res://Audio/Voices/" + GameDefaults.character +"/jump-att4.ogg",
+				]
+				random_vocal(voice_lines)
+				col = result.collider.global_transform.origin
+				# Handle a jump here.
+				target = result
 				# Don't let them spam! Make a cooldown.
+				if is_on_floor():
+					handle_jump()
+					await get_tree().create_timer(0.125).timeout
 				set_state(State.ATTACKING)
-				attack_cooldown.start()
+				await get_tree().create_timer(2).timeout
+				set_state(State.IDLE)
+
+func _process(delta: float) -> void:
+	if current_state == State.ATTACKING:
+		$SpeedLines.visible = true
+		var new_y
+		var new_x = lerp(global_position.x, target.position.x, (DEFAULT_SPEED * 4) * delta / global_position.distance_to(target.position))
+		var new_z = lerp(global_position.z, target.position.z, (DEFAULT_SPEED * 4) * delta / global_position.distance_to(target.position))
+		if is_on_floor():
+			new_y = global_position.y
+		else:
+			new_y = target.position.y
+		global_position = Vector3(new_x, new_y, new_z)
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if current_state == State.CUTSCENE:
@@ -419,6 +434,7 @@ func set_state(new_state: State) -> void:
 				return # Limit state changes during cutscenes
 	#print("Changing state from %s to %s" % [State.keys()[current_state], State.keys()[new_state]])
 	current_state = new_state
+
 func add_boost(boost_num : float):
 	if boost_gauge + boost_num < max_boost_gauge:
 		boost_gauge += boost_num
@@ -436,6 +452,34 @@ func take_damage():
 
 func random_vocal(bank : Array):
 	var random_index = randi() % bank.size()
-	var selected_audio = load(bank[random_index])  # Load a random voice
-	$Voice.stream = selected_audio	
-	$Voice.play()
+	var selected_audio = load(bank[random_index])
+	vocal_queue.append(selected_audio)
+	for v in vocal_queue:
+		$Voice.stream = v
+		$Voice.play()
+		vocal_queue.pop_front()
+		await $Voice.finished
+		await get_tree().create_timer(get_process_delta_time()*2).timeout
+
+
+func handle_jump():
+	var floor_norm = get_floor_normal()
+	var jump_direction = Vector3(0, 1, 0)
+	jump_direction = jump_direction.rotated(Vector3(1, 0, 0), floor_norm.x * PI / 2)
+	jump_direction = jump_direction.rotated(Vector3(0, 0, 1), floor_norm.z * PI / 2)
+	set_state(State.JUMPING)
+
+	# Set the jump velocity
+	velocity.y = JUMP_VELOCITY * jump_direction.y
+
+func cheer():
+	var voice_lines = [
+		"res://Audio/Voices/" + GameDefaults.character +"/cheer1.ogg",
+		"res://Audio/Voices/" + GameDefaults.character +"/cheer2.ogg",
+		"res://Audio/Voices/" + GameDefaults.character +"/cheer3.ogg",
+	]
+	random_vocal(voice_lines)
+
+func bounce(amount : float = 2.0):
+	#velocity.y = clamp(velocity.y + amount, velocity.y, 10)
+	velocity.y += amount

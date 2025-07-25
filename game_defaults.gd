@@ -32,3 +32,18 @@ enum Characters {
 	ROUGE
 }
 var character = "Sonic" # Sonic will be the fallback I guess.
+
+enum BadnikType {
+	DOCILE_WANDERER, # This badnik just moves around; it won't attack if you're near.
+	WANDERER,
+	CHASER
+}
+
+func get_enum_keys(enum_type) -> Array:
+	var keys = []
+	
+	# Use reflection to get the enum values
+	for key in enum_type:
+		keys.append(key)
+	
+	return keys

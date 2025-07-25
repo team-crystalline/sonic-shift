@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dv7e2w135rgoe"]
+[gd_scene load_steps=13 format=3 uid="uid://dv7e2w135rgoe"]
 
 [ext_resource type="Script" uid="uid://be34j07b44lo4" path="res://Scripts/Brains/motobug.gd" id="1_cpt6f"]
 [ext_resource type="Texture2D" uid="uid://cgu4uolapjfe7" path="res://Graphics/Particles/cloud_part.png" id="2_e37k2"]
@@ -6,28 +6,26 @@
 [ext_resource type="ArrayMesh" uid="uid://brkogd6ddvaan" path="res://Graphics/Particles/gear2.obj" id="4_g3qyk"]
 [ext_resource type="AudioStream" uid="uid://p5ypty5jn806" path="res://Audio/FX/badnik_death.ogg" id="5_c5aaw"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_tekqx"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_ec06l"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cpt6f"]
-albedo_color = Color(0.784314, 0, 0, 1)
-metallic = 0.71
-metallic_specular = 0.36
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ec06l"]
+albedo_color = Color(1, 0, 0, 1)
+metallic = 0.85
 roughness = 0.4
 
-[sub_resource type="SphereMesh" id="SphereMesh_e37k2"]
-material = SubResource("StandardMaterial3D_cpt6f")
+[sub_resource type="SphereMesh" id="SphereMesh_c5aaw"]
+material = SubResource("StandardMaterial3D_ec06l")
+radius = 2.0
+height = 4.0
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_cpt6f"]
-radius = 1.26527
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e37k2"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c5aaw"]
 transparency = 1
 albedo_texture = ExtResource("2_e37k2")
 billboard_mode = 1
 billboard_keep_scale = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_mttih"]
-material = SubResource("StandardMaterial3D_e37k2")
+material = SubResource("StandardMaterial3D_c5aaw")
 
 [sub_resource type="Curve" id="Curve_g3qyk"]
 _data = [Vector2(0, 0.503536), 0.0, 0.0, 0, 0, Vector2(0.521905, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -40,21 +38,18 @@ point_count = 5
 
 [node name="Motobug" type="RigidBody3D" groups=["attackable", "can_pause"]]
 physics_interpolation_mode = 1
-gravity_scale = -1.0
+freeze_mode = 1
 angular_velocity = Vector3(0.0174533, 0.0174533, 0.0174533)
 script = ExtResource("1_cpt6f")
 
 [node name="ModelCollision" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_tekqx")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47238, 0)
+shape = SubResource("SphereShape3D_ec06l")
 
 [node name="Model" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_e37k2")
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.358387, 0)
+mesh = SubResource("SphereMesh_c5aaw")
 skeleton = NodePath("")
-
-[node name="HitBox" type="Area3D" parent="."]
-
-[node name="HitCollision" type="CollisionShape3D" parent="HitBox"]
-shape = SubResource("SphereShape3D_cpt6f")
 
 [node name="Poof" type="CPUParticles3D" parent="."]
 emitting = false
@@ -136,5 +131,3 @@ hue_variation_max = 0.57
 stream = ExtResource("5_c5aaw")
 max_polyphony = 10
 bus = &"SFX"
-
-[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]

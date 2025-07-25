@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cfpjdvsafcmmy"]
+[gd_scene load_steps=13 format=3 uid="uid://cfpjdvsafcmmy"]
 
 [ext_resource type="Shader" uid="uid://k8j4fgoka1ac" path="res://Graphics/Shaders/glass.gdshader" id="1_6xj78"]
 [ext_resource type="Script" uid="uid://cnu8qlffxauch" path="res://Actors/Objects/Collectibles/itembox.gd" id="1_8iea4"]
 [ext_resource type="Texture2D" uid="uid://bidnre3cc2uvq" path="res://Graphics/Textures/Placeholders/Purple/texture_08.png" id="2_ho7i7"]
-[ext_resource type="Texture2D" uid="uid://bvum851bjh2q0" path="res://Graphics/Textures/sparkly.png" id="4_45mbq"]
+[ext_resource type="Texture2D" uid="uid://cgu4uolapjfe7" path="res://Graphics/Particles/cloud_part.png" id="5_im4ce"]
+[ext_resource type="AudioStream" uid="uid://b5mxobhf17svr" path="res://Audio/FX/item-capsule.ogg" id="6_go4ei"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xl2ck"]
 size = Vector3(0.7, 0.7, 0.7)
@@ -22,13 +23,31 @@ radius = 0.4
 height = 1.0
 rings = 4
 
-[node name="Itembox" type="StaticBody3D"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_im4ce"]
+radius = 1.19218
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e37k2"]
+transparency = 1
+albedo_texture = ExtResource("5_im4ce")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_go4ei"]
+material = SubResource("StandardMaterial3D_e37k2")
+
+[sub_resource type="Curve" id="Curve_bq7ee"]
+_data = [Vector2(0, 0.503536), 0.0, 0.0, 0, 0, Vector2(0.521905, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Itembox" type="StaticBody3D" groups=["attackable"]]
 script = ExtResource("1_8iea4")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="ModelCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_xl2ck")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Model" type="MeshInstance3D" parent="."]
+cast_shadow = 0
+gi_mode = 0
 mesh = SubResource("CapsuleMesh_6xj78")
 
 [node name="itemscreen" type="Sprite3D" parent="."]
@@ -36,10 +55,34 @@ transform = Transform3D(0.188, 0, 0, 0, 0.188, 0, 0, 0, 0.188, 0, 0, 0)
 billboard = 2
 texture = ExtResource("2_ho7i7")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.733985, 0)
-light_projector = ExtResource("4_45mbq")
-light_specular = 5.586
-shadow_enabled = true
-shadow_blur = 0.868
-omni_range = 0.852141
+[node name="HitboxGroup" type="Area3D" parent="."]
+
+[node name="Hitbox" type="CollisionShape3D" parent="HitboxGroup"]
+shape = SubResource("SphereShape3D_im4ce")
+
+[node name="Poof" type="CPUParticles3D" parent="."]
+emitting = false
+amount = 32
+one_shot = true
+speed_scale = 1.46
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.4
+mesh = SubResource("QuadMesh_go4ei")
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+angular_velocity_min = 154.84
+angular_velocity_max = 720.0
+scale_amount_min = 0.5
+scale_amount_curve = SubResource("Curve_bq7ee")
+
+[node name="CapsuleSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_go4ei")
+max_polyphony = 10
+bus = &"SFX"
+
+[connection signal="body_entered" from="HitboxGroup" to="." method="_on_static_body_3d_body_entered"]
