@@ -164,7 +164,6 @@ attack_secondary={
 [physics]
 
 3d/physics_engine="Jolt Physics"
-3d/default_gravity_vector=Vector3(0, 1, 0)
 
 [rendering]
 

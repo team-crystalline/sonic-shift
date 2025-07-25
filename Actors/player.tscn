@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://pgx7n8fyonap"]
+[gd_scene load_steps=42 format=4 uid="uid://pgx7n8fyonap"]
 
 [ext_resource type="Script" uid="uid://44ncygd5css7" path="res://Actors/player.gd" id="1_sor1j"]
 [ext_resource type="Script" uid="uid://b6youh33uuxbb" path="res://Actors/camera.gd" id="2_c5kq5"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://dlyd82si3yqyk" path="res://Audio/Voices/Sonic/Boost2.ogg" id="11_3sj5c"]
 [ext_resource type="AudioStream" uid="uid://braypwwxga67t" path="res://Audio/FX/boost-boom.ogg" id="12_3sj5c"]
 [ext_resource type="AudioStream" uid="uid://bf4npmh83ecse" path="res://Audio/FX/boost-sustain.ogg" id="13_6yncu"]
+[ext_resource type="AudioStream" uid="uid://ch4necm8m1flu" path="res://Audio/FX/windy-loop.ogg" id="14_6yncu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tl1vq"]
 
@@ -3323,13 +3324,25 @@ point_count = 3
 [sub_resource type="Gradient" id="Gradient_c5kq5"]
 colors = PackedColorArray(0.3956, 0.53492, 0.86, 1, 0.82, 0.994, 1, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6yncu"]
+shader = ExtResource("7_1c8hm")
+shader_parameter/noise = SubResource("NoiseTexture2D_lkt0t")
+shader_parameter/line_color = Color(1, 0.849833, 0.47, 1)
+shader_parameter/line_count = 0.05
+shader_parameter/line_density = 0.757
+shader_parameter/line_faloff = 1.0
+shader_parameter/mask_size = 0.08
+shader_parameter/mask_edge = 0.581
+shader_parameter/animation_speed = 7.43
+
 [node name="Player" type="CharacterBody3D" groups=["Persist", "Player", "bouncy_objects", "can_pause"]]
+process_mode = 1
 editor_description = "This is a generic player. It contains the basic movement of all characters that will be implemented."
 floor_max_angle = 0.827286
 floor_snap_length = 1.0
 platform_on_leave = 1
 script = ExtResource("1_sor1j")
-SPEED = 10.0
+SPEED = 25.0
 can_boost = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -3345,6 +3358,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0042029, 0.155909, 0.000570
 [node name="Camera" type="Camera3D" parent="Neck"]
 editor_description = "This is the first person camera. Place it in the center of the character model's head."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0275478, 0.144851, 0.0117627)
+visible = false
 cull_mask = 524287
 doppler_tracking = 1
 current = true
@@ -4217,7 +4231,6 @@ hue_variation_max = 0.03
 [node name="SonicArms" type="Node3D" parent="."]
 
 [node name="AttackCooldown" type="Timer" parent="."]
-wait_time = 0.5
 one_shot = true
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
@@ -4234,5 +4247,31 @@ bus = &"SFX"
 [node name="BoomSustain" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_6yncu")
 bus = &"SFX"
+
+[node name="WindyNoise" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_6yncu")
+volume_db = -5.0
+bus = &"Ambient"
+
+[node name="InvincibilityTimer" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
+
+[node name="InvincibilityOverlay" type="ColorRect" parent="."]
+process_mode = 4
+editor_description = "When the player boosts, this overlay appears."
+visible = false
+show_behind_parent = true
+material = SubResource("ShaderMaterial_6yncu")
+layout_direction = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.984885, 1.0805)
+
+[node name="Physics" type="RigidBody3D" parent="."]
+mass = 34.92
 
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

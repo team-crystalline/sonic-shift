@@ -1,0 +1,148 @@
+[gd_scene load_steps=16 format=3 uid="uid://7y3aw1nvhoie"]
+
+[ext_resource type="Script" uid="uid://be34j07b44lo4" path="res://Scripts/Brains/motobug.gd" id="1_3e0d1"]
+[ext_resource type="Texture2D" uid="uid://cgu4uolapjfe7" path="res://Graphics/Particles/cloud_part.png" id="2_lnysv"]
+[ext_resource type="ArrayMesh" uid="uid://bgb88y8xwfcxa" path="res://Graphics/Particles/gear1.obj" id="3_kn7t6"]
+[ext_resource type="ArrayMesh" uid="uid://brkogd6ddvaan" path="res://Graphics/Particles/gear2.obj" id="4_jrbam"]
+[ext_resource type="AudioStream" uid="uid://p5ypty5jn806" path="res://Audio/FX/badnik_death.ogg" id="5_lqjtj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lnysv"]
+height = 1.12892
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_70r12"]
+albedo_color = Color(1, 0, 0, 1)
+metallic = 0.71
+roughness = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_fku5w"]
+material = SubResource("StandardMaterial3D_70r12")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3e0d1"]
+radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lnysv"]
+transparency = 1
+albedo_color = Color(0.2, 0.653333, 1, 0.0705882)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lnysv"]
+material = SubResource("StandardMaterial3D_lnysv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c5aaw"]
+transparency = 1
+albedo_texture = ExtResource("2_lnysv")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_yugyk"]
+material = SubResource("StandardMaterial3D_c5aaw")
+
+[sub_resource type="Curve" id="Curve_2lupn"]
+_data = [Vector2(0, 0.503536), 0.0, 0.0, 0, 0, Vector2(0.521905, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_ejl6n"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.304762, 360), 0.0, 0.0, 0, 0, Vector2(0.499048, -360), 0.0, 0.0, 0, 0, Vector2(0.752381, 360), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[node name="GenericBadnik" type="Node3D"]
+
+[node name="BadnikBody" type="RigidBody3D" parent="." groups=["attackable"]]
+mass = 100.0
+script = ExtResource("1_3e0d1")
+
+[node name="ModelBox" type="CollisionShape3D" parent="BadnikBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0819409, 0)
+shape = SubResource("CapsuleShape3D_lnysv")
+
+[node name="Model" type="MeshInstance3D" parent="BadnikBody"]
+mesh = SubResource("SphereMesh_fku5w")
+
+[node name="HitArea" type="Area3D" parent="BadnikBody"]
+
+[node name="Hitbox" type="CollisionShape3D" parent="BadnikBody/HitArea"]
+shape = SubResource("SphereShape3D_3e0d1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BadnikBody/HitArea"]
+mesh = SubResource("BoxMesh_lnysv")
+
+[node name="Poof" type="CPUParticles3D" parent="."]
+emitting = false
+amount = 32
+one_shot = true
+speed_scale = 1.46
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.4
+mesh = SubResource("QuadMesh_yugyk")
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+angular_velocity_min = 154.84
+angular_velocity_max = 720.0
+scale_amount_min = 0.5
+scale_amount_curve = SubResource("Curve_2lupn")
+
+[node name="Gear1" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.795974, 0)
+cast_shadow = 0
+emitting = false
+amount = 16
+one_shot = true
+speed_scale = 1.46
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+mesh = ExtResource("3_kn7t6")
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_align_y = true
+direction = Vector3(1, 0.5, 1)
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+linear_accel_max = 7.33
+angle_max = 312.5
+angle_curve = SubResource("Curve_ejl6n")
+scale_amount_min = 0.1
+scale_amount_max = 0.3
+scale_amount_curve = SubResource("Curve_2lupn")
+hue_variation_max = 0.57
+
+[node name="Gear2" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.795974, 0)
+cast_shadow = 0
+emitting = false
+amount = 16
+one_shot = true
+speed_scale = 1.46
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+mesh = ExtResource("4_jrbam")
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_align_y = true
+direction = Vector3(1, 0.5, 1)
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+linear_accel_max = 7.33
+angle_max = 312.5
+angle_curve = SubResource("Curve_ejl6n")
+scale_amount_min = 0.1
+scale_amount_max = 0.3
+scale_amount_curve = SubResource("Curve_2lupn")
+hue_variation_max = 0.57
+
+[node name="PoofSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_lqjtj")
+max_polyphony = 10
+bus = &"SFX"
+
+[connection signal="body_entered" from="BadnikBody/HitArea" to="BadnikBody" method="_on_hit_area_body_entered"]
