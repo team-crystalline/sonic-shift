@@ -1,17 +1,19 @@
-[gd_scene load_steps=17 format=3 uid="uid://bp27esbw6s3b3"]
+[gd_scene load_steps=20 format=3 uid="uid://bp27esbw6s3b3"]
 
 [ext_resource type="Script" uid="uid://bx13raqqgxgbq" path="res://Scripts/LevelManager.gd" id="1_fb2ui"]
 [ext_resource type="Environment" uid="uid://b4wd7qdth75lo" path="res://Graphics/Resources/defaultenv-day.tres" id="1_y41jg"]
 [ext_resource type="Texture2D" uid="uid://baccneuiftbk5" path="res://Graphics/Textures/Placeholders/Green/texture_08.png" id="5_y41jg"]
-[ext_resource type="PackedScene" uid="uid://dv7e2w135rgoe" path="res://Actors/Badniks/motobug.tscn" id="6_48f0s"]
 [ext_resource type="PackedScene" uid="uid://delu2qjrw6teu" path="res://Actors/Objects/Mirror3D/Mirror3D.tscn" id="7_20qaj"]
 [ext_resource type="PackedScene" uid="uid://bx8c24mnmlqib" path="res://Actors/Objects/Buildings/Building1.tscn" id="7_52khx"]
 [ext_resource type="PackedScene" uid="uid://div614tanecr4" path="res://Actors/Environment/water.tscn" id="8_b6u7x"]
+[ext_resource type="AudioStream" uid="uid://uuhkecjg3k2k" path="res://Audio/BGM/Blur - The Ballad (Instrumental).mp3" id="8_fb2ui"]
 [ext_resource type="PackedScene" uid="uid://xe3a3emdj7ak" path="res://Actors/Objects/Buildings/wall.tscn" id="8_y41jg"]
 [ext_resource type="PackedScene" uid="uid://3h2eievlgcdi" path="res://Actors/Objects/Collectibles/RingTrail.tscn" id="9_y41jg"]
 [ext_resource type="PackedScene" uid="uid://c3qhhst175gi0" path="res://Actors/DEBUG/teleporter.tscn" id="10_0sp38"]
 [ext_resource type="PackedScene" uid="uid://bjyvvolkoq2a6" path="res://Actors/Objects/trampoline.tscn" id="12_48f0s"]
 [ext_resource type="PackedScene" uid="uid://52e308j80ryx" path="res://Actors/Objects/goalRing.tscn" id="12_wfrlm"]
+[ext_resource type="PackedScene" uid="uid://7y3aw1nvhoie" path="res://Actors/Badniks/generic_badnik.tscn" id="13_20qaj"]
+[ext_resource type="PackedScene" uid="uid://cfpjdvsafcmmy" path="res://Actors/Objects/Collectibles/itembox.tscn" id="14_20qaj"]
 [ext_resource type="PackedScene" uid="uid://fpa0fvh1j1yf" path="res://Actors/Environment/streetlight.tscn" id="15_fb2ui"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0sp38"]
@@ -24,6 +26,8 @@ uv1_scale = Vector3(500, 500, 500)
 [sub_resource type="BoxMesh" id="BoxMesh_wfrlm"]
 material = SubResource("StandardMaterial3D_5ey0c")
 size = Vector3(500, 1, 500)
+
+[sub_resource type="BoxMesh" id="BoxMesh_20qaj"]
 
 [node name="BetaRoom" type="Node3D" groups=["level"]]
 script = ExtResource("1_fb2ui")
@@ -49,7 +53,7 @@ spot_angle = 39.1363
 environment = ExtResource("1_y41jg")
 
 [node name="SpawnPoint" type="Node3D" parent="." groups=["SpawnPoint"]]
-transform = Transform3D(-0.583258, 0, 0.812287, 0, 1, 0, -0.812287, 0, -0.583258, 2.9571, 1, 20.9136)
+transform = Transform3D(-0.583258, 0, 0.812287, 0, 1, 0, -0.812287, 0, -0.583258, 16.414, 1, 24.7666)
 rotation_edit_mode = 1
 
 [node name="Platforms" type="Node3D" parent="."]
@@ -104,6 +108,20 @@ light_energy = 1.918
 spot_range = 30.7484
 spot_attenuation = 0.14
 
+[node name="Speaker" type="Node3D" parent="Buildings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.3312, 0.658912, 9.27124)
+
+[node name="Box" type="MeshInstance3D" parent="Buildings/Speaker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.352689, 0.303911, 0.201735)
+mesh = SubResource("BoxMesh_20qaj")
+skeleton = NodePath("../..")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Buildings/Speaker"]
+stream = ExtResource("8_fb2ui")
+unit_size = 5.0
+autoplay = true
+bus = &"BGM"
+
 [node name="Rings" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
@@ -135,7 +153,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.0079
 size = Vector2(3, 1)
 
 [node name="Teleporter" parent="." instance=ExtResource("10_0sp38")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.585, 2.89315, 8.58795)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5587, 2.89315, 8.62035)
 teleport_to_path = "res://Levels/starting_island.tscn"
 
 [node name="GoalRing" parent="." instance=ExtResource("12_wfrlm")]
@@ -153,40 +171,53 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.64409, 0.197968, 19.6921)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.64409, 0.197968, 34.0694)
 
 [node name="Badniks" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -21.7297, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.950701, 0.118179, 5.64236)
 
-[node name="Motobug" parent="Badniks" instance=ExtResource("6_48f0s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.46912, 1, 14.5875)
+[node name="GenericBadnik" parent="Badniks" instance=ExtResource("13_20qaj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.635702, 0.881821, 2.07866)
 
-[node name="Motobug2" parent="Badniks" instance=ExtResource("6_48f0s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0085, 1, 16.2762)
+[node name="GenericBadnik2" parent="Badniks" instance=ExtResource("13_20qaj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.7245, 0.881821, 9.13835)
 
-[node name="Motobug3" parent="Badniks" instance=ExtResource("6_48f0s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.323639, 1, 10.8997)
+[node name="GenericBadnik3" parent="Badniks" instance=ExtResource("13_20qaj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.0597, 0.881821, 9.13835)
 
-[node name="Motobug4" parent="Badniks" instance=ExtResource("6_48f0s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85317, 1, 12.0324)
+[node name="GenericBadnik4" parent="Badniks" instance=ExtResource("13_20qaj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5049, 0.881821, 9.13835)
 
-[node name="Motobug5" parent="Badniks" instance=ExtResource("6_48f0s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.31085, 1, 20.9591)
+[node name="GenericBadnik5" parent="Badniks" instance=ExtResource("13_20qaj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.1817, 0.881821, 9.13835)
 
-[node name="Motobug6" parent="Badniks" instance=ExtResource("6_48f0s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.78847, 1, 22.6478)
+[node name="ItemBoxes" type="Node3D" parent="."]
 
-[node name="Motobug7" parent="Badniks" instance=ExtResource("6_48f0s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.45633, 1, 17.2713)
+[node name="Itembox" parent="ItemBoxes" instance=ExtResource("14_20qaj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.3007, 1.8383, 10.3058)
+loot_count = 10.0
 
-[node name="Motobug8" parent="Badniks" instance=ExtResource("6_48f0s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.63313, 1, 18.404)
+[node name="Itembox2" parent="ItemBoxes" instance=ExtResource("14_20qaj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.8143, 1.8383, 10.3058)
+loot_count = 10.0
 
-[node name="Motobug9" parent="Badniks" instance=ExtResource("6_48f0s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.1352, 1, 20.1869)
+[node name="Itembox3" parent="ItemBoxes" instance=ExtResource("14_20qaj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.0659, 1.8383, 10.3058)
+loot_count = 10.0
 
-[node name="Motobug10" parent="Badniks" instance=ExtResource("6_48f0s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6128, 1, 21.8756)
+[node name="Itembox4" parent="ItemBoxes" instance=ExtResource("14_20qaj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.3118, 1.8383, 10.3058)
+loot_count = 10.0
 
-[node name="Motobug11" parent="Badniks" instance=ExtResource("6_48f0s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2807, 1, 16.4991)
+[node name="Itembox5" parent="ItemBoxes" instance=ExtResource("14_20qaj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.3007, 3.2229, 8.01169)
+loot_count = 10.0
 
-[node name="Motobug12" parent="Badniks" instance=ExtResource("6_48f0s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.4575, 1, 17.6318)
+[node name="Itembox6" parent="ItemBoxes" instance=ExtResource("14_20qaj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.8143, 3.2229, 8.01169)
+loot_count = 10.0
+
+[node name="Itembox7" parent="ItemBoxes" instance=ExtResource("14_20qaj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.0659, 3.2229, 8.01169)
+loot_count = 10.0
+
+[node name="Itembox8" parent="ItemBoxes" instance=ExtResource("14_20qaj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.3118, 3.2229, 8.01169)
+loot_count = 10.0

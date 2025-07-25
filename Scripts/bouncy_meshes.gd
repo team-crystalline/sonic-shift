@@ -21,7 +21,7 @@ func _on_body_entered(body: Node) -> void:
 			# Oop. Didn't hold jump. Reset the bonus.
 			body.bounce_bonus = body.bounce_bonus_base
 
-# Connect the signal in the editor
-func _ready() -> void:
-	# Connect the body entered signal
-	$CollisionShape3D.connect("body_entered", Callable(self, "_on_body_entered"))
+## Connect the signal in the editor
+#func _ready() -> void:
+	## Connect the body entered signal
+	#$HitboxGroup.connect("body_entered", Callable(self, "_on_body_entered"))
